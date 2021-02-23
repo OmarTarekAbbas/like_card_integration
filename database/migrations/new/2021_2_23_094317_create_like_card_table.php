@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameRoutesRoute extends Migration
+class CreateLikeCardTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,14 @@ class RenameRoutesRoute extends Migration
      */
     public function up()
     {
-        DB::raw("UPDATE routes SET route = 'routess' WHERE routes.id = 40");
+        Schema::create('like_cards', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('req');
+            $table->text('response');
+            $table->text('url');
+            $table->string('function_name',191);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,5 @@ class RenameRoutesRoute extends Migration
      */
     public function down()
     {
-        //
     }
 }
