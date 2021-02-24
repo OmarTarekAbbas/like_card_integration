@@ -176,9 +176,7 @@ class LikecartController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => $parameter,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/x-www-form-urlencoded',
-            ),
+
         ));
         $response = curl_exec($curl);
         curl_close($curl);
