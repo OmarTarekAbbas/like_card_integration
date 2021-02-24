@@ -25,9 +25,7 @@ class LikecartController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array('deviceId' => '31e0f17d72b7f0ef674fa6f1a102822de7e088613cb5ee24b67198d582a1c06d','email' => 'emad@ivas.com.eg','password' => 'b0844ea720cffe4f18e8e10e3cad0a33593c62ea8968851398d22bd75e6185a6','securityCode' => '99498b770cd4927e39131afc1cf65cc7b3450c42f76099d78e57029a5ec52235','langId' => '1'),
-        CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/x-www-form-urlencoded'
-        ),
+
         ));
 
         $response = curl_exec($curl);
