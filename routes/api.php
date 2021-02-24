@@ -34,6 +34,8 @@ define('quantity','1');
 define('langIdEn','1');
 define('langIdAr','2');
 
+
+Route::get('/test_check_balance','LikecartController@test_check_balance');
 Route::get('/check_balance','LikecartController@check_balance');
 Route::get('/categories','LikecartController@categories');
 Route::get('/products','LikecartController@products');

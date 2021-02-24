@@ -9,6 +9,51 @@ use App\LikeCard;
 class LikecartController extends Controller
 {
 
+    public function test_check_balance()
+    {
+        // $URL = 'https://taxes.like4app.com/online/check_balance';
+        // $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn);
+        // //make curl for functions GetPageData
+        // $response = $this->GetPageData($URL, $parameter);
+        // //save for database
+        // $likecard = new LikeCard();
+        // $likecard->req = json_encode($parameter);
+        // $likecard->response = $response;
+        // $likecard->url = $URL;
+        // $likecard->function_name = 'check_balance';
+        // $likecard->save();
+        // return $response;
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://taxes.like4app.com/online/check_balance/',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>   $parameter,
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/x-www-form-urlencoded'
+          ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        echo $response;
+
+
+
+
+    }
+
+
+
+
     public function check_balance()
     {
         $URL = 'https://taxes.like4app.com/online/check_balance';
