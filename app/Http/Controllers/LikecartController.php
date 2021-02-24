@@ -24,6 +24,11 @@ class LikecartController extends Controller
         // $likecard->save();
         // return $response;
 
+
+
+             $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn);
+
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
