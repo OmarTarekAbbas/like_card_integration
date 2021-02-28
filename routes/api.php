@@ -42,6 +42,6 @@ Route::get('/categories','LikecartController@categories');
 Route::get('/products','LikecartController@products');
 Route::get('/products_with_optiona','LikecartController@products_with_optiona');
 Route::get('/orders','LikecartController@orders');
-Route::get('/orders/details','LikecartController@order_details');
+Route::get('/order_details','LikecartController@order_details');
 Route::get('/create_order','LikecartController@create_order');
 
