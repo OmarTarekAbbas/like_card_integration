@@ -128,7 +128,7 @@ class LikecartController extends Controller
     public function order_details()
     {
         $URL = 'https://taxes.like4app.com/online/orders/details';
-        $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn, 'orderId' => '');
+        $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn, 'orderId' => orderId);
         //make curl for functions GetPageData
         $response = $this->GetPageData($URL, $parameter);
 
