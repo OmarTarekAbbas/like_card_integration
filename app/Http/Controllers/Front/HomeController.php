@@ -44,7 +44,7 @@ class HomeController extends Controller
     public function listProducts($category_id)
     {
         try {
-            $products = Cache::remember('products', 60*60*5 , function () use ($category_id) {
+            $products = Cache::remember('products'.$category_id , 60*60*5 , function () use ($category_id) {
                 $response = json_decode($this->likeCard->Products($category_id));
                 $products = $response->data ;
                 return $products;
