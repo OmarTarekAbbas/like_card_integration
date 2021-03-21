@@ -31,9 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $response   = json_decode($this->likeCard->Categories());
-        $categories = $response->data ;
-        return view("front.home", compact("categories"));
+        return view("front.home");
     }
 
     /**
@@ -45,8 +43,13 @@ class HomeController extends Controller
      */
     public function listProducts($category_id)
     {
-        $response   = json_decode($this->likeCard->products($category_id));
-        $products = $response->data ;
+        try {
+            $response   = json_decode($this->likeCard->Products($category_id));
+            $products = $response->data ;
+        } catch (\Throwable $th) {
+            $products = [] ;
+        }
+
         return view("front.product", compact("products"));
     }
 }

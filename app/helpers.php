@@ -5,6 +5,7 @@ use App\Route as RouteModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Services\LikeCardService;
 
 function delete_multiselect(Request $request) // select many contract from index table and delete them
 {
@@ -226,4 +227,16 @@ function dynamic_routes($route_model,$found_roles)
         return $routeRole || $userRole == 1 ? 1 : 0 ;
     }
     return false;
+ }
+
+ function categories()
+ {
+    try {
+        $response   = json_decode(LikeCardService::Categories());
+        $categories = $response->data ;
+    } catch (\Throwable $th) {
+        $categories = [] ;
+    }
+
+    return $categories;
  }

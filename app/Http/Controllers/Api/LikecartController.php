@@ -57,7 +57,7 @@ class LikecartController extends Controller
         return $response;
     }
 
-    public function categories()
+    public function Categories()
     {
         $URL = 'https://taxes.like4app.com/online/categories';
         $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn);
@@ -74,7 +74,7 @@ class LikecartController extends Controller
         return $response;
     }
 
-    public function products()
+    public function Products()
     {
         $URL = 'https://taxes.like4app.com/online/products';
         $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn, 'categoryId' => categoryId);
