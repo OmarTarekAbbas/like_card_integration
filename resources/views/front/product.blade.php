@@ -24,7 +24,7 @@
 								</div>
 								<div class="thumb-content">
 									<h4>{{ $product->productName }}</h4>
-									<p class="item-price"><strike>{{{ $product->productPriceWithoutVat }} {{  $product->productCurrency }}</strike> <span>${{ $product->productPrice }} {{  $product->productCurrency }}</span></p>
+									<p class="item-price"><strike>{{ $product->productPriceWithoutVat }} {{  $product->productCurrency }}</strike> <span>${{ $product->productPrice }} {{  $product->productCurrency }}</span></p>
 									<div class="star-rating">
 										<ul class="list-inline">
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
