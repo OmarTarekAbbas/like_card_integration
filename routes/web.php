@@ -14,5 +14,7 @@
 get_static_routes() ;
 get_dynamic_routes();
 
-
+Route::get('/',function(){
+    return redirect()->route("front.home");
+});
 
