@@ -1,4 +1,4 @@
-@include("front.master")
+@extends("front.master")
 
 @section("content")
 <div class="container">
