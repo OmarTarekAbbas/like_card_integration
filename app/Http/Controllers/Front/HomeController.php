@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Services\LikeCardService;
-
+use Cache;
 class HomeController extends Controller
 {
     /**
@@ -44,8 +44,12 @@ class HomeController extends Controller
     public function listProducts($category_id)
     {
         try {
-            $response   = json_decode($this->likeCard->Products($category_id));
-            $products = $response->data ;
+            $products = Cache::remember('products', 60*60*5 , function () use ($category_id) {
+                $response = json_decode($this->likeCard->Products($category_id));
+                $products = $response->data ;
+                return $products;
+            });
+
         } catch (\Throwable $th) {
             $products = [] ;
         }

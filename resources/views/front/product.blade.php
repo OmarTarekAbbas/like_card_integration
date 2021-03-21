@@ -24,16 +24,7 @@
 								</div>
 								<div class="thumb-content">
 									<h4>{{ $product->productName }}</h4>
-									<p class="item-price"><strike>{{ $product->productPriceWithoutVat }} {{  $product->productCurrency }}</strike> <span>{{ $product->productPrice }} {{  $product->productCurrency }}</span></p>
-									<div class="star-rating">
-										<ul class="list-inline">
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
+									<p class="item-price"><span>{{ $product->productPrice }} {{  $product->productCurrency }}</span></p>
 									<a href="#" class="btn btn-primary">Add to Cart</a>
 								</div>
 							</div>

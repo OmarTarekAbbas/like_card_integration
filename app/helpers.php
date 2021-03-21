@@ -233,8 +233,11 @@ function dynamic_routes($route_model,$found_roles)
  {
     try {
         $likeCard = new LikeCardService;
-        $response   = json_decode($likeCard->Categories());
-        $categories = $response->data ;
+        $categories = \Cache::remember('categories', 60*60*5 , function () use ($likeCard) {
+            $response   = json_decode($likeCard->Categories());
+            $categories = $response->data ;
+            return $categories;
+        });
     } catch (\Throwable $th) {
         $categories = [] ;
     }
