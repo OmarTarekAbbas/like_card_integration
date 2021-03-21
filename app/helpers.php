@@ -232,7 +232,8 @@ function dynamic_routes($route_model,$found_roles)
  function categories()
  {
     try {
-        $response   = json_decode(LikeCardService::Categories());
+        $likeCard = new LikeCardService;
+        $response   = json_decode($likeCard->Categories());
         $categories = $response->data ;
     } catch (\Throwable $th) {
         $categories = [] ;

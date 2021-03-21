@@ -173,7 +173,7 @@ h2::after {
             @foreach(categories() as $category)
                 @if(count($category->childs) > 0)
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $child->category }} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $category->categoryName }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach ($category->childs as $child)
                                 <li><a href="{{ route('front.products', ['category_id' => $child->id ]) }}">{{ $child->categoryName }}<</a></li>
