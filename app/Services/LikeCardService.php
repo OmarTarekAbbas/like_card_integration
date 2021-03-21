@@ -83,7 +83,7 @@ class LikeCardService
      * @param integer $category_id
      * @return void
      */
-    public function products($category_id)
+    public function Products($category_id)
     {
         $URL = 'https://taxes.like4app.com/online/products';
         $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn, 'categoryId' => $category_id);
