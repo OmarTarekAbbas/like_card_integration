@@ -189,5 +189,8 @@ h2::after {
         </div><!-- /.container-fluid -->
     </nav>
     @yield("content")
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="{{url('assets/bootstrap/js/bootstrap.min.js')}}"></script>
 </body>
 </html>
