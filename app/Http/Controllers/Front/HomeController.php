@@ -70,13 +70,13 @@ class HomeController extends Controller
         try {
             $response = json_decode($this->likeCard->createOrder($request->product_id));
             if($response->response) {
-                session()->put("success", "Order Create Successfully");
+                session()->flash("success", "Order Create Successfully");
             } else {
-                session()->put("success", $response->message);
+                session()->flash("faild", $response->message);
             }
 
         } catch (\Throwable $th) {
-            session()->put("faild", "There Are Error In Api");
+            session()->flash("faild", "There Are Error In Api");
         }
 
         return redirect()->route("front.orders");
