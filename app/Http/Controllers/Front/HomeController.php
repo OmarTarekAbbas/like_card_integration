@@ -90,12 +90,8 @@ class HomeController extends Controller
     public function ListOrders()
     {
         try {
-            $orders = Cache::remember('orders', 60*30, function ()  {
-                $response = json_decode($this->likeCard->Orders());
-                $orders = $response->data ;
-                return $orders;
-            });
-
+            $response = json_decode($this->likeCard->Orders());
+            $orders = $response->data ;
         } catch (\Throwable $th) {
             $orders = [] ;
         }
