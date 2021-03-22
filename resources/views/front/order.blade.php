@@ -32,7 +32,7 @@
         <td>{{  $order->orderCreateDate }}</td>
         <td>{{  $order->orderCurrentStatus }}</td>
         <td>{{  $order->orderPaymentMethod }}</td>
-        <td> <a class="btn btn-gray" href="{{ route(''front.order.details', ['order_id' => $order->orderNumber])"> Show </a> </td>
+        <td> <a class="btn btn-gray" href="{{ route('front.order.details', ['order_id' => $order->orderNumber]) }}"> Show </a> </td>
       </tr>
     @endforeach
     </tbody>
