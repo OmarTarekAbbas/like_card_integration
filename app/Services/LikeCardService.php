@@ -179,7 +179,7 @@ class LikeCardService
         //1614078108
         $timestamp = strtotime("now");
         $hash = $this->generateHash($timestamp);
-        $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn, 'productId' => $product_id, 'time' => $timestamp, 'hash' => $hash);
+        $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn, 'productId' => productId, 'quantity' => quantity, 'optionalFields' => '[{"optionId":"499","optionalFieldID":"14","value":"VALUE...."}]', 'time' => $timestamp, 'hash' => $hash);
         //make curl for functions GetPageData
         $response = $this->GetPageData($URL, $parameter);
 

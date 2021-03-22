@@ -68,7 +68,7 @@ class HomeController extends Controller
     public function createOrder(Request $request)
     {
         try {
-            $response = json_decode($this->likeCard->createOrder(376));
+            $response = json_decode($this->likeCard->createOrder($request->product_id));
             if($response->response) {
                 session()->put("success", "Order Create Successfully");
             } else {
