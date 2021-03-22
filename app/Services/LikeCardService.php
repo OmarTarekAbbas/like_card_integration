@@ -146,14 +146,16 @@ class LikeCardService
     }
 
     /**
-     * Method order_details
+     * Method orderDetails
+     *
+     * @param Integer $order_id [explicite description]
      *
      * @return void
      */
-    public function order_details()
+    public function orderDetails($order_id)
     {
         $URL = 'https://taxes.like4app.com/online/orders/details';
-        $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn, 'orderId' => orderId);
+        $parameter = array('deviceId' => deviceId, 'email' => email, 'password' => password, 'securityCode' => securitycode, 'langId' => langIdEn, 'orderId' => $order_id);
         //make curl for functions GetPageData
         $response = $this->GetPageData($URL, $parameter);
 

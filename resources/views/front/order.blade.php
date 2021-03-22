@@ -20,6 +20,7 @@
         <th>orderCreateDate</th>
         <th>orderCurrentStatus</th>
         <th>orderPaymentMethod</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,7 @@
         <td>{{  $order->orderCreateDate }}</td>
         <td>{{  $order->orderCurrentStatus }}</td>
         <td>{{  $order->orderPaymentMethod }}</td>
+        <td> <a class="btn btn-gray" href="{{ route(''front.order.details', ['order_id' => $order->orderNumber])"> Show </a> </td>
       </tr>
     @endforeach
     </tbody>

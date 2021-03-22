@@ -98,4 +98,25 @@ class HomeController extends Controller
 
         return view("front.order", compact("orders"));
     }
+
+    /**
+     * Method ListOrders
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function orderDetails($order_id)
+    {
+        try {
+            $order = Cache::remember('orders'.$$order_id , 60*30 , function () use ($order_id) {
+                $response = json_decode($this->likeCard->orderDetails($order_id));
+                $order = $response->data ;
+                return $order;
+            });
+
+        } catch (\Throwable $th) {
+            $order = [] ;
+        }
+
+        return view("front.order_details", compact("order"));
+    }
 }
