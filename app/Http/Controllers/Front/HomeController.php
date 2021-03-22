@@ -72,7 +72,7 @@ class HomeController extends Controller
             if($response->response) {
                 session()->put("success", "Order Create Successfully");
             } else {
-                session()->put("faild", $response->message);
+                session()->put("success", $response->message);
             }
 
         } catch (\Throwable $th) {

@@ -5,7 +5,7 @@
   <h2>List Order</h2>
   <p>List All Previous Order With Status:</p>
   @if(session()->has("success"))
-  <p class="text-success"> {{ session()->get("succcess") }} </p>
+  <p class="text-success"> {{ session()->get("success") }} </p>
   @endif
   @if(session()->has("faild"))
   <p class="text-danger"> {{ session()->get("faild") }} </p>
