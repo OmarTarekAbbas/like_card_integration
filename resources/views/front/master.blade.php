@@ -10,29 +10,6 @@
         body {
             font-family: "Open Sans", sans-serif;
         }
-        h2 {
-            color: #000;
-            font-size: 26px;
-            font-weight: 300;
-            text-align: center;
-            text-transform: uppercase;
-            position: relative;
-            margin: 30px 0 80px;
-        }
-        h2 b {
-            color: #ffc000;
-        }
-        h2::after {
-            content: "";
-            width: 100px;
-            position: absolute;
-            margin: 0 auto;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.2);
-            left: 0;
-            right: 0;
-            bottom: -20px;
-        }
         .carousel {
             margin: 50px auto;
             padding: 0 70px;
@@ -151,16 +128,6 @@
             font-size: 14px;
             color: #ffc000;
         }
-
-        .container-fluid {
-            margin-top: 200px
-        }
-
-        p {
-            font-size: 14px;
-            margin-bottom: 7px
-        }
-
         .small {
             letter-spacing: 0.5px !important
         }
@@ -223,11 +190,6 @@
             color: #fff
         }
 
-        h2 {
-            color: rgb(78, 0, 92);
-            letter-spacing: 2px !important
-        }
-
         .display-3 {
             font-weight: 500 !important
         }
@@ -244,10 +206,6 @@
         }
 
         @media (max-width: 700px) {
-            h2 {
-                color: rgb(78, 0, 92);
-                font-size: 17px
-            }
 
             .display-3 {
                 font-size: 28px;
