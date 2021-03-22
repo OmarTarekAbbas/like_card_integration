@@ -27,7 +27,7 @@
 									<p class="item-price"><span>{{ $product->productPrice }} {{  $product->productCurrency }}</span></p>
 									<a href="#" onclick="event.preventDefault(); document.getElementById('frm-create-order').submit();" class="btn btn-primary">Buy</a>
                                     <form id="frm-create-order" action="{{ route('front.create.order') }}" method="POST" style="display: none;">
-                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                        <input type="hidden" value="{{ $product->productId }}" name="product_id">
                                         {{ csrf_field() }}
                                     </form>
 								</div>
