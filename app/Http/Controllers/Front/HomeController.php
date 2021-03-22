@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Request;
+use Illuminate\Http\Request;
 use App\Services\LikeCardService;
 use Cache;
 class HomeController extends Controller
@@ -61,7 +61,7 @@ class HomeController extends Controller
     /**
      * Method createOrder
      *
-     * @param Request $request [explicite description]
+     * @param Illuminate\Http\Request $request
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
