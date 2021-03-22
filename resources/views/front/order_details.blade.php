@@ -31,7 +31,7 @@
                                     <div class="media-body my-auto text-right">
                                         <div class="row my-auto flex-column flex-md-row">
                                             <div class="col my-auto">
-                                                <h6 class="mb-0"> {{ $produc->productName }}</h6>
+                                                <h6 class="mb-0"> {{ $product->productName }}</h6>
                                             </div>
                                             <div class="col-auto my-auto"> <small> {{ $product->serialId }}</small></div>
                                             <div class="col my-auto">

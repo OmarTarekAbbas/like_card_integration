@@ -109,7 +109,7 @@ class HomeController extends Controller
         try {
             $order = Cache::remember('orders'.$$order_id , 60*30 , function () use ($order_id) {
                 $response = json_decode($this->likeCard->orderDetails($order_id));
-                $order = $response->data ;
+                $order = $response ;
                 return $order;
             });
 
