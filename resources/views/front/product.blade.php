@@ -23,7 +23,7 @@
         </form>
       </div>
     </div>
-    @else
+    @empty
     <div class="panel">
         <h3>Not Found</h3>
     </div>

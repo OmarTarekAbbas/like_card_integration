@@ -1,5 +1,25 @@
 @extends("front.master")
 
 @section("content")
-<h1>Home</h1>
+<section class="grid_card">
+  <div class="row m-0">
+    @forelse($categories() as $category)
+    <div class="col-4 collPadding">
+      <div class="card">
+        <a class="linkable" href="{{ getUrl($category) }}">
+          <img class="card_img m-auto d-block" src="{{ $category->amazonImage }}" alt="{{ $category->categoryName }}">
+
+          <div class="card-body text-center">
+            <p class="card-text">{{ $category->categoryName }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    @empty
+    <div class="panel">
+        <h3>Not Found</h3>
+    </div>
+    @endforelse
+  </div>
+</section>
 @stop

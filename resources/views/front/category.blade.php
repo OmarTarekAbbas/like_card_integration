@@ -7,7 +7,7 @@
     <div class="col-4 collPadding">
       <div class="card">
         <a class="linkable" href="{{ getUrl($child) }}">
-          <img class="card_img m-auto d-block" src="{{ $child->amazonImage }}" alt="itunes">
+          <img class="card_img m-auto d-block" src="{{ $child->amazonImage }}" alt="{{ $category->categoryName }}">
 
           <div class="card-body text-center">
             <p class="card-text">{{ $child->categoryName }}</p>
@@ -15,7 +15,7 @@
         </a>
       </div>
     </div>
-    @else
+    @empty
     <div class="panel">
         <h3>Not Found</h3>
     </div>
