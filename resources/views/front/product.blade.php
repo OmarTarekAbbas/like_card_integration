@@ -6,7 +6,7 @@
     @forelse($products as $product)
     <div class="col-6 collPadding">
       <div class="card">
-        <a class="linkable" href="payment.php">
+        <a class="linkable" href="#">
           <img class="card_img m-auto d-block" src="{{ $product->productImage }}" alt="{{ $product->productName }}">
 
           <div class="card-body text-center">
