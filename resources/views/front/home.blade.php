@@ -6,7 +6,7 @@
     @forelse(categories() as $category)
     <div class="col-4 collPadding">
       <div class="card">
-        <a class="linkable" href="{{ getUrl($category) }}">
+        <a class="linkable" href="{{ route('front.category', ['parent_id' => $category->id]) }}">
           <img class="card_img m-auto d-block" src="{{ $category->amazonImage }}" alt="{{ $category->categoryName }}">
 
           <div class="card-body text-center">
