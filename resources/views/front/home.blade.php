@@ -3,7 +3,7 @@
 @section("content")
 <section class="grid_card">
   <div class="row m-0">
-    @forelse($categories() as $category)
+    @forelse(categories() as $category)
     <div class="col-4 collPadding">
       <div class="card">
         <a class="linkable" href="{{ getUrl($category) }}">
