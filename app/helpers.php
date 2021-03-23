@@ -244,3 +244,10 @@ function dynamic_routes($route_model,$found_roles)
 
     return $categories;
  }
+
+ function getUrl($category){
+    if(count($category->childs)) {
+        return route('front.products', ['category_id' => $category->id ]);
+    }
+    return route('front.category', ['parent_id' => $category->id]);
+ }

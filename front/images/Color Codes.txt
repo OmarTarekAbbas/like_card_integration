@@ -1,0 +1,13 @@
+ Blue Green: #368ca7 
+
+Frame Color Blue Green: #368ca7
+
+
+
+ Text Color: #093543
+
+ Grey: #d7d7d7
+ Black: #000000
+ Mobile Bar : Main Color Gray: #e1e1e1   and Stroke : #368ca7  size 1 px
+ Green: #50b759  and Stroke: #005e20 size 1 px 
+ Red: #e04e4e    and Stroke: #9e0b0f size 1 px

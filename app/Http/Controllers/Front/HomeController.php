@@ -36,6 +36,23 @@ class HomeController extends Controller
     }
 
     /**
+     * Method listCategoryChilds
+     *
+     * @param int $parent_id
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function listCategoryChilds($parent_id)
+    {
+        $category = Cache::remember('category'.$parent_id, 60*60*5 , function () use ($parent_id) {
+            $category  = $this->getSpecficCategory($parent_id);
+            return $category;
+        });
+
+        return view("front.category", compact("category"));
+    }
+
+    /**
      * Method listProducts
      *
      * @param integer $category_id
@@ -79,7 +96,7 @@ class HomeController extends Controller
             session()->flash("faild", "There Are Error In Api");
         }
 
-        return redirect()->route("front.orders");
+        return redirect()->route("front.payment");
     }
 
     /**
@@ -118,5 +135,35 @@ class HomeController extends Controller
         }
 
         return view("front.order_details", compact("order"));
+    }
+
+    /**
+     * Method getPaymentPage
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getPaymentPage()
+    {
+        return view("front.payment");
+    }
+
+    /**
+     * Method getSpecficCategory
+     *
+     * @param integer $category_id
+     *
+     * @return array
+     */
+    public function getSpecficCategory($category_id)
+    {
+        try {
+            $response   = json_decode($this->likeCard->Categories());
+            $categories = $response->data ;
+            $key        = array_search($category_id, array_column($categories, 'id'));
+            $category  =  $categories[$key];
+        } catch (\Throwable $th) {
+            $category = [] ;
+        }
+        return $category;
     }
 }
