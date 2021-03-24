@@ -229,18 +229,18 @@ class HomeController extends Controller
     /**
      * Method getProductFromSubCategoryLikeSearchValue
      *
-     * @param array $categories [all search sub category]
+     * @param array $subCategories [all search sub category]
      * @param string $search_value [use like]
      *
      * @return array
      */
-    public function getProductFromSubCategoryLikeSearchValue($categories, $search_value)
+    public function getProductFromSubCategoryLikeSearchValue($subCategories, $search_value)
     {
 
-        foreach ($categories as $category) {
+        foreach ($subCategories as $category) {
           $products[] = Cache::remember('products'.$category->id , 60*30 , function () use ($category, $search_value) {
               $response = json_decode($this->likeCard->Products($category->id));
-              if($response->response){
+              if($response->response){ //1 return data else no data
                   $products = array_filter($response->data, function($product) use ($search_value){
                     return strpos($product->productName, $search_value) !== false;
                   });
@@ -248,6 +248,6 @@ class HomeController extends Controller
               }
           });
         }
-      return call_user_func_array('array_merge', $products);
+      return call_user_func_array('array_merge', array_filter($products));
     }
 }
