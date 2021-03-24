@@ -113,7 +113,7 @@ class HomeController extends Controller
             $orders = [] ;
         }
 
-        return view("front.order", compact("orders"));
+        return view("front_old.order", compact("orders"));
     }
 
     /**
@@ -134,7 +134,7 @@ class HomeController extends Controller
             $order = [] ;
         }
 
-        return view("front.order_details", compact("order"));
+        return view("front_old.order_details", compact("order"));
     }
 
     /**
