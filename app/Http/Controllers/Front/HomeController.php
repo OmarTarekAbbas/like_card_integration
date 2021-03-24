@@ -189,7 +189,7 @@ class HomeController extends Controller
             $products = [] ;
         }
 
-        return $products;
+        return view("front.product", compact("products"));
     }
 
      /**
