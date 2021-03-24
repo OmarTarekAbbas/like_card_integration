@@ -1,6 +1,7 @@
 /* general */
 
 $blueGreenCol: #368ca7;
+$blueGreenNew: #368ca7ad;
 $petrolCol: #093543;
 $greenlCol: #50b759;
 $redlCol: #e04e4e;
@@ -278,7 +279,7 @@ main {
         .home-card {
             margin-bottom: 10%;
             border: 1px solid $blueGreenCol;
-            background-color: $blueGreenCol;
+            background-color: $blueGreenNew;
             .linkable {
                 color: $blackCol;
                 .card_img {

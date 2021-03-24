@@ -242,7 +242,7 @@ main .grid_card .card .linkable .card-body .card-text {
 main .grid_card .home-card {
   margin-bottom: 10%;
   border: 1px solid #368ca7;
-  background-color: #368ca7;
+  background-color: #368ca7ad;
 }
 main .grid_card .home-card .linkable {
   color: #000;
