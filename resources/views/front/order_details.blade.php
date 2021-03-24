@@ -30,11 +30,11 @@
                                     <div class="sq align-self-center "> <img class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="{{ $product->productImage }}" width="135" height="135" /> </div>
                                     <div class="media-body my-auto text-right">
                                         <div class="row my-auto flex-column flex-md-row">
-                                            <div class="col-md-4 col-sm-12 my-auto">
+                                            <div class="col-lg-4 col-md-12 my-auto">
                                                 <h6 class="mb-0"> {{ $product->productName }}</h6>
                                             </div>
-                                            <div class="col-md-4 col-sm-12 my-auto"> <small> {{ $product->serialId }}</small></div>
-                                            <div class="col-md-4 col-sm-12 my-auto">
+                                            <div class="col-lg-4 col-md-12 my-auto"> <small> {{ $product->serialId }}</small></div>
+                                            <div class="col-lg-4 col-md-12 my-auto">
                                                 <h6 class="mb-0">{{ $product->validTo }}</h6>
                                             </div>
                                         </div>
