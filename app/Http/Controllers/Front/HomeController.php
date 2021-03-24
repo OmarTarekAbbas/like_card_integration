@@ -166,4 +166,25 @@ class HomeController extends Controller
         }
         return $category;
     }
+
+    /**
+     * Method search
+     *
+     * @param string $value
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function search($value)
+    {
+        try {
+            $products = Cache::remember('search', 60*60*24, function () {
+                $category = json_decode($this->likeCard->Categories());
+                $order = $response ;
+                return $order;
+            });
+
+        } catch (\Throwable $th) {
+            $order = [] ;
+        }
+    }
 }
