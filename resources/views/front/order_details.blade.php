@@ -31,11 +31,11 @@
                                     <div class="media-body my-auto text-right">
                                         <div class="row my-auto flex-column flex-md-row">
                                             <div class="col-md-12 my-auto">
-                                                <h6 class="mb-0"> {{ $product->productName }}</h6>
+                                                <h6 class="mb-0"> <span class="text-bold"> ProductName : </span> {{ $product->productName }}</h6>
                                             </div>
-                                            <div class="col-md-12 my-auto"> <small> {{ $product->serialId }}</small></div>
+                                            <div class="col-md-12 my-auto"> <span class="text-bold"> ProductId : </span> <small> {{ $product->serialId }}</small></div>
                                             <div class="col-md-12 my-auto">
-                                                <h6 class="mb-0">{{ $product->validTo }}</h6>
+                                                <h6 class="mb-0"> <span class="text-bold"> validTo: </span> {{ $product->validTo }}</h6>
                                             </div>
                                         </div>
                                     </div>

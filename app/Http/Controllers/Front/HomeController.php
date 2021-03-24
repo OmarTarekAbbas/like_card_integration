@@ -203,7 +203,7 @@ class HomeController extends Controller
     public function getCategoryLikeSearchValue($categories, $search_value)
     {
       $categories  = array_filter($categories, function($category) use ($search_value){
-        return strpos($category->categoryName, $search_value) !== false;
+        return strpos(strtolower($category->categoryName), $search_value) !== false;
       });
       return $categories;
     }
@@ -220,7 +220,7 @@ class HomeController extends Controller
     {
       foreach ($categories as $category) {
         $subCategories[]  = array_filter($category->childs, function($subCategory) use ($search_value){
-          return strpos($subCategory->categoryName, $search_value) !== false;
+          return strpos(strtolower($subCategory->categoryName), $search_value) !== false;
         });
       }
       return call_user_func_array('array_merge', $subCategories);
@@ -242,7 +242,7 @@ class HomeController extends Controller
               $response = json_decode($this->likeCard->Products($category->id));
               if($response->response){ //1 return data else no data
                   $products = array_filter($response->data, function($product) use ($search_value){
-                    return strpos($product->productName, $search_value) !== false;
+                    return strpos(strtolower($product->productName), $search_value) !== false;
                   });
                   return $products;
               }
