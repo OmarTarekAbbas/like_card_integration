@@ -9,3 +9,4 @@ Route::get("/payment","HomeController@getPaymentPage")->name("front.payment");
 Route::post("/create/order","HomeController@CreateOrder")->name("front.create.order");
 Route::get("/orders","HomeController@listOrders")->name("front.orders");
 Route::get("/orders/{id}","HomeController@orderDetails")->name("front.order.details");
+Route::get("/search","HomeController@search")->name("front.search");

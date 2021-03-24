@@ -66,7 +66,7 @@
                         <section class="search_form">
                             <h5 class="find_your_card text-capitalize text-center font-weight-bold">find your card</h5>
 
-                            <form class="search-container" action="#0">
+                            <form class="search-container" action="{{ route('front.search') }}">
                                 <input type="text" name="search" value="" class="form-control search-bar"
                                     placeholder="Search ....">
 

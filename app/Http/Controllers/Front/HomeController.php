@@ -170,21 +170,85 @@ class HomeController extends Controller
     /**
      * Method search
      *
-     * @param string $value
+     * @param Illuminate\Http\Request $request
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function search($value)
+    public function search(Request $request)
     {
         try {
-            $products = Cache::remember('search', 60*60*24, function () {
-                $category = json_decode($this->likeCard->Categories());
-                $order = $response ;
-                return $order;
+            $products = Cache::remember('search'.$request->search , 60*60*24, function () use ($request){
+                $category                       = json_decode($this->likeCard->Categories());
+                $category_like_search_value     = $this->getCategoryLikeSearchValue($category, $request->value);
+                $sub_category_like_search_value = $this->getSubCategoryLikeSearchValue($category_like_search_value, $request->value);
+                $products                       = $this->getProductFromCategoryLikeSearchValue($sub_category_like_search_value, $request->value);
+                return $products;
             });
 
         } catch (\Throwable $th) {
-            $order = [] ;
+            $products = [] ;
         }
+
+        return $products;
+    }
+
+    /**
+     * Method getCategoryLikeSearchValue
+     *
+     * @param array $categories [all category]
+     * @param string $search_value [use like]
+     *
+     * @return array
+     */
+    public function getCategoryLikeSearchValue($categories, $search_value)
+    {
+      $categories  = array_filter($categories, function($category) use ($search_value){
+        return strpos($category->categoryName, $search_value) !== false;
+      });
+      return $categories;
+    }
+
+    /**
+     * Method getSubCategoryLikeSearchValue
+     *
+     * @param array $categories [all search parent category]
+     * @param string $search_value [use like]
+     *
+     * @return array
+     */
+    public function getSubCategoryLikeSearchValue($categories, $search_value)
+    {
+      foreach ($categories as $category) {
+        $categories[]  = array_filter($category->childs, function($subCategory) use ($search_value){
+          return strpos($subCategory->categoryName, $search_value) !== false;
+        });
+      }
+      return $categories;
+    }
+
+    /**
+     * Method getProductFromCategoryLikeSearchValue
+     *
+     * @param array $categories [all search sub category]
+     * @param string $search_value [use like]
+     *
+     * @return array
+     */
+    public function getProductFromCategoryLikeSearchValue($categories, $search_value)
+    {
+      try {
+        foreach ($categories as $category) {
+          $products[] = Cache::remember('products'.$category->id , 60*30 , function () use ($category, $search_value) {
+              $response = json_decode($this->likeCard->Products($category->id));
+              $products = array_filter($response->data, function($product) use ($search_value){
+                return strpos($product->productName, $search_value) !== false;
+              });
+              return $products;
+          });
+        }
+      } catch (\Throwable $th) {
+          $products = [] ;
+      }
+      return $products;
     }
 }
