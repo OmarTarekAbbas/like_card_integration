@@ -5,7 +5,7 @@
   <div class="row m-0">
     @forelse(categories() as $category)
     <div class="col-4 collPadding">
-      <div class="card">
+      <div class="home-card">
         <a class="linkable" href="{{ route('front.category', ['parent_id' => $category->id]) }}">
           <img class="card_img m-auto d-block" src="{{ $category->amazonImage }}" alt="{{ $category->categoryName }}">
 
