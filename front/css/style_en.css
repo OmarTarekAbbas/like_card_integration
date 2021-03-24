@@ -224,6 +224,7 @@ main .grid_card .collPadding {
 main .grid_card .card {
   margin-bottom: 10%;
   border: 1px solid #368ca7;
+  background-color: #368ca7;
 }
 main .grid_card .card .linkable {
   color: #000;
@@ -252,6 +253,7 @@ main .list_content .card .linkable {
 }
 main .list_content .card .linkable .card_img {
   width: 100%;
+  height: 90px;
 }
 main .list_content .card .linkable .card-body {
   padding: 0 5px;
