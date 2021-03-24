@@ -7,7 +7,7 @@
             <div class="card-header bg-white">
                 <div class="media flex-sm-row flex-column-reverse justify-content-between ">
                     <div class="col my-auto">
-                        <h4 class="mb-0">Thanks for your Order,<span class="change-color">Mohamed</span> !</h4>
+                        <h4 class="mb-0">Thanks for your Order !</h4>
                     </div>
                     <div class="col-auto text-center my-auto pl-0 pt-sm-4"> <img class="img-fluid my-auto align-items-center mb-0 pt-3" src="https://i.imgur.com/7q7gIzR.png" width="115" height="115">
                         <p class="mb-4 pt-0 Glasses">Like Card</p>
@@ -41,19 +41,6 @@
                                     </div>
                                 </div>
                                 <hr class="my-3 ">
-                                <div class="row">
-                                    <div class="col-md-3 mb-3"> <small> Track Order <span><i class=" ml-2 fa fa-refresh" aria-hidden="true"></i></span></small> </div>
-                                    <div class="col mt-auto">
-                                        <div class="progress my-auto">
-                                            <div class="progress-bar progress-bar rounded" style="width: 62%" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <div class="media row justify-content-between ">
-                                            <div class="col-auto text-right"><span> <small class="text-right mr-sm-2"></small> <i class="fa fa-circle active"></i> </span></div>
-                                            <div class="flex-col"> <span> <small class="text-right mr-sm-2">Out for delivary</small><i class="fa fa-circle active"></i></span></div>
-                                            <div class="col-auto flex-col-auto"><small class="text-right mr-sm-2">Delivered</small><span> <i class="fa fa-circle"></i></span></div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -86,14 +73,6 @@
                             </div>
                             <div class="flex-sm-col col-auto">
                                 <p class="mb-1">{{ $order->orderCurrentStatus }}</p>
-                            </div>
-                        </div>
-                        <div class="row justify-content-between">
-                            <div class="flex-sm-col text-right col">
-                                <p class="mb-1"><b>Delivery Charges</b></p>
-                            </div>
-                            <div class="flex-sm-col col-auto">
-                                <p class="mb-1">Free</p>
                             </div>
                         </div>
                     </div>

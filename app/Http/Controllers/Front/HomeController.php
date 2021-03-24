@@ -96,7 +96,7 @@ class HomeController extends Controller
             session()->flash("faild", "There Are Error In Api");
         }
 
-        return redirect()->route("front.payment");
+        return redirect()->route("front.order");
     }
 
     /**
