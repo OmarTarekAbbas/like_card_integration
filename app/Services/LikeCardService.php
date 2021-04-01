@@ -10,7 +10,7 @@ class LikeCardService
      * Method test_check_balance
      *
      * check balance That We Have
-     * @return void
+     * @return string|bool
      */
     public function test_check_balance()
     {
@@ -37,7 +37,7 @@ class LikeCardService
      * Method checkBalance
      *
      * check balance That We Have
-     * @return void
+     * @return string|bool
      */
     public function checkBalance()
     {
@@ -58,7 +58,7 @@ class LikeCardService
     /**
      * Method categories
      *
-     * @return void
+     * @return string|bool
      */
     public function Categories()
     {
@@ -80,8 +80,8 @@ class LikeCardService
     /**
      * Method products
      *
-     * @param integer $category_id
-     * @return void
+     * @param int $category_id
+     * @return string|bool
      */
     public function Products($category_id)
     {
@@ -103,8 +103,8 @@ class LikeCardService
     /**
      * Method productsWithOptional
      *
-     * @param integer $category_id
-     * @return void
+     * @param int $category_id
+     * @return string|bool
      */
     public function productsWithOptional($category_id)
     {
@@ -126,7 +126,7 @@ class LikeCardService
     /**
      * Method Orders
      *
-     * @return void
+     * @return string|bool
      */
     public function Orders()
     {
@@ -150,7 +150,7 @@ class LikeCardService
      *
      * @param Integer $order_id [explicite description]
      *
-     * @return void
+     * @return string|bool
      */
     public function orderDetails($order_id)
     {
@@ -172,8 +172,8 @@ class LikeCardService
     /**
      * Method createOrder
      *
-     * @param integer $product_id
-     * @return void
+     * @param int $product_id
+     * @return string|bool
      */
     public function createOrder($product_id)
     {
