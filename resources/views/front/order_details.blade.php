@@ -33,7 +33,7 @@
                                             <div class="col-md-12 my-auto">
                                                 <h6 class="mb-0"> <span class="font-weight-bold"> ProductName : </span> {{ $product->productName }}</h6>
                                             </div>
-                                            <div class="col-md-12 my-auto"> <span class="font-weight-bold"> ProductId : </span> <small> {{ $product->serialId }}</small></div>
+                                            <div class="col-md-12 my-auto"> <span class="font-weight-bold"> serial Id : </span> <small> {{ $product->serialId }}</small></div>
                                             <div class="col-md-12 my-auto">
                                                 <h6 class="mb-0"> <span class="font-weight-bold"> validTo: </span> {{ $product->validTo }}</h6>
                                             </div>

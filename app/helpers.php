@@ -250,5 +250,5 @@ function dynamic_routes($route_model,$found_roles)
         return route('front.category', ['parent_id' => $category->id]);
     }
     return route('front.products', ['category_id' => $category->id ]);
-    
+
  }
