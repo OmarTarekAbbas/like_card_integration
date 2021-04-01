@@ -408,6 +408,34 @@ main .payment_card .my_checkout .btn_checkout {
   border: 1px solid #005e20;
   padding: 0.25rem 0.25rem;
 }
+main .order_sec table thead {
+  display: none;
+}
+main .order_sec table tbody .table_grid {
+  display: grid;
+  grid-template-columns: 100%;
+  border-bottom: 1px solid #093543;
+  margin-bottom: 5%;
+}
+main .order_sec table tbody .table_grid td,
+main .order_sec table tbody .table_grid th {
+  border-top: 0;
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+main .order_sec table tbody .table_grid td {
+  width: 100%;
+}
+main .order_sec table tbody .table_grid .btn_show {
+  background-color: #093543;
+  color: #fff;
+  width: 40%;
+  margin: auto;
+  margin-bottom: 5%;
+}
+main .order_sec table tbody .table_grid .btn_show:focus {
+  box-shadow: 0 0 0 0.2rem #368ca7;
+}
 
 #return-to-top {
   z-index: 999;
