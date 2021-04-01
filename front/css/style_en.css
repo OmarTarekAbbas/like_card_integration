@@ -78,9 +78,6 @@ body {
   color: #fff;
   background-color: #000;
 }
-.header_Nav .navbar_btn .accordion .nav-item .nav-link:hover, .header_Nav .navbar_btn .accordion .nav-item .nav-link:focus {
-  color: #fff;
-}
 .header_Nav .search_btn {
   float: right;
   padding: 12px;
@@ -414,24 +411,34 @@ main .order_sec table thead {
 main .order_sec table tbody .table_grid {
   display: grid;
   grid-template-columns: 100%;
-  border-bottom: 1px solid #093543;
   margin-bottom: 5%;
 }
 main .order_sec table tbody .table_grid td,
 main .order_sec table tbody .table_grid th {
   border-top: 0;
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 50% 50%;
+  padding: 0.25rem;
 }
 main .order_sec table tbody .table_grid td {
   width: 100%;
+  line-height: 2.5rem;
+}
+main .order_sec table tbody .table_grid td.last_grid {
+  grid-template-columns: 100%;
+  border-bottom: 1px solid #368ca7;
+}
+main .order_sec table tbody .table_grid td.last_grid:last-of-type {
+  border-bottom: 0;
+}
+main .order_sec table tbody .table_grid td .title_value {
+  margin: auto;
 }
 main .order_sec table tbody .table_grid .btn_show {
   background-color: #093543;
   color: #fff;
   width: 40%;
-  margin: auto;
-  margin-bottom: 5%;
+  margin: 5% auto;
 }
 main .order_sec table tbody .table_grid .btn_show:focus {
   box-shadow: 0 0 0 0.2rem #368ca7;
@@ -525,6 +532,7 @@ main .order_sec table tbody .table_grid .btn_show:focus {
     font-size: 22px;
     padding: 15px 50px 15px 15px;
   }
+
   .hamburger {
     font-size: 2rem;
     left: 1.5rem;

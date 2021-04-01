@@ -32,20 +32,9 @@
                 </li>
                 @endforeach
 
-                <li class="nav-item dropdown">
-                    @if(app()->getLocale() == 'en')
-                    <a class="nav-link dropdown-toggle link_href text-capitalize" data-toggle="dropdown" href="#"
-                        role="button" aria-haspopup="true" aria-expanded="false">english</a>
-                    @else
-                    <a class="nav-link dropdown-toggle link_href text-capitalize" data-toggle="dropdown" href="#"
-                        role="button" aria-haspopup="true" aria-expanded="false">عربى</a>
-                    @endif
-                    <div class="dropdown-menu text-capitalize">
-                        <a class="dropdown-item" href="{{ url('lang/en') }}">english</a>
-                        <a class="dropdown-item" href="{{ url('lang/ar') }}">عربي</a>
-                    </div>
+                <li>
+                    <a href="{{ route('front.orders') }}" class="link text-capitalize link_href">orders</a>
                 </li>
-
             </ul>
         </nav>
 
