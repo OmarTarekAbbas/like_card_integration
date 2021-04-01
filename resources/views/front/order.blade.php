@@ -33,7 +33,7 @@
           <td><span class="title">Order Create Date:</span> <b class="title_value">{{ $order->orderCreateDate }}</b></td>
           <td><span class="title">Order Current Status:</span> <b class="title_value">{{ $order->orderCurrentStatus }}</b></td>
           <td><span class="title">Order Payment Method:</span> <b class="title_value">{{ $order->orderPaymentMethod }}</b></td>
-          <td><a class="btn_show btn" href="{{ route('front.order.details', ['order_id' => $order->orderNumber]) }}"> Show </a></td>
+          <td class="last_grid"><a class="btn_show btn" href="{{ route('front.order.details', ['order_id' => $order->orderNumber]) }}"> Show </a></td>
         </tr>
         @endforeach
       </tbody>
