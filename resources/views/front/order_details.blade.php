@@ -7,7 +7,7 @@
     <div class="card-header bg-white">
       <div class="media row justify-content-between mb-3">
         <div class="col-6 my-auto p-0">
-          <h4 class="mb-0">Thanks for your Order !</h4>
+          <h6 class="mb-0">Thanks for your Order !</h6>
         </div>
 
         <div class="col-6 text-center my-auto pl-0 pt-sm-4">
