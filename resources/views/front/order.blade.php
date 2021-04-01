@@ -12,18 +12,6 @@
   @endif
   <div class="table-responsive">
     <table class="table">
-      <thead>
-        <tr>
-          <th>orderNumber</th>
-          <th>orderFinalTotal</th>
-          <th>currencySymbol</th>
-          <th>orderCreateDate</th>
-          <th>orderCurrentStatus</th>
-          <th>orderPaymentMethod</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-
       <tbody>
         @foreach($orders as $order)
         <tr class="table_grid">
