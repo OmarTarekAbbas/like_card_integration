@@ -1,7 +1,7 @@
 @extends("front.master")
 
 @section("content")
-<section class="order_sec">
+<section class="order_sec ">
   <h2 class="text-center">List Order</h2>
   <p class="text-center">List All Previous Order With Status:</p>
   @if(session()->has("success"))
