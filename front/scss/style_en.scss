@@ -100,16 +100,6 @@ body {
         color: $whiteCol;
         background-color: $blackCol;
       }
-
-      .nav-item {
-        .nav-link {
-
-          &:hover,
-          &:focus {
-            color: $whiteCol;
-          }
-        }
-      }
     }
   }
 
@@ -540,22 +530,31 @@ main {
         .table_grid {
           display: grid;
           grid-template-columns: 100%;
-          border-bottom: 1px solid $petrolCol;
           margin-bottom: 5%;
 
           td,
           th {
             border-top: 0;
             display: grid;
-            grid-template-columns: 40% 60%;
+            grid-template-columns: 50% 50%;
+            padding: .25rem;
           }
 
           td {
             width: 100%;
+            line-height: 2.5rem;
 
-            .title {}
+            &.last_grid {
+              grid-template-columns: 100%;
+              border-bottom: 1px solid $blueGreenCol;
+
+              &:last-of-type {
+                border-bottom: 0;
+              }
+            }
 
             .title_value {
+              margin: auto;
             }
           }
 
@@ -563,8 +562,7 @@ main {
             background-color: $petrolCol;
             color: $whiteCol;
             width: 40%;
-            margin: auto;
-            margin-bottom: 5%;
+            margin: 5% auto;
 
             &:focus {
               box-shadow: 0 0 0 0.2rem $blueGreenCol;
@@ -688,7 +686,6 @@ main {
           padding: 15px 50px 15px 15px;
         }
 
-        .nav-item {}
       }
     }
   }
