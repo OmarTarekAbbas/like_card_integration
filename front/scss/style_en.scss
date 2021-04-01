@@ -562,6 +562,25 @@ main {
       }
     }
   }
+
+  .order_details {
+    .card {
+      .card-body {
+        padding: 1rem;
+        .card_grid {
+          display: grid;
+          grid-template-columns: 25% 75%;
+          img {
+            width: 100%;
+          }
+
+          .media-body {
+            margin-left: 3%;
+          }
+        }
+      }
+    }
+  }
 }
 
 #return-to-top {
