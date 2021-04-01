@@ -202,9 +202,9 @@ class HomeController extends Controller
      */
     public function getCategoryLikeSearchValue($categories, $search_value)
     {
-      $categories  = array_filter($categories, function($category) use ($search_value){
-        return strpos(strtolower($category->categoryName), $search_value) !== false;
-      });
+      // $categories  = array_filter($categories, function($category) use ($search_value){
+      //   return strpos(strtolower($category->categoryName), $search_value) !== false;
+      // });
       return $categories;
     }
 
@@ -219,9 +219,10 @@ class HomeController extends Controller
     public function getSubCategoryLikeSearchValue($categories, $search_value)
     {
       foreach ($categories as $category) {
-        $subCategories[]  = array_filter($category->childs, function($subCategory) use ($search_value){
-          return strpos(strtolower($subCategory->categoryName), $search_value) !== false;
-        });
+        // $subCategories[]  = array_filter($category->childs, function($subCategory) use ($search_value){
+        //   return strpos(strtolower($subCategory->categoryName), $search_value) !== false;
+        // });
+        $subCategories[]  = $category->childs;
       }
       return call_user_func_array('array_merge', $subCategories);
     }
