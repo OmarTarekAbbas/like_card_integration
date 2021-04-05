@@ -43,7 +43,7 @@
       <button class="price_currency btn">30 <span class="currency">$</span></button>
     </div>
 
-    <div class="price_background rounded">
+    <!-- <div class="price_background rounded">
       <button class="price_currency btn text-capitalize"><span class="currency">+1</span> month</button>
     </div>
 
@@ -53,7 +53,7 @@
 
     <div class="price_background rounded">
       <button class="price_currency btn text-capitalize"><span class="currency">+3</span> months</button>
-    </div>
+    </div> -->
   </div>
 
   <div class="phone_number">
