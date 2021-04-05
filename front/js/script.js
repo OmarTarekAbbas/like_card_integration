@@ -41,19 +41,31 @@ $(window).on('load', function () {
   });
 });
 
-jQuery(document).ready(($) => {
-  $('.quantity').on('click', '.plus', function(e) {
-      let $input = $(this).prev('input.qty');
-      let val = parseInt($input.val());
-      $input.val( val+1 ).change();
-  });
+// jQuery(document).ready(($) => {
+//   $('.quantity').on('click', '.plus', function(e) {
+//       let $input = $(this).prev('input.qty');
+//       let val = parseInt($input.val());
+//       console.log(val);
+//       $input.val( val+1 ).change();
+//   });
 
-  $('.quantity').on('click', '.minus', 
-      function(e) {
-      let $input = $(this).next('input.qty');
-      var val = parseInt($input.val());
-      if (val > 0) {
-          $input.val( val-1 ).change();
-      } 
-  });
+//   $('.quantity').on('click', '.minus',
+//       function(e) {
+//       let $input = $(this).next('input.qty');
+//       var val = parseInt($input.val());
+//       if (val > 0) {
+//           $input.val( val-1 ).change();
+//       }
+//   });
+// });
+
+$('.add').click(function () {
+  if ($(this).prev().val() < 6) {
+    $(this).prev().val(+$(this).prev().val() + 1);
+  }
+});
+$('.sub').click(function () {
+  if ($(this).next().val() > 1) {
+    if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+  }
 });

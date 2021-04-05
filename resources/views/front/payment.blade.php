@@ -7,7 +7,7 @@
       <div class="col-4 collPadding collFloat">
         <div class="card_background rounded">
           <a href="payment.php">
-            <img class="card_img m-auto d-block" src="images/logos/17.png" alt="itunes">
+            <img class="card_img m-auto d-block" src="{{ asset('images/logos/17.png') }}" alt="itunes">
           </a>
         </div>
       </div>
@@ -102,13 +102,11 @@
 
       <div class="col-6 d-flex justify-content-center">
         <form id='myform' method='POST' class='quantity' action='#'>
-          <div class="qtyminus minus">
+          <div id="sub" class="qtyminus minus sub">
             <i class=" fas fa-minus-circle"></i>
           </div>
-          <!-- <input type='button' value='-' class='qtyminus minus' field='quantity' /> -->
-          <input type='text' name='quantity' value='0' class='qty' />
-          <!-- <input type='button' value='+' class='qtyplus plus' field='quantity' /> -->
-          <div class="qtyplus plus">
+          <input type="number" id="1" name='quantity' value="1" min="1" max="6" />
+          <div id="add" class="qtyplus plus add">
             <i class=" fas fa-plus-circle"></i>
           </div>
         </form>
@@ -138,5 +136,8 @@
       </div>
     </div>
   </div>
+
+
+
 </section>
 @stop
