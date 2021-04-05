@@ -19,8 +19,8 @@
     </div>
   </div>
   <div class="grid_view">
-    <div class="price_background rounded">
-      <button class="price_currency btn">{{$productPrice}} <span class="currency">KWD</span></button>
+  <div class="price_background rounded">
+      <button class="price_currency btn" id="price1"></button>
     </div>
 
     <div class="price_background rounded">
