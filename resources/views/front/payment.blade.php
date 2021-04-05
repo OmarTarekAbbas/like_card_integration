@@ -1,6 +1,7 @@
 @extends("front.master")
 
 @section("content")
+<
 <section class="payment_card">
   <div class="row m-0">
     <div class="col-12 p-0">
@@ -101,7 +102,7 @@
       </div>
 
       <div class="col-6 d-flex justify-content-center align-items-center">
-        <span class="total_price text-uppercase" id="total_price">{{$productPrice}} kd</span>
+        <span class="total_price text-uppercase" id="total_price">{{$productPrice}} KWD</span>
       </div>
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
@@ -129,48 +130,42 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script>
-  $(document).ready(function () {
-    var number1 = {{$productPrice}};
-    var number2 = number1 * 2;
-    var number3 = number1 * 3;
-    var number4 = number1 * 4;
-    var number5 = number1 * 5;
-    var number6 = number1 * 6;
-    $('#price2').text(number2 + ' KWD');
-    $('#price3').text(Math.ceil(number3) + ' KWD');
-    $('#price4').text(Math.ceil(number4) + ' KWD');
-    $('#price5').text(Math.ceil(number5) + ' KWD');
-    $('#price6').text(Math.ceil(number6) + ' KWD');
-  });
+    var price = {{$productPrice}}
 
-  $('.add').click(function () {
-    if ($(this).prev().val() < 6) {
-      $(this).prev().val(+$(this).prev().val() + 1);
+    $(document).ready(function () {
+        for (let index = 1; index <= 9; index++) {
+        $('#price'+index).text((price * index).toFixed(1) + ' KWD');
+        }
+    });
+
+    $('#price1,#price2,#price3,#price4,#price5,#price6,#price7,#price8,#price9').click(function () {
+        price_text = $(this).text();
+        price_now = (parseFloat((price_text.split(" "))[0])).toFixed(1)
+        $('#total_price').text(price_now + ' KWD');
+        var num = Math.ceil(price_now/price)
+        $("#quantity").val(num);
+    });
+
+    $('.add').click(function () {
+        if (parseInt($("#quantity").val()) >= 9) {
+        return ;
+        }
+        $("#quantity").val(parseInt($("#quantity").val()) + 1);
+        setTotalPrice()
+    });
+
+    $('.sub').click(function () {
+        if (parseInt($("#quantity").val()) <= 1) {
+        return ;
+        }
+        $("#quantity").val(parseInt($("#quantity").val()) - 1);
+        setTotalPrice()
+    });
+
+    function setTotalPrice() {
+        $('#total_price').html((price * parseInt($("#quantity").val())).toFixed(1) + ' KWD');
+        $("#price"+parseInt($("#quantity").val())).trigger('focus')
     }
-    var price_bac = {{$productPrice}};
-    var total_pr = $(this).prev().val() * price_bac ;
-    $('#total_price').text(total_pr + ' kd');
-  });
-  $('.sub').click(function () {
-    if ($(this).next().val() > 1) {
-      if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
-    }
-    var price_bac = {{$productPrice}};
-    var total_pr = $(this).next().val() * price_bac ;
-    $('#total_price').text(total_pr + ' kd') });
-
-  $('#price2').click(function () {
-          console.log($(this).text());
-          var price2 = $(this).text();
-          $('#total_price').text(price2 + ' kd');
-  });
-
-
-
-
-
-
-
 
 </script>
 @stop
