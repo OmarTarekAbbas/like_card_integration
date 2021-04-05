@@ -1,7 +1,6 @@
 @extends("front.master")
 
 @section("content")
-@if($order)
 <section class="order_details">
   <div class="card card-1">
     <div class="card-header bg-white">
@@ -24,28 +23,27 @@
         </div>
 
         <div class="col-6 p-0">
-          <small class="font-weight-bold">Receipt Voucher : {{ $order->orderNumber }}</small>
+          <small class="font-weight-bold">Receipt Voucher : 34427724</small>
         </div>
       </div>
 
-      @foreach($order->serials as $product)
       <div class="row mb-2">
-        <div class="col-12 p-0">
+        <div class="col-12 p-1">
           <div class="card card-2">
             <div class="card-body">
               <div class="card_grid">
-                <div class="sq align-self-center ">
-                  <img class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="{{ $product->productImage }}"/>
+                <div class="sq align-self-center">
+                  <img class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="https://likecard-space.fra1.digitaloceanspaces.com/products/9cf24-likecardlogo.png">
                 </div>
 
                 <div class="media-body my-auto">
                   <div class="row my-auto flex-column flex-md-row">
                     <div class="col-12 my-auto">
-                      <h6 class="mb-0"> <span class="font-weight-bold">Product Name : </span>{{ $product->productName }}</h6>
+                      <h6 class="mb-0"> <span class="font-weight-bold"> ProductName : </span> test-itunes1</h6>
                     </div>
-                    <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Id : </span><small> {{ $product->serialId }}</small></div>
+                    <div class="col-12 my-auto"> <span class="font-weight-bold"> serial Id : </span> <small> 25413216</small></div>
                     <div class="col-12 my-auto">
-                      <h6 class="mb-0"> <span class="font-weight-bold">Valid To: </span>{{ $product->validTo }}</h6>
+                      <h6 class="mb-0"> <span class="font-weight-bold"> validTo: </span> 24/06/2021</h6>
                     </div>
                   </div>
                 </div>
@@ -55,42 +53,40 @@
           </div>
         </div>
       </div>
-      @endforeach
 
       <div class="row mb-2">
         <div class="col-12 p-1">
-          <div class="row justify-content-between">
+          <div class="row justify-content-between m-0">
             <div class="col-12 text-center">
               <p class="mb-1 text-dark"><b>Order Details</b></p>
             </div>
 
             <div class="col-12 text-center">
-              <p class="mb-1"><b>Total: </b><span>{{ $order->orderFinalTotal }} {{ $order->currencySymbol }}</span></p>
+              <p class="mb-1"><b>Total: </b><span>0.01 KWD</span></p>
             </div>
           </div>
 
-          <div class="row justify-content-between">
+          <div class="row justify-content-between m-0">
             <div class="col-12 text-center">
-              <p class="mb-1"> <b>Payment:</b><span>{{ $order->orderPaymentMethod }}</span></p>
+              <p class="mb-1"><b>Payment: </b><span>Pocket</span></p>
             </div>
           </div>
 
-          <div class="row justify-content-between">
+          <div class="row justify-content-between m-0">
             <div class="col-12 text-center">
-              <p class="mb-1"><b>Status</b><span>{{ $order->orderCurrentStatus }}</span></p>
+              <p class="mb-1"><b>Status:</b> <span>completed</span></p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row invoice ">
+      <div class="row invoice">
         <div class="col">
-          <p class="mb-1"> Invoice Number : {{ $order->orderNumber }}</p>
-          <p class="mb-1">Invoice Date : {{ $order->orderCreateDate }}</p>
+          <p class="mb-1"> Invoice Number : 34427724</p>
+          <p class="mb-1">Invoice Date : 2021-03-24 07:09</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-@endif
 @stop

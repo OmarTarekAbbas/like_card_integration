@@ -6,8 +6,8 @@
     <div class="col-12 p-0">
       <div class="col-4 collPadding collFloat">
         <div class="card_background rounded">
-          <a href="payment.php">
-            <img class="card_img m-auto d-block" src="images/logos/17.png" alt="itunes">
+          <a href="#0">
+            <img class="card_img m-auto d-block" src="{{$productImage}}" alt="{{$productName}}">
           </a>
         </div>
       </div>
@@ -17,43 +17,31 @@
       <h4 class="payment_card_title text-capitalize">Amount - المبلغ</h4>
     </div>
   </div>
-
   <div class="grid_view">
     <div class="price_background rounded">
-      <button class="price_currency btn">5 <span class="currency">$</span></button>
+      <button class="price_currency btn">{{$productPrice}} <span class="currency">KWD</span></button>
     </div>
 
     <div class="price_background rounded">
-      <button class="price_currency btn">10 <span class="currency">$</span></button>
+      <button class="price_currency btn" id="price2"></button>
     </div>
 
     <div class="price_background rounded">
-      <button class="price_currency btn">15 <span class="currency">$</span></button>
+      <button class="price_currency btn" id="price3"></button>
     </div>
 
     <div class="price_background rounded">
-      <button class="price_currency btn">20 <span class="currency">$</span></button>
+      <button class="price_currency btn" id="price4"></button>
     </div>
 
     <div class="price_background rounded">
-      <button class="price_currency btn">25 <span class="currency">$</span></button>
+      <button class="price_currency btn" id="price5"></button>
     </div>
 
     <div class="price_background rounded">
-      <button class="price_currency btn">30 <span class="currency">$</span></button>
+      <button class="price_currency btn" id="price6"></button>
     </div>
 
-    <div class="price_background rounded">
-      <button class="price_currency btn text-capitalize"><span class="currency">+1</span> month</button>
-    </div>
-
-    <div class="price_background rounded">
-      <button class="price_currency btn text-capitalize"><span class="currency">+2</span> months</button>
-    </div>
-
-    <div class="price_background rounded">
-      <button class="price_currency btn text-capitalize"><span class="currency">+3</span> months</button>
-    </div>
   </div>
 
   <div class="phone_number">
@@ -102,20 +90,18 @@
 
       <div class="col-6 d-flex justify-content-center">
         <form id='myform' method='POST' class='quantity' action='#'>
-          <div class="qtyminus minus">
+          <div id="sub" class="qtyminus minus sub">
             <i class=" fas fa-minus-circle"></i>
           </div>
-          <!-- <input type='button' value='-' class='qtyminus minus' field='quantity' /> -->
-          <input type='text' name='quantity' value='0' class='qty' />
-          <!-- <input type='button' value='+' class='qtyplus plus' field='quantity' /> -->
-          <div class="qtyplus plus">
+          <input type="number" id="1" name='quantity' value="1" min="1" max="6" />
+          <div id="add" class="qtyplus plus add">
             <i class=" fas fa-plus-circle"></i>
           </div>
         </form>
       </div>
 
       <div class="col-6 d-flex justify-content-center align-items-center">
-        <span class="total_price text-uppercase">0.000 kd</span>
+        <span class="total_price text-uppercase" id="total_price">{{$productPrice}} kd</span>
       </div>
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
@@ -138,5 +124,53 @@
       </div>
     </div>
   </div>
+
 </section>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    var number1 = {{$productPrice}};
+    var number2 = number1 * 2;
+    var number3 = number1 * 3;
+    var number4 = number1 * 4;
+    var number5 = number1 * 5;
+    var number6 = number1 * 6;
+    $('#price2').text(number2 + ' KWD');
+    $('#price3').text(Math.ceil(number3) + ' KWD');
+    $('#price4').text(Math.ceil(number4) + ' KWD');
+    $('#price5').text(Math.ceil(number5) + ' KWD');
+    $('#price6').text(Math.ceil(number6) + ' KWD');
+  });
+
+  $('.add').click(function () {
+    if ($(this).prev().val() < 6) {
+      $(this).prev().val(+$(this).prev().val() + 1);
+    }
+    var price_bac = {{$productPrice}};
+    var total_pr = $(this).prev().val() * price_bac ;
+    $('#total_price').text(total_pr + ' kd');
+  });
+  $('.sub').click(function () {
+    if ($(this).next().val() > 1) {
+      if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+    }
+    var price_bac = {{$productPrice}};
+    var total_pr = $(this).next().val() * price_bac ;
+    $('#total_price').text(total_pr + ' kd') });
+
+  $('#price2').click(function () {
+          console.log($(this).text());
+          var price2 = $(this).text();
+          $('#total_price').text(price2 + ' kd');
+  });
+
+
+
+
+
+
+
+
+</script>
 @stop
