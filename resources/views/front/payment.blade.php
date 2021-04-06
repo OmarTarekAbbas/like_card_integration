@@ -102,7 +102,7 @@
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
         <div class="my_checkout">
-          <button type="submit" class="btn_checkout btn text-capitalize" form="#myform">checkout</button>
+          <button type="submit" class="btn_checkout btn text-capitalize" form="myform">checkout</button>
         </div>
       </div>
     </div>
