@@ -76,7 +76,7 @@
           <div id="sub" class="qtyminus minus sub">
             <i class=" fas fa-minus-circle"></i>
           </div>
-          <input type="number" id="1" name='quantity' value="1" min="1" max="6" />
+          <input type="number" id="quantity" name='quantity' value="1" min="1" max="6" />
           <div id="add" class="qtyplus plus add">
             <i class=" fas fa-plus-circle"></i>
           </div>
@@ -84,7 +84,7 @@
       </div>
 
       <div class="col-6 d-flex justify-content-center align-items-center">
-        <span class="total_price text-uppercase" id="total_price">{{$productPrice}} KWD</span>
+        <span class="total_price text-uppercase" id="total_price">{{$productPrice}} {{ $productCurrency }}</span>
       </div>
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
@@ -114,10 +114,11 @@
 @section("script")
 <script>
     var price = {{$productPrice}}
+    var currency = ' {{$productCurrency}}'
 
     $('.price_currency').click(function () {
         price = ($(this).data("price")).toFixed(1);
-        $('#total_price').text(price_now + ' KWD');
+        $('#total_price').text(price + currency);
         $("#quantity").val($(this).data("quantity"));
     });
 
@@ -138,7 +139,7 @@
     });
 
     function setTotalPrice() {
-        $('#total_price').html((price * parseInt($("#quantity").val())).toFixed(1) + ' KWD');
+        $('#total_price').html((price * parseInt($("#quantity").val())).toFixed(1) + currency);
         $("#price"+parseInt($("#quantity").val())).trigger('focus')
     }
 
