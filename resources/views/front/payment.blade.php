@@ -117,8 +117,8 @@
     var currency = ' {{$productCurrency}}'
 
     $('.price_currency').click(function () {
-        price = ($(this).data("price")).toFixed(1);
-        $('#total_price').text(price + currency);
+        var cuurentPrice = ($(this).data("price")).toFixed(1);
+        $('#total_price').text(cuurentPrice + currency);
         $("#quantity").val($(this).data("quantity"));
     });
 
