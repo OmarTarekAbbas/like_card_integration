@@ -94,12 +94,11 @@ class HomeController extends Controller
             } else {
                 session()->flash("faild", $response->message);
             }
-
+            return redirect()->route("front.order.details",["id" => $response->orderNumber]);
         } catch (\Throwable $th) {
             session()->flash("faild", "There Are Error In Api");
+            return redirect()->back();
         }
-
-        return redirect()->route("front.orders");
     }
 
     /**
