@@ -6,6 +6,12 @@
   <div class="card card-1">
     <div class="card-header bg-white">
       <div class="media row justify-content-between mb-3">
+        <div class="col-12 text-center mt-2 p-0">
+          <a href="{{ route('front.orders') }}" class="text-success">
+            <h4 class="mb-0">List Orders !</h4>
+          </a>
+        </div>
+
         <div class="col-6 my-auto p-0">
           <h6 class="mb-0">Thanks for your Order !</h6>
         </div>
