@@ -157,7 +157,8 @@ class HomeController extends Controller
         $productImage = $request->productImage;
         $productPrice = $request->productPrice;
         $productName = $request->productName;
-        return view("front.payment",compact('productId','productImage','productPrice','productName'));
+        $productCurrency = $request->productCurrency;
+        return view("front.payment",compact('productId','productImage','productPrice','productName','productCurrency'));
     }
 
     public function getPaymentPageGet(Request $request)
