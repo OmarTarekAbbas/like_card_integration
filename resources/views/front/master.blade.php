@@ -88,6 +88,7 @@
     <script src="{{ asset('front/js/popper.min.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('front/js/script.js') }}"></script>
+    @yield("script")
 </body>
 
 </html>
