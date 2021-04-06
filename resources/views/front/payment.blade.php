@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="grid_view">
-  @for($i=1; $<=9; $i++)
+  @for($i=1; $i<=9; $i++)
     <div class="price_background rounded">
       <button class="price_currency btn" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency = "{{ $productCurrency }}" data-price = "{{ $productPrice }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
     </div>
