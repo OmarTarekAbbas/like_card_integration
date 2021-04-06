@@ -76,7 +76,7 @@
           <div id="sub" class="qtyminus minus sub">
             <i class=" fas fa-minus-circle"></i>
           </div>
-          <input type="number" id="quantity" name='quantity' value="1" min="1" max="6" />
+          <input type="number" id="quantity" name='quantity' value="1" min="1" max="9" />
           <div id="add" class="qtyplus plus add">
             <i class=" fas fa-plus-circle"></i>
           </div>
