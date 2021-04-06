@@ -151,6 +151,7 @@ class HomeController extends Controller
         session()->put('productImage', $request->productImage);
         session()->put('productPrice', $request->productPrice);
         session()->put('productName', $request->productName);
+        session()->put('productCurrency', $request->productCurrency);
 
         $productId   = $request->product_id;
         $productImage = $request->productImage;
@@ -165,7 +166,8 @@ class HomeController extends Controller
         $productImage = session()->get('productImage');
         $productPrice = session()->get('productPrice');
         $productName = session()->get('productName');
-        return view("front.payment",compact('productId','productImage','productPrice','productName'));
+        $productCurrency = session()->get('productCurrency');
+        return view("front.payment",compact('productId','productImage','productPrice','productName','productCurrency'));
     }
 
     /**
