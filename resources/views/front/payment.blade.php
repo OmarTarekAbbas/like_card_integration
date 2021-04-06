@@ -1,7 +1,6 @@
 @extends("front.master")
 
 @section("content")
-<
 <section class="payment_card">
   <div class="row m-0">
     <div class="col-12 p-0">
@@ -19,12 +18,11 @@
     </div>
   </div>
   <div class="grid_view">
-  @for($i=1; $i<=9; $i++)
-    <div class="price_background rounded">
-      <button class="price_currency btn" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency = "{{ $productCurrency }}" data-price = "{{ $productPrice }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
-    </div>
-  @endfor
-
+    @for($i=1; $i<=9; $i++)
+      <div class="price_background rounded">
+        <button class="price_currency btn" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency = "{{ $productCurrency }}" data-price = "{{ {{ $productPrice * $i }} }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
+      </div>
+    @endfor
   </div>
 
   <div class="phone_number">
