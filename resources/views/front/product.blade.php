@@ -25,10 +25,11 @@
 {{--        <a href="#" onclick="event.preventDefault(); document.getElementById('frm-create-order').submit();" class="btn_buy btn text-capitalize">buy</a>--}}
         <form id="frm-create-order" action="{{route('front.payment')}}" method="POST" >
           <button type="submit" class="btn_buy btn text-capitalize">buy</button>
-          <input type="hidden" value="{{ $product->productId }}" name="product_id">
-          <input type="hidden" value="{{ $product->productImage }}" name="productImage">
-          <input type="hidden" value="{{ $product->productPrice }}" name="productPrice">
-          <input type="hidden" value="{{ $product->productName }}" name="productName">
+          <input type="hidden" value="{{ $product->productId }}"       name="product_id">
+          <input type="hidden" value="{{ $product->productImage }}"    name="productImage">
+          <input type="hidden" value="{{ $product->productPrice }}"    name="productPrice">
+          <input type="hidden" value="{{ $product->productName }}"     name="productName">
+          <input type="hidden" value="{{ $product->productCurrency }}" name="productCurrency">
           {{ csrf_field() }}
         </form>
       </div>

@@ -88,7 +88,7 @@ class HomeController extends Controller
     public function createOrder(Request $request)
     {
         try {
-            $response = json_decode($this->likeCard->createOrder($request->product_id));
+            $response = json_decode($this->likeCard->createOrder($request->product_id, $request->quantity));
             if($response->response) {
                 session()->flash("success", "Order Create Successfully");
             } else {
@@ -169,30 +169,6 @@ class HomeController extends Controller
     }
 
     /**
-     * Method search
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function findProduct($id)
-    {
-        try {
-            $product = Cache::remember('search'.$id , 60*60*24, function () use ($id){
-                $category                       = json_decode($this->likeCard->Categories());
-                $category_like_search_array     = $this->getCategoryLikeSearchValue($category->data);
-                $sub_category_like_search_array = $this->getSubCategoryLikeSearchValue($category_like_search_array);
-                $product                        = $this->getProductFromSubCategoryLikeID($sub_category_like_search_array, $id);
-                return $product[0];
-            });
-
-        } catch (\Throwable $th) {
-            $product = null;
-        }
-    }
-
-
-    /**
      * Method getSpecficCategory
      *
      * @param integer $category_id
@@ -237,15 +213,7 @@ class HomeController extends Controller
         return view("front.product", compact("products"));
     }
 
-
-
-
-
-
-
-
-
-     /**
+    /**
      * Method getCategoryLikeSearchValue
      *
      * @param array $categories [all category]
@@ -303,32 +271,5 @@ class HomeController extends Controller
           });
         }
       return call_user_func_array('array_merge', array_filter($products));
-    }
-
-    /**
-     * Method getProductFromSubCategoryLikeID
-     *
-     * @param array $subCategories [all search sub category]
-     * @param int $id [use like]
-     *
-     * @return array
-     */
-    public function getProductFromSubCategoryLikeID($subCategories, $id)
-    {
-
-        foreach ($subCategories as $category) {
-            $products[] = Cache::remember('products'.$category->id , 60*30 , function () use ($category, $id) {
-                $response = json_decode($this->likeCard->Products($category->id));
-                if($response->response){ //1 return data else no data
-                    $products = array_filter($response->data, function($product) use ($id){
-                        dd($product->id = $id);
-
-                        return $product->id = $id;
-                    });
-                    return $products;
-                }
-            });
-        }
-        return call_user_func_array('array_merge', array_filter($products));
     }
 }

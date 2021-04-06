@@ -19,29 +19,11 @@
     </div>
   </div>
   <div class="grid_view">
-  <div class="price_background rounded">
-      <button class="price_currency btn" id="price1"></button>
-    </div>
-
+  @for($i=1; $<=9; $i++)
     <div class="price_background rounded">
-      <button class="price_currency btn" id="price2"></button>
+      <button class="price_currency btn" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency = "{{ $productCurrency }}" data-price = "{{ $productPrice }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
     </div>
-
-    <div class="price_background rounded">
-      <button class="price_currency btn" id="price3"></button>
-    </div>
-
-    <div class="price_background rounded">
-      <button class="price_currency btn" id="price4"></button>
-    </div>
-
-    <div class="price_background rounded">
-      <button class="price_currency btn" id="price5"></button>
-    </div>
-
-    <div class="price_background rounded">
-      <button class="price_currency btn" id="price6"></button>
-    </div>
+  @endfor
 
   </div>
 
@@ -90,7 +72,9 @@
       </div>
 
       <div class="col-6 d-flex justify-content-center">
-        <form id='myform' method='POST' class='quantity' action='#'>
+        <form id='myform' method='POST' class='quantity' action='{{ route("front.create.order") }}'>
+          @csrf
+          <input type="hidden" value="{{ $productId }}" name="product_id">
           <div id="sub" class="qtyminus minus sub">
             <i class=" fas fa-minus-circle"></i>
           </div>
@@ -119,9 +103,9 @@
       </div>
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
-        <form action="#0" class="my_checkout">
-          <button type="submit" class="btn_checkout btn text-capitalize">checkout</button>
-        </form>
+        <div class="my_checkout">
+          <button type="submit" class="btn_checkout btn text-capitalize" form="#myform">checkout</button>
+        </div>
       </div>
     </div>
   </div>
@@ -132,18 +116,10 @@
 <script>
     var price = {{$productPrice}}
 
-    $(document).ready(function () {
-        for (let index = 1; index <= 9; index++) {
-        $('#price'+index).text((price * index).toFixed(1) + ' KWD');
-        }
-    });
-
-    $('#price1,#price2,#price3,#price4,#price5,#price6,#price7,#price8,#price9').click(function () {
-        price_text = $(this).text();
-        price_now = (parseFloat((price_text.split(" "))[0])).toFixed(1)
+    $('.price_currency').click(function () {
+        price = ($(this).data("price")).toFixed(1);
         $('#total_price').text(price_now + ' KWD');
-        var num = Math.ceil(price_now/price)
-        $("#quantity").val(num);
+        $("#quantity").val($(this).data("quantity"));
     });
 
     $('.add').click(function () {

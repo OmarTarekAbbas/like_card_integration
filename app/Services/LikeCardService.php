@@ -173,9 +173,10 @@ class LikeCardService
      * Method createOrder
      *
      * @param int $product_id
+     * @param int $quantity
      * @return string|bool
      */
-    public function createOrder($product_id)
+    public function createOrder($product_id, $quantity)
     {
         $URL = 'https://taxes.like4app.com/online/create_order';
         //1614078108
