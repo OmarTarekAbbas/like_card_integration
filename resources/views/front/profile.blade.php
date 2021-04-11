@@ -2,87 +2,76 @@
 
 @section('content')
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<div class="panel panel-default">
-					<div class="panel-heading">Profile</div>
-					<div class="panel-body">
-						@include('errors')
-						@include('front.alerts')
-						<form method="POST" class="form-horizontal" role="form" action="{{ route('client.profile.submit') }}">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<div class="form-group">
-								<label class="col-md-4 control-label">Name</label>
-								<div class="col-md-6">
-									<input class="form-control" type="text" name="name" value="{{ auth()->guard('client')->user()->name }}">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-4 control-label">Email</label>
-								<div class="col-md-6">
-									<input class="form-control" type="email" name="email" value="{{ auth()->guard('client')->user()->email }}" readonly>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-4 control-label">Mobile</label>
-								<div class="col-md-6">
-									<input class="form-control" type="text" name="phone" value="{{ auth()->guard('client')->user()->phone }}" pattern="[0-9]*" readonly>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">
-										submit
-									</button>
-								</div>
-							</div>
-						</form>
-            <hr>
-						<form method="POST" class="form-horizontal" role="form" action="{{ route('client.profile.submit') }}" enctype="multipart/form-data">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<input type="file" name="image">
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">
-										submit
-									</button>
-								</div>
-							</div>
-						</form>
-            <hr>
-            <form method="POST" class="form-horizontal" role="form" action="{{ route('client.password.submit') }}">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="form-group">
-								<label class="col-md-4 control-label">Old Password</label>
-								<div class="col-md-6">
-									<input class="form-control" type="password" name="current-password">
-								</div>
-							</div>
-              <div class="form-group">
-								<label class="col-md-4 control-label">Password</label>
-								<div class="col-md-6">
-									<input class="form-control" type="password" name="password">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-4 control-label">Confirm Password</label>
-								<div class="col-md-6">
-									<input class="form-control" type="password" name="password_confirmation">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">
-										submit
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="profile_page">
+  {!! Form::open(['url'=> route('client.profile.submit') , 'method'=>'POST' , 'enctype' => 'multipart/form-data']) !!}
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  @include('errors')
+  @include('front.alerts')
+  <div class="main-content">
+    <div class="row m-0 w-100 text-center">
+      <div class="login_form">
+        <div class="col-12 ">
+          <h2 class="title">Profile</h2>
+        </div>
+
+        <div class="col-12">
+          <div class="upload_img">
+            <a onclick="_upload()">
+
+              <img id='output' class="img-fluid rounded-circle" src="{{ url(auth()->guard('client')->user()->image?? 'front/images/logo1.png') }}" alt="Profile Picture">
+
+              <i id="icon_upload" class="upload_icon_img fas fa-camera fa-3x"></i>
+            </a>
+          </div>
+
+          <input type="file" name="image" accept='image/*' id="file_upload_id" onchange="openFile(event)" style="display:none">
+        </div>
+
+        <div class="col-12">
+          {!! Form::text("name", auth()->guard('client')->user()->name ,['class'=>'form__input', 'placeholder'=>'Username']) !!}
+        </div>
+
+        <div class="col-12">
+          {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input', 'placeholder'=>'Email', 'readonly']) !!}
+        </div>
+
+        <div class="col-12">
+          {!! Form::tel("phone", auth()->guard('client')->user()->phone ,['class'=>'form__input', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*', 'readonly']) !!}
+        </div>
+
+        <div class="col-12">
+          {!! Form::submit('Submit',['class'=>'form__btn btn font-weight-bold']) !!}
+        </div>
+      </div>
+    </div>
+  </div>
+  {!! Form::close() !!}
+
+  {!! Form::open(['url'=> route('client.profile.submit') , 'method'=>'POST' , 'role'=>'form', 'enctype'=>'multipart/form-data' ]) !!}
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+  <div class="main-content">
+    <div class="login_form">
+      <div class="row m-0 text-center">
+        <div class="col-12">
+          {!! Form::password('password' ,['class'=>'form__input','placeholder'=>'Password']) !!}<br>
+        </div>
+
+        <div class="col-12">
+          {!! Form::password('old_password' ,['class'=>'form__input','placeholder'=>'Old Password']) !!}<br>
+        </div>
+
+        <div class="col-12">
+          {!! Form::password('password_confirmation' ,['class'=>'form__input','placeholder'=>'Confirm Password']) !!}<br>
+        </div>
+
+        <div class="col-12">
+          {!! Form::submit('Submit',['class'=>'form__btn btn font-weight-bold']) !!}
+        </div>
+      </div>
+    </div>
+  </div>
+  {!! Form::close() !!}
+</div>
 
 @stop

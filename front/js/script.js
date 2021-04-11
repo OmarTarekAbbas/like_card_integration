@@ -32,6 +32,24 @@ $('#return-to-top').click(function () { // When arrow is clicked
   }, 1000);
 });
 
+/* Start Upload Img */
+var openFile = function (event) {
+  var input = event.target;
+  console.log('good');
+  var reader = new FileReader();
+  reader.onload = function () {
+    var dataURL = reader.result;
+    var output = document.getElementById('output');
+    output.src = dataURL;
+  };
+  reader.readAsDataURL(input.files[0]);
+};
+
+function _upload() {
+  document.getElementById('file_upload_id').click();
+}
+/* End Upload Img */
+
 //loading screen
 $(window).on('load', function () {
   'use strict';
