@@ -38,6 +38,11 @@ class HomeController extends Controller
         return view("front.home");
     }
 
+    public function cart()
+    {
+        return view('front.cart');
+    }
+
     /**
      * Method listCategoryChilds
      *

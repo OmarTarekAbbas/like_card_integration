@@ -22,3 +22,5 @@ Route::group(['middleware' => 'auth:client'], function () {
   Route::get("/orders","HomeController@listOrders")->name("front.orders");
   Route::get("/orders/{id}","HomeController@orderDetails")->name("front.order.details");
 });
+
+Route::get("/cart","HomeController@cart")->name("front.cart");

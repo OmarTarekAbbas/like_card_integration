@@ -26,6 +26,8 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    
     public function JICindex()
     {
        return view('JIC.index');
