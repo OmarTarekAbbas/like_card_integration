@@ -51,12 +51,12 @@
 							</div>
 						</form>
             <hr>
-            <form method="POST" class="form-horizontal" role="form" action="{{ route('client.profile.submit') }}" enctype="multipart/form-data">
+            <form method="POST" class="form-horizontal" role="form" action="{{ route('client.password.submit') }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
 								<label class="col-md-4 control-label">Old Password</label>
 								<div class="col-md-6">
-									<input class="form-control" type="password" name="old_password">
+									<input class="form-control" type="password" name="current-password">
 								</div>
 							</div>
               <div class="form-group">
