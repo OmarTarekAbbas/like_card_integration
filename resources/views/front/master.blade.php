@@ -35,6 +35,20 @@
                 <li>
                     <a href="{{ route('front.orders') }}" class="link text-capitalize link_href">orders</a>
                 </li>
+
+                @if(auth()->guard("client")->check())
+                  <li>
+                    <a href="#" class="link text-capitalize"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('client.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                  </li>
+                @endif
             </ul>
         </nav>
 
