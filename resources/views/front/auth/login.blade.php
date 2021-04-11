@@ -1,9 +1,9 @@
 @extends("front.master")
 
 @section("content")
-<!-- BEGIN Main Content -->
+
 <div class="login_page">
-  {!! Form::open(['url'=>'login']) !!}
+  {!! Form::open(['url'=>route('client.login.submit') ]) !!}
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
   @include('errors')
   <div class="main-content">
@@ -36,7 +36,7 @@
           </div>
 
           <div class="col-12">
-            <p class="dont_have">Don't have an account? <a href="#">Register Here</a></p>
+            <p class="dont_have text-capitalize">Don't have an account? <a href="{{ route('client.register') }}">Register Here</a></p>
           </div>
         </div>
       </div>
@@ -45,5 +45,4 @@
   {!! Form::close() !!}
 </div>
 
-<!-- END Main Content -->
 @stop

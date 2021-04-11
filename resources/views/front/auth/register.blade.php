@@ -2,58 +2,54 @@
 
 @section('content')
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<div class="panel panel-default">
-					<div class="panel-heading">Register</div>
-					<div class="panel-body">
-						@include('errors')
+<div class="register_page">
+  {!! Form::open(['url'=> route('client.register.submit') , 'method'=>'POST']) !!}
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  @include('errors')
+  <div class="main-content">
+    <div class="row m-0 text-center">
+      <div class="col-12 text-center">
+        <div class="company_info">
+          <img src="{{ asset('front/images/logo1.png') }}" alt="Digi Card">
+        </div>
+      </div>
 
-						<form method="POST" class="form-horizontal" role="form" action="{{ route('client.register') }}">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<div class="form-group">
-								<label class="col-md-4 control-label">Name</label>
-								<div class="col-md-6">
-									<input class="form-control" type="text" name="name" value="">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-4 control-label">Email</label>
-								<div class="col-md-6">
-									<input class="form-control" type="email" name="email" value="" >
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-4 control-label">Mobile</label>
-								<div class="col-md-6">
-									<input class="form-control" type="text" name="phone" value="" pattern="[0-9]*">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-4 control-label">Password</label>
-								<div class="col-md-6">
-									<input class="form-control" type="password" name="password">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-4 control-label">Confirm Password</label>
-								<div class="col-md-6">
-									<input class="form-control" type="password" name="password_confirmation">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">
-										Register
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div class="login_form">
+        <div class="col-12 ">
+          <h2 class="title">Register</h2>
+
+          <div class="col-12">
+            {!! Form::text("name",null ,['class'=>'form__input', 'placeholder'=>'Username']) !!}
+          </div>
+
+          <div class="col-12">
+            {!! Form::email("email",null ,['class'=>'form__input', 'placeholder'=>'Email']) !!}
+          </div>
+
+          <div class="col-12">
+            {!! Form::tel("phone",null ,['class'=>'form__input', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*' ]) !!}
+          </div>
+
+          <div class="col-12">
+            {!! Form::password('password' ,['class'=>'form__input','placeholder'=>'Password']) !!}<br>
+          </div>
+
+          <div class="col-12">
+            {!! Form::password('password_confirmation' ,['class'=>'form__input','placeholder'=>'Confirm Password']) !!}<br>
+          </div>
+
+          <div class="col-12">
+            {!! Form::submit('Register',['class'=>'form__btn btn font-weight-bold']) !!}
+          </div>
+
+          <div class="col-12">
+            <p class="dont_have text-capitalize">do you have an account? <a href="{{ route('client.login') }}">Login Here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {!! Form::close() !!}
+</div>
 
 @stop
