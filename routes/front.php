@@ -14,6 +14,8 @@ Route::post('/login', 'Auth\ClientLoginController@login')->name('client.login.su
 Route::post('/logout', 'Auth\ClientLoginController@logout')->name('client.logout');
 
 Route::group(['middleware' => 'auth:client'], function () {
+  Route::get("/profile","ClientController@getProfilePage")->name("client.profile");
+  Route::post("/profile","ClientController@updateProfile")->name("client.profile.submit");
   Route::post("/payment","HomeController@getPaymentPage")->name("front.payment");
   Route::get("/payment","HomeController@getPaymentPageGet")->name("front.paymentGet");
   Route::post("/create/order","HomeController@CreateOrder")->name("front.create.order");

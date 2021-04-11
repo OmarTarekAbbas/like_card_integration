@@ -3,8 +3,8 @@
 
 namespace App\Services;
 
-use Illuminate\UploadedFile;
 use App\Client;
+use Illuminate\Http\UploadedFile;
 
 class ClientService
 {
@@ -39,8 +39,10 @@ class ClientService
             $client = new Client;
         }
 
-        $request['password']  = \Hash::make($request['password']);
-        
+        if(isset($request['password'])) {
+          $request['password']  = \Hash::make($request['password']);
+        }
+
         if(isset($request['image'])) {
             $request = array_merge($request, [
                 'image' => $this->handleFile($request['image'])
