@@ -1,6 +1,14 @@
 <?php
 
 /** Front Route */
+define("Tutorcomp_User_Name", "tutor_comp");
+define("Tutorcomp_Password", "tutor_2021_5466");
+define("User", "info@liveacademy.com");
+define("Password", "L!ve0cademy");
+define("ServiceID", "808");
+define("ChannelID", "12211");
+define("ProfileID", "1833");
+define("ShortCode", "50230");
 
 Route::get("/home","HomeController@index")->name("front.home");
 Route::get("/category/{parent_id}","HomeController@listCategoryChilds")->name("front.category");
@@ -19,7 +27,9 @@ Route::group(['middleware' => 'auth:client'], function () {
   Route::post("/update_passwrod","ClientController@UpdatePassword")->name("client.password.submit");
   Route::post("/payment","OrderController@getPaymentPage")->name("front.payment");
   Route::get("/payment","OrderController@getPaymentPageGet")->name("front.paymentGet");
-  Route::post("/create/order","OrderController@CreateOrder")->name("front.create.order");
+  Route::post("/pincode/request","OrderController@pincodeRequest")->name("front.pincode.request");
+  Route::get("/pincode/verify","OrderController@pincodeVerifyPage")->name("front.pincode.verify");
+  Route::post("/pincode/verify","OrderController@pincodeVerify")->name("front.pincode.verify.submit");
   Route::get("/orders","OrderController@listOrders")->name("front.orders");
   Route::get("/orders/{id}","OrderController@orderDetails")->name("front.order.details");
 });

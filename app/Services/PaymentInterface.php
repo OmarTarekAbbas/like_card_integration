@@ -7,7 +7,7 @@ interface PaymentInterface
   /**
    * Method getError
    *
-   * this function can with it but items and handle all checkout cycle
+   * this function can with it buy items and handle all checkout cycle
    * @param array $data
    * @return void
    */

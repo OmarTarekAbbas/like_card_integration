@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-
-class StripePaymentService
+class DcbPaymentService implements PaymentInterface
 {
   /**
    * error
@@ -43,11 +42,14 @@ class StripePaymentService
   /**
    * Method __construct
    *
-   * @param LikeCardService $likeCard
+   * @param \App\Services\LikeCardService $likeCard
+   * @param \App\Services\DcbService $dcbService
+   * @param \App\Services\OrderService $dcbService
    */
-  public function __construct(LikeCardService $likeCard)
+  public function __construct(LikeCardService $likeCard, DcbService $dcbService, OrderService $orderService)
   {
-      $this->likeCard = $likeCard;
+      $this->likeCard    = $likeCard;
+      $this->dcbService  = $dcbService ;
   }
 
   /**
@@ -84,15 +86,14 @@ class StripePaymentService
     $this->checkBalance($data['total_price']);
     if($this->success) {
       try {
-        \Stripe\Charge::create([
-          "amount" => 300 * 100,
-          "currency" => "usd",
-          "source" => $data['stripeToken'],
-          "description" => "Test payment."
-        ]);
+        $response = $this->dcbService->dcb_verify_charging($data);
+        if($response == 'faild') {
+          $this->success = false;
+          $this->error   = "canb't charge when verify pincode";
+        }
       } catch ( \Exception $e ) {
         $this->success = false;
-        $this->error   = "error when buy from stripe getway";
+        $this->error   = "error when buy from dcb getway";
       }
       $this->createOrderFromLikeCard($data);
     }
@@ -112,6 +113,7 @@ class StripePaymentService
       if($response->response) {
         $this->sucess = true;
         $this->responseData = $response;
+        $this->createOrderFromOurSide($data);
       } else {
         $this->sucess = false;
         $this->error   = "You Can't Buy From Like Card";
@@ -120,6 +122,18 @@ class StripePaymentService
       $this->success = false;
       $this->error   = "error when buy from Like Card getway";
     }
+  }
+
+  /**
+   * Method createOrderFromOurSide
+   *
+   * @param array $data
+   *
+   * @return void
+   */
+  public function createOrderFromOurSide($data)
+  {
+    $this->orderService->handle($data);
   }
 
   /**

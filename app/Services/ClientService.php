@@ -3,67 +3,27 @@
 
 namespace App\Services;
 
-use App\Client;
-use Illuminate\Http\UploadedFile;
+use App\Order;
 
-class ClientService
+class OrderService
 {
     /**
-     * @var IMAGE_PATH
-     */
-	  const IMAGE_PATH = 'clients';
-
-    /**
-     * @var UploaderService
-     */
-    private $uploaderService;
-
-    /**
-     * __construct
-     * @param UploaderService $uploaderService
-     * @return void
-     */
-    public function __construct(UploaderService $uploaderService)
-    {
-        $this->uploaderService = $uploaderService;
-    }
-
-    /**
-     * handle function that make update for client
+     * handle function that make update for order
      * @param array $request
-     * @return Client
+     * @return Order
      */
-    public function handle($request, $client = null)
+    public function handle($request, $order = null)
     {
-        if(!$client) {
-            $client = new Client;
+        if(!$order) {
+            $order = new Order;
         }
 
-        if(isset($request['password'])) {
-          $request['password']  = \Hash::make($request['password']);
-        }
 
-        if(isset($request['image'])) {
-            $request = array_merge($request, [
-                'image' => $this->handleFile($request['image'])
-            ]);
-        }
+        $order->fill($request);
 
-        $client->fill($request);
+        $order->save();
 
-        $client->save();
-
-    	return $client;
-    }
-
-    /**
-     * handle image file that return file path
-     * @param File $file
-     * @return string
-     */
-    public function handleFile(UploadedFile $file)
-    {
-        return $this->uploaderService->upload($file, self::IMAGE_PATH);
+    	return $order;
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Services\LikeCardService;
 use App\Services\PaymentInterface;
+use App\Services\DcbService;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -24,15 +25,55 @@ class OrderController extends Controller
     private $payment;
 
     /**
+     * dcbService
+     *
+     * @var \App\Services\DcbService
+     */
+    private $dcbService;
+
+
+    /**
      * Method __construct
      *
      * @param \App\Services\LikeCardService $likeCard
+     * @param \App\Services\PaymentInterface $payment
+     * @param \App\Services\DcbService $dcbService
      */
-    public function __construct(LikeCardService $likeCard, PaymentInterface $payment)
+    public function __construct(LikeCardService $likeCard, PaymentInterface $payment, DcbService $dcbService)
     {
-        $this->likeCard = $likeCard;
-        $this->payment  = $payment ;
+        $this->likeCard    = $likeCard;
+        $this->payment     = $payment ;
+        $this->dcbService  = $dcbService ;
     }
+
+    /**
+     * Method pincodeRequest
+     *
+     * @param Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function pincodeRequest(Request $request)
+    {
+      $response = $this->dcbService->dcb_pincode_request($request);
+      if($response == 'failed') {
+        session()->flash("faild", "error when make pincode request");
+        return back();
+      }
+      session()->flash("success", "pincode send successfully");
+      return redirect()->route("front.pincode.verify");
+    }
+
+    /**
+     * Method pincodeVerifyPage
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function pincodeVerifyPage()
+    {
+      return view("front.pincode_verfiy");
+    }
+
     /**
      * Method createOrder
      *
@@ -40,7 +81,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function createOrder(Request $request)
+    public function pincodeVerify(Request $request)
     {
       $this->payment->buyItems($request->all());
       if($this->payment->isSuccess()){
