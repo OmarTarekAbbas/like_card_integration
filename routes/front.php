@@ -33,3 +33,6 @@ Route::group(['middleware' => 'auth:client'], function () {
   Route::get("/orders","OrderController@listOrders")->name("front.orders");
   Route::get("/orders/{id}","OrderController@orderDetails")->name("front.order.details");
 });
+
+Route::get("/cart","HomeController@cart")->name("front.cart");
+Route::get("/pincode","HomeController@pincode")->name("front.pincode");
