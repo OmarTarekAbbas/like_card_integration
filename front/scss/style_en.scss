@@ -47,6 +47,24 @@ body {
   padding-right: 7px;
 }
 
+.alert_danger {
+  color: $whiteCol;
+  background-color: $redlCol;
+}
+
+.notFound {
+  background-color: $petrolCol;
+  color: $whiteCol;
+  width: 75%;
+  letter-spacing: 8px;
+  margin: 25% auto;
+  border-radius: 500px;
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  -ms-border-radius: 500px;
+  -o-border-radius: 500px;
+}
+
 .header_Nav {
   background-color: $whiteCol;
   position: fixed;
@@ -606,109 +624,116 @@ main {
 
       .login_form {
         width: 100%;
+        padding: 3% 6%;
 
         .title {
           color: $whiteCol;
         }
 
-        .form__input {
-          width: 100%;
-          background: transparent;
-          color: $whiteCol;
-          border: 0px solid transparent;
-          border-radius: 0;
-          border-bottom: 1px solid #aaa;
-          padding: 0.5rem;
-          outline: none;
-          margin: 0.5em auto;
-          transition: all .5s ease;
-          -webkit-transition: all .5s ease;
-          -moz-transition: all .5s ease;
-          -ms-transition: all .5s ease;
-          -o-transition: all .5s ease;
+        .login_form_grid {
+          display: grid;
+          grid-template-columns: 100%;
 
-          &::placeholder {
+          .upload_img {
+            margin-bottom: 15%;
+            cursor: pointer;
+            color: #343a40;
+            font-size: 0.75rem;
+            width: 100%;
+            position: relative;
+            transition: all 1.1s ease-in-out;
+            -webkit-transition: all 1.1s ease-in-out;
+            -moz-transition: all 1.1s ease-in-out;
+            -ms-transition: all 1.1s ease-in-out;
+            -o-transition: all 1.1s ease-in-out;
+
+            img {
+              width: 50%;
+              transition: all 1.1s ease-in-out;
+              -webkit-transition: all 1.1s ease-in-out;
+              -moz-transition: all 1.1s ease-in-out;
+              -ms-transition: all 1.1s ease-in-out;
+              -o-transition: all 1.1s ease-in-out;
+            }
+
+            .upload_icon_img {
+              color: $whiteCol;
+              font-size: 2.2rem;
+              position: absolute;
+              top: 12rem;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              -webkit-transform: translate(-50%, -50%);
+              -moz-transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+              -o-transform: translate(-50%, -50%);
+            }
+          }
+
+          .form__input {
+            width: 100%;
+            background: transparent;
+            color: $whiteCol;
+            border: 0px solid transparent;
+            border-radius: 0;
+            border-bottom: 1px solid #aaa;
+            padding: 0.5rem;
+            outline: none;
+            margin: 0.5em auto;
+            transition: all .5s ease;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            -o-transition: all .5s ease;
+
+            &::placeholder {
+              color: $whiteCol;
+            }
+
+            &:focus {
+              border-bottom-color: $blueGreenCol;
+              box-shadow: 0 0 5px $blueGreenCol;
+              border-radius: 4px;
+              -webkit-border-radius: 4px;
+              -moz-border-radius: 4px;
+              -ms-border-radius: 4px;
+              -o-border-radius: 4px;
+            }
+          }
+
+          .form__label {
             color: $whiteCol;
           }
 
-          &:focus {
-            border-bottom-color: $blueGreenCol;
-            box-shadow: 0 0 5px $blueGreenCol;
-            border-radius: 4px;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            -o-border-radius: 4px;
+          .form__btn {
+            transition: all .5s ease;
+            width: 70%;
+            border-radius: 30px;
+            color: $blueGreenCol;
+            background-color: $whiteCol;
+            border: 1px solid $blueGreenCol;
+            margin: auto;
+            margin-top: 1.5em;
+            margin-bottom: 1em;
+
+            &.btn:hover,
+            &.btn:focus {
+              box-shadow: 0 0 0 0.2rem $whiteCol;
+            }
           }
-        }
 
-        .form__label {
-          color: $whiteCol;
-        }
+          .dont_have {
+            color: $whiteCol;
 
-        .form__btn {
-          transition: all .5s ease;
-          width: 70%;
-          border-radius: 30px;
-          color: $blueGreenCol;
-          background-color: $whiteCol;
-          border: 1px solid $blueGreenCol;
-          margin-top: 1.5em;
-          margin-bottom: 1em;
+            a {
 
-          &.btn:hover,
-          &.btn:focus {
-            box-shadow: 0 0 0 0.2rem $whiteCol;
-          }
-        }
-
-        .dont_have {
-          color: $whiteCol;
-
-          a {
-
-            &:hover,
-            &:focus {
-              color: $redlCol;
+              &:hover,
+              &:focus {
+                color: $redlCol;
+              }
             }
           }
         }
-      }
-    }
-
-    .upload_img {
-      margin-bottom: 15%;
-      cursor: pointer;
-      color: #343a40;
-      font-size: 0.75rem;
-      width: 100%;
-      position: relative;
-      transition: all 1.1s ease-in-out;
-      -webkit-transition: all 1.1s ease-in-out;
-      -moz-transition: all 1.1s ease-in-out;
-      -ms-transition: all 1.1s ease-in-out;
-      -o-transition: all 1.1s ease-in-out;
-
-      img {
-        width: 50%;
-        transition: all 1.1s ease-in-out;
-        -webkit-transition: all 1.1s ease-in-out;
-        -moz-transition: all 1.1s ease-in-out;
-        -ms-transition: all 1.1s ease-in-out;
-        -o-transition: all 1.1s ease-in-out;
-      }
-
-      .upload_icon_img {
-        color: $whiteCol;
-        font-size: 2.2rem;
-        position: absolute;
-        top: 11rem;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
-        -moz-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        -o-transform: translate(-50%, -50%);
       }
     }
   }
@@ -1019,6 +1044,54 @@ main {
     }
   }
 
+  main {
+
+    .login_page,
+    .register_page,
+    .profile_page {
+      .main-content {
+        .login_form {
+          .login_form_grid {
+            grid-template-columns: 35% 65%;
+
+            .upload_img {
+              margin-top: 10%;
+              margin-bottom: 0;
+
+              img {
+                width: 70%;
+              }
+            }
+
+            &.gridV2 {
+              grid-template-columns: 100%;
+              width: 80%;
+              margin: auto;
+
+              .form__btn {
+                margin: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .login_page,
+    .register_page {
+      .main-content {
+        .login_form {
+          width: 70%;
+          margin: auto;
+
+          .login_form_grid {
+            grid-template-columns: 100%;
+          }
+        }
+      }
+    }
+  }
+
   #return-to-top {
     i {
       padding: 0.75rem;
@@ -1088,6 +1161,58 @@ main {
       .search_form {
         margin-top: 0;
         width: 85%;
+      }
+    }
+  }
+
+  main {
+
+    .login_page,
+    .register_page,
+    .profile_page {
+      .main-content {
+        .login_form {
+          .login_form_grid {
+            grid-template-columns: 35% 65%;
+
+            .upload_img {
+              margin-top: 5%;
+              margin-bottom: 0;
+
+              img {
+                width: 70%;
+              }
+
+              .upload_icon_img {
+                top: 14rem;
+              }
+            }
+
+            &.gridV2 {
+              grid-template-columns: 100%;
+              width: 80%;
+              margin: auto;
+
+              .form__btn {
+                margin: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .login_page,
+    .register_page {
+      .main-content {
+        .login_form {
+          width: 70%;
+          margin: auto;
+
+          .login_form_grid {
+            grid-template-columns: 100%;
+          }
+        }
       }
     }
   }

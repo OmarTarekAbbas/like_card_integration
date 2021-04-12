@@ -7,37 +7,27 @@
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
   @include('errors')
   <div class="main-content">
-    <div class="row m-0 text-center">
-      <div class="col-12 text-center">
-        <div class="company_info">
-          <img src="{{ asset('front/images/logo1.png') }}" alt="Digi Card">
-        </div>
+    <div class="login_form text-center">
+      <div class="company_info">
+        <img src="{{ asset('front/images/logo1.png') }}" alt="Digi Card">
       </div>
 
-      <div class="login_form">
-        <div class="col-12 ">
-          <h2 class="title">Log In</h2>
+      <div class="login_form_grid">
+        <h2 class="title">Log In</h2>
 
-          <div class="col-12">
-            {!! Form::email("email",null ,['class'=>'form__input','placeholder'=>'Email']) !!}
-          </div>
+        <div class="login_form_grid">
+          {!! Form::email("email",null ,['class'=>'form__input','placeholder'=>'Email']) !!}
 
-          <div class="col-12">
-            {!! Form::password('password' ,['class'=>'form__input','placeholder'=>'Password']) !!}<br>
-          </div>
+          {!! Form::password('password' ,['class'=>'form__input','placeholder'=>'Password']) !!}
 
-          <div class="col-12">
+          <label class="form__label" for="remember_me">
             <input type="checkbox" name="remember_me" id="remember_me" class="">
-            <label class="form__label" for="remember_me">Remember Me!</label>
-          </div>
+            Remember Me!
+          </label>
 
-          <div class="col-12">
-            {!! Form::submit('Login',['class'=>'form__btn btn font-weight-bold']) !!}
-          </div>
+          {!! Form::submit('Login',['class'=>'form__btn btn font-weight-bold']) !!}
 
-          <div class="col-12">
-            <p class="dont_have text-capitalize">Don't have an account? <a href="{{ route('client.register') }}">Register Here</a></p>
-          </div>
+          <p class="dont_have text-capitalize">Don't have an account? <a href="{{ route('client.register') }}">Register Here</a></p>
         </div>
       </div>
     </div>

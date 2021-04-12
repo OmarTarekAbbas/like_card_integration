@@ -16,8 +16,8 @@
       </div>
     </div>
     @empty
-    <div class="panel">
-        <h3>Not Found</h3>
+    <div class="notFound text-center">
+      <h4>Not Found</h4>
     </div>
     @endforelse
   </div>
