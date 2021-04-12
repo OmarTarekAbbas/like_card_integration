@@ -18,9 +18,9 @@ class CreateOrderItemsTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->string('product_name');
             $table->string('product_image');
-            $table->string('valid_to');
-            $table->string('serial_id');
-            $table->string('serial_code');
+            $table->string('valid_to')->nullable();
+            $table->string('serial_id')->nullable();
+            $table->string('serial_code')->nullable();
             $table->string('currency');
             $table->integer('quantity');
             $table->decimal('price', 2);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\LikeCardService;
 use App\Services\PaymentInterface;
 use App\Services\DcbService;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -31,6 +32,13 @@ class OrderController extends Controller
      */
     private $dcbService;
 
+    /**
+     * orderservice
+     *
+     * @var \App\Services\OrderService
+     */
+    private $orderService;
+
 
     /**
      * Method __construct
@@ -38,12 +46,14 @@ class OrderController extends Controller
      * @param \App\Services\LikeCardService $likeCard
      * @param \App\Services\PaymentInterface $payment
      * @param \App\Services\DcbService $dcbService
+     * @param \App\Services\OrderService $orderService
      */
-    public function __construct(LikeCardService $likeCard, PaymentInterface $payment, DcbService $dcbService)
+    public function __construct(LikeCardService $likeCard, PaymentInterface $payment, DcbService $dcbService, OrderService $orderService)
     {
-        $this->likeCard    = $likeCard;
-        $this->payment     = $payment ;
-        $this->dcbService  = $dcbService ;
+        $this->likeCard     = $likeCard;
+        $this->payment      = $payment ;
+        $this->dcbService   = $dcbService ;
+        $this->orderService = $orderService ;
     }
 
     /**
@@ -60,6 +70,7 @@ class OrderController extends Controller
         session()->flash("faild", "error when make pincode request");
         return back();
       }
+      $this->orderService->handle($request->all());
       session()->flash("success", "pincode send successfully");
       return redirect()->route("front.pincode.verify");
     }
@@ -71,7 +82,7 @@ class OrderController extends Controller
      */
     public function pincodeVerifyPage()
     {
-      return view("front.pincode_verfiy");
+      return view("front.pincode");
     }
 
     /**

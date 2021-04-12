@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
   protected $fillable = [
-    'client_id', 'status', 'total_price', 'payment', 'payment_status', 'transaction_id'
+    'client_id', 'status', 'total_price', 'currency', 'payment', 'payment_status', 'transaction_id'
   ];
 
   public function getPaymentAttribute($value)

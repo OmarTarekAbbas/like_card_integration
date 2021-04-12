@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="pinCode_page">
-  {!! Form::open(['url'=> route('client.profile.submit') , 'method'=>'POST' , 'enctype' => 'multipart/form-data']) !!}
+  {!! Form::open(['url'=> route('front.pincode.verify.submit') , 'method'=>'POST' , 'enctype' => 'multipart/form-data']) !!}
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
   @include('errors')
   @include('front.alerts')

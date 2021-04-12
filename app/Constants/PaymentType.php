@@ -6,14 +6,14 @@ namespace App\Constants;
 
 final class PaymentType
 {
-  const CASH               = 1;
-  const STRIPE             = 2;
+  const NO_PAYMENT         = 0;
+  const DCB                = 1;
 
   public static function getList()
   {
       return [
-          self::CASH                => trans('cash'),
-          self::STRIPE              => trans('stripe'),
+          self::NO_PAYMENT       => trans('no payment yet'),
+          self::DCB              => trans('DCB'),
       ];
   }
 

@@ -70,9 +70,10 @@
       </div>
 
       <div class="col-6 d-flex justify-content-center">
-        <form id='myform' method='POST' class='quantity' action='{{ route("front.create.order") }}'>
+        <form id='myform' method='POST' class='quantity' action='{{ route("front.pincode.request") }}'>
           @csrf
-          <input type="hidden" value="{{ $productId }}" name="product_id">
+          <input type="hidden" value="{{ $productPrice }}" name="price">
+          <input type="hidden" value="{{ $productCurrency }}" name="currency">
           <div id="sub" class="qtyminus minus sub">
             <i class=" fas fa-minus-circle"></i>
           </div>
