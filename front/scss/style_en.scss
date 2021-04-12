@@ -50,6 +50,10 @@ body {
 .alert_danger {
   color: $whiteCol;
   background-color: $redlCol;
+
+  .close {
+    color: $whiteCol;
+  }
 }
 
 .notFound {
@@ -950,6 +954,79 @@ main {
           -ms-transition: all .2s linear;
           -o-transition: all .2s linear;
           transition: all .2s linear;
+        }
+      }
+    }
+  }
+
+  .pinCode_page {
+    .main-content {
+      margin-bottom: 4%;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 5px 5px $blueGreenNew;
+      background-color: $petrolCol;
+      padding: 5% 10%;
+
+      .logo {
+        img {
+          width: 50%;
+        }
+      }
+
+      .form__input {
+        width: 100%;
+        background: transparent;
+        color: $whiteCol;
+        border: 0px solid transparent;
+        border-radius: 0;
+        border-bottom: 1px solid #aaa;
+        padding: 0.5rem;
+        outline: none;
+        margin: 1em auto;
+        transition: all .5s ease;
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        -o-transition: all .5s ease;
+
+        &::placeholder {
+          color: $whiteCol;
+        }
+
+        &:focus {
+          border-bottom-color: $blueGreenCol;
+          box-shadow: 0 0 5px $blueGreenCol;
+          border-radius: 4px;
+          -webkit-border-radius: 4px;
+          -moz-border-radius: 4px;
+          -ms-border-radius: 4px;
+          -o-border-radius: 4px;
+        }
+      }
+
+      .form__btn {
+        width: 70%;
+        color: $blueGreenCol;
+        background-color: $whiteCol;
+        border: 1px solid $blueGreenCol;
+        margin: auto;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -ms-border-radius: 30px;
+        -o-border-radius: 30px;
+        transition: all .5s ease;
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        -o-transition: all .5s ease;
+
+        &.btn:hover,
+        &.btn:focus {
+          box-shadow: 0 0 0 0.2rem $whiteCol;
         }
       }
     }

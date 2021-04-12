@@ -43,6 +43,11 @@ class HomeController extends Controller
         return view('front.cart');
     }
 
+    public function pincode()
+    {
+        return view('front.pincode');
+    }
+
     /**
      * Method listCategoryChilds
      *
