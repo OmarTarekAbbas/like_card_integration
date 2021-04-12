@@ -16,11 +16,12 @@ Route::post('/logout', 'Auth\ClientLoginController@logout')->name('client.logout
 Route::group(['middleware' => 'auth:client'], function () {
   Route::get("/profile","ClientController@getProfilePage")->name("client.profile");
   Route::post("/profile","ClientController@updateProfile")->name("client.profile.submit");
-  Route::post("/payment","HomeController@getPaymentPage")->name("front.payment");
-  Route::get("/payment","HomeController@getPaymentPageGet")->name("front.paymentGet");
-  Route::post("/create/order","HomeController@CreateOrder")->name("front.create.order");
-  Route::get("/orders","HomeController@listOrders")->name("front.orders");
-  Route::get("/orders/{id}","HomeController@orderDetails")->name("front.order.details");
+  Route::post("/update_passwrod","ClientController@UpdatePassword")->name("client.password.submit");
+  Route::post("/payment","OrderController@getPaymentPage")->name("front.payment");
+  Route::get("/payment","OrderController@getPaymentPageGet")->name("front.paymentGet");
+  Route::post("/create/order","OrderController@CreateOrder")->name("front.create.order");
+  Route::get("/orders","OrderController@listOrders")->name("front.orders");
+  Route::get("/orders/{id}","OrderController@orderDetails")->name("front.order.details");
 });
 
 Route::get("/cart","HomeController@cart")->name("front.cart");

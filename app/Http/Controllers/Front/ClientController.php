@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Services\ClientService;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UserProfileRequest;
 class ClientController extends Controller
 {
   /**
@@ -39,21 +40,26 @@ class ClientController extends Controller
   /**
    * Method updateProfile
    *
-   * @param \Illuminate\Http\Request
-   * @return \Illuminate\Contracts\Support\Renderable
+   * @param  \App\Http\Requests\UserProfileRequest $request
+   * @return \Illuminate\Http\RedirectResponse
    */
-  public function updateProfile(Request $request)
+  public function updateProfile(UserProfileRequest $request)
   {
-    if($request->filled("old_password")) {
-      if (!\Hash::check($request->old_password, auth()->user()->password)) {
-        session()->flash("faild", "Error In Old Password");
-      }
-      $this->clientService->handle($request->only("password"), auth()->guard("client")->user());
-      session()->flash("success", "Update User Data Successfully");
-    } else {
-      $this->clientService->handle($request->all(), auth()->guard("client")->user());
-      session()->flash("success", "Update User Data Successfully");
-    }
+    $this->clientService->handle($request->validated(), auth()->guard("client")->user());
+    session()->flash("success", "Update User Data Successfully");
+    return back();
+  }
+
+  /**
+   * UpdatePassword
+   *
+   * @param  \App\Http\Requests\UpdatePasswordRequest $request
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function UpdatePassword(UpdatePasswordRequest $request)
+  {
+    $this->clientService->handle($request->validated(), auth()->guard("client")->user());
+    \Session::flash('success','Password updated successfully');
     return back();
   }
 }

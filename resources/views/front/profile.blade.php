@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="profile_page">
-  {!! Form::open(['url'=> route('client.profile.submit') , 'method'=>'POST']) !!}
+  {!! Form::open(['url'=> route('client.profile.submit') , 'method'=>'POST' , 'enctype' => 'multipart/form-data']) !!}
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
   @include('errors')
   @include('front.alerts')
@@ -18,7 +18,7 @@
           <div class="upload_img">
             <a onclick="_upload()">
 
-              <img id='output' class="img-fluid rounded-circle" src="{{ asset('front/images/logo1.png') }}" alt="Profile Picture">
+              <img id='output' class="img-fluid rounded-circle" src="{{ url(auth()->guard('client')->user()->image?? 'front/images/logo1.png') }}" alt="Profile Picture">
 
               <i id="icon_upload" class="upload_icon_img fas fa-camera fa-3x"></i>
             </a>
