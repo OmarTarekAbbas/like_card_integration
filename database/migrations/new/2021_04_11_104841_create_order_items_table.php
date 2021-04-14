@@ -23,8 +23,8 @@ class CreateOrderItemsTable extends Migration
             $table->string('serial_code')->nullable();
             $table->string('currency');
             $table->integer('quantity');
-            $table->decimal('price', 2);
-            $table->decimal('total_price', 2);
+            $table->decimal('price', 10, 2);
+            $table->decimal('total_price', 10, 2);
             $table->timestamps();
         });
     }

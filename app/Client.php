@@ -12,7 +12,7 @@ class Client extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'image', 'phone'];
+    protected $fillable = ['name', 'email', 'password', 'image', 'phone_code', 'phone'];
 
     /**
      * The attributes excluded from the model's JSON form.

@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use App\Constants\OperatorCode;
 use App\Services\PaymentInterface;
-use App\Services\StripePaymentService;
+use App\Services\DcbPaymentService;
 use Illuminate\Support\ServiceProvider;
-
+use View;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      $this->app->singleton(PaymentInterface::class, StripePaymentService::class);
+      $this->app->singleton(PaymentInterface::class, DcbPaymentService::class);
+
+      View::composer("*", function ($view) {
+        $view->with("operatorCode", OperatorCode::class);
+      });
+
     }
 }

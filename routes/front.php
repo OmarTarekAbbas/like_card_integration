@@ -15,11 +15,11 @@ Route::get("/category/{parent_id}","HomeController@listCategoryChilds")->name("f
 Route::get("/products/{category_id}","HomeController@listProducts")->name("front.products");
 Route::get("/search","HomeController@search")->name("front.search");
 
-Route::get('/register', 'Auth\ClientRegisterController@showLoginForm')->name('client.register');
-Route::post('/register', 'Auth\ClientRegisterController@register')->name('client.register.submit');
-Route::get('/login', 'Auth\ClientLoginController@showLoginForm')->name('client.login');
-Route::post('/login', 'Auth\ClientLoginController@login')->name('client.login.submit');
-Route::post('/logout', 'Auth\ClientLoginController@logout')->name('client.logout');
+Route::get('client/register', 'Auth\ClientRegisterController@showLoginForm')->name('client.register');
+Route::post('client/register', 'Auth\ClientRegisterController@register')->name('client.register.submit');
+Route::get('client/login', 'Auth\ClientLoginController@showLoginForm')->name('client.login');
+Route::post('client/login', 'Auth\ClientLoginController@login')->name('client.login.submit');
+Route::post('client/logout', 'Auth\ClientLoginController@logout')->name('client.logout');
 
 Route::group(['middleware' => 'auth:client'], function () {
   Route::get("/profile","ClientController@getProfilePage")->name("client.profile");

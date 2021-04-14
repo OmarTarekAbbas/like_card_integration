@@ -28,20 +28,6 @@ class ClientLoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if(isset($_COOKIE['carts'])){
-            $carts = unserialize($_COOKIE['carts']);
-            for ($i=0; $i < count($carts) ; $i++) {
-                Cart::create([
-                    'product_id' => $carts[$i]['product_id'],
-                    'client_id' => $user->id,
-                    'quantity'=> $carts[$i]['quantity'],
-                    'price'  => $carts[$i]['price'],
-                    'total_price' => $carts[$i]['price'] * $carts[$i]['quantity']
-                ]);
-            }
-            unset($_COOKIE['carts']);
-            setcookie('carts','', time() - 3600, "/", config('app.APP_DOMAIN'));
-        }
         return redirect()->intended($this->redirectPath());
     }
 
