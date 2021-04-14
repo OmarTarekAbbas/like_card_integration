@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PincodeRequestFormRequest;
+use App\Services\ClientService;
 use App\Services\LikeCardService;
 use App\Services\PaymentInterface;
 use App\Services\DcbService;
@@ -39,6 +41,13 @@ class OrderController extends Controller
      */
     private $orderService;
 
+    /**
+     * clientService
+     *
+     * @var \App\Services\ClientService
+     */
+    private $clientService;
+
 
     /**
      * Method __construct
@@ -47,29 +56,41 @@ class OrderController extends Controller
      * @param \App\Services\PaymentInterface $payment
      * @param \App\Services\DcbService $dcbService
      * @param \App\Services\OrderService $orderService
+     * @param \App\Services\ClientService $clientService
      */
-    public function __construct(LikeCardService $likeCard, PaymentInterface $payment, DcbService $dcbService, OrderService $orderService)
-    {
-        $this->likeCard     = $likeCard;
-        $this->payment      = $payment ;
-        $this->dcbService   = $dcbService ;
-        $this->orderService = $orderService ;
+    public function __construct(
+      LikeCardService $likeCard,
+      PaymentInterface $payment,
+      DcbService $dcbService,
+      OrderService $orderService,
+      ClientService $clientService
+    ) {
+        $this->likeCard      = $likeCard;
+        $this->payment       = $payment ;
+        $this->dcbService    = $dcbService ;
+        $this->orderService  = $orderService ;
+        $this->clientService = $clientService ;
     }
 
     /**
      * Method pincodeRequest
      *
-     * @param Illuminate\Http\Request $request
+     * @param \App\Http\Requests\PincodeRequestFormRequest $request
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function pincodeRequest(Request $request)
+    public function pincodeRequest(PincodeRequestFormRequest $request)
     {
+      //update user phone like he enter
+      $this->clientService->handle($request->only("phone"), auth()->guard("client")->user());
+
       $response = $this->dcbService->pinCodeDCBRequest($request);
       if(!$response['status']) {
         session()->flash("faild", "error when make pincode request");
         return back();
       }
+
+      //add pincode request id to order table to link them
       $request->request->add(['pincode_request_id' => $response['pincode_request_id']]);
       $this->orderService->handle($request->all());
       session()->flash("success", "pincode send successfully");

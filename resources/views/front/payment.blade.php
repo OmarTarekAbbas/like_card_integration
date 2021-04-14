@@ -2,6 +2,7 @@
 
 @section("content")
 <section class="payment_card">
+  @include('front.alerts')
   <div class="row m-0">
     <div class="col-12 p-0">
       <div class="col-4 collPadding collFloat">
@@ -36,7 +37,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">+965</span>
           </div>
-          <input type="tel" class="form-control" placeholder="Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon1">
+          <input type="tel" class="form-control" placeholder="Mobile No."  name="phone" form="#myform" aria-label="Mobile_No" aria-describedby="basic-addon1">
         </div>
       </div>
 
@@ -49,7 +50,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon2">+965</span>
           </div>
-          <input type="tel" class="form-control" placeholder="Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon2">
+          <input type="tel" class="form-control" placeholder="Mobile No." name="phone_confirmation"  aria-label="Mobile_No" aria-describedby="basic-addon2">
         </div>
       </div>
     </div>

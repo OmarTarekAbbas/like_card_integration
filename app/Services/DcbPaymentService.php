@@ -94,7 +94,7 @@ class DcbPaymentService implements PaymentInterface
    *
    * @param array $data
    *
-   * @return bool
+   * @return void
    */
   public function buyItems($data)
   {
@@ -102,15 +102,17 @@ class DcbPaymentService implements PaymentInterface
     if($this->success) {
       try {
         $response = $this->dcbService->verifyDOBCharging($data);
-        if($response == 'faild') {
+        if(!$response['status']) {
           $this->success = false;
           $this->error   = "canb't charge when verify pincode";
         }
       } catch ( \Exception $e ) {
         $this->success = false;
         $this->error   = "error when buy from dcb getway";
+      } finally {
+        $data['pincode_verify_id'] = $response['pincode_verify_id'];
+        $this->createOrderFromLikeCard($data);
       }
-      $this->createOrderFromLikeCard($data);
     }
   }
 
@@ -128,7 +130,8 @@ class DcbPaymentService implements PaymentInterface
       if($response->response) {
         $this->sucess = true;
         $this->responseData = $response;
-        $this->createOrderFromOurSide($data);
+        $data['transaction_id'] = $response->order_id;
+        $this->updateOrderFromOurSide($data);
       } else {
         $this->sucess = false;
         $this->error   = "You Can't Buy From Like Card";
@@ -146,7 +149,7 @@ class DcbPaymentService implements PaymentInterface
    *
    * @return void
    */
-  public function createOrderFromOurSide($data)
+  public function updateOrderFromOurSide($data)
   {
     $this->orderService->handle($data);
   }

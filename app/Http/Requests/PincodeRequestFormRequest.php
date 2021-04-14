@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PincodeRequestVerify extends FormRequest
+class PincodeRequestFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class PincodeRequestVerify extends FormRequest
     public function rules()
     {
         return [
-            'phone' => '',
-            'image' => ''
+          'phone'    => 'required|string|confirmed',
+          'price'    => 'required',
+          'quantity' => 'required'
         ];
     }
 }
