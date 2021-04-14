@@ -2,6 +2,13 @@
 
 namespace App\Services;
 
+use App\Constants\OrderStatus;
+use App\Constants\PaymentStatus;
+use App\Constants\PaymentType;
+use App\Order;
+use App\OrderItem;
+use Faker\Provider\ar_SA\Payment;
+
 class DcbPaymentService implements PaymentInterface
 {
   /**
@@ -21,7 +28,7 @@ class DcbPaymentService implements PaymentInterface
   /**
    * responseData
    *
-   * @var array
+   * @var object
    */
   private $responseData;
 
@@ -130,7 +137,6 @@ class DcbPaymentService implements PaymentInterface
       if($response->response) {
         $this->sucess = true;
         $this->responseData = $response;
-        $data['transaction_id'] = $response->order_id;
         $this->updateOrderFromOurSide($data);
       } else {
         $this->sucess = false;
@@ -143,15 +149,24 @@ class DcbPaymentService implements PaymentInterface
   }
 
   /**
-   * Method createOrderFromOurSide
+   * Method updateOrderFromOurSide
    *
-   * @param array $data
+   * update status, payment_status, payment_type
+   * @param array $data [pincode_verify_id]
    *
    * @return void
    */
   public function updateOrderFromOurSide($data)
   {
-    $this->orderService->handle($data);
+    $currentOrder = Order::where("client_id", auth()->guard("client")->user()->id)->where("payment", PaymentType::NO_PAYMENT)->where("payment_status", PaymentStatus::Pending)->where("status", OrderStatus::PENDING)->latest()->first();
+    $data['status']          = OrderStatus::FINISHED;
+    $data['payment']         = PaymentType::DCB;
+    $data['payment_status']  = PaymentStatus::Success;
+    $data['transaction_id']  = $this->responseData->order_id;
+    session()->put("serial_id", $this->responseData->serials[0]->serialId);
+    session()->put("serial_code", $this->responseData->serials[0]->serialCode);
+    session()->put("valid_to", $this->responseData->serials[0]->validTo);
+    $this->orderService->handle($data, $currentOrder);
   }
 
   /**

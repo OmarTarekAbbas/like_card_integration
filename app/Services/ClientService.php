@@ -31,6 +31,7 @@ class ClientService
     /**
      * handle function that make update for client
      * @param array $request
+     * @param \App\Client|null $client
      * @return Client
      */
     public function handle($request, $client = null)

@@ -110,12 +110,14 @@ class OrderController extends Controller
     /**
      * Method createOrder
      *
-     * @param Illuminate\Http\Request $request
+     * @param Illuminate\Http\Request $request [pincode, total_price]
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function pincodeVerify(Request $request)
     {
+      //add pincode request id to order table to link them
+      $request->request->add(['total_price' => session("total_price")]);
       $this->payment->buyItems($request->all());
       if($this->payment->isSuccess()){
         $response = $this->payment->getData();
