@@ -13,9 +13,9 @@ final class OperatorCode
   public static function getList()
   {
       return [
-          self::STC_KUWAIT       => trans('41902'),
-          self::ZAIN_KUWAIT      => trans('41903'),
-          self::OOREDOO_KUWAIT   => trans('41904'),
+          self::STC_KUWAIT       => 'STC Kuwait',
+          self::ZAIN_KUWAIT      => 'ZAIN Kuwait',
+          self::OOREDOO_KUWAIT   => 'OOREDOO Kuwait',
       ];
   }
 

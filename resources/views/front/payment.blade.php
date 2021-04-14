@@ -3,6 +3,7 @@
 @section("content")
 <section class="payment_card">
   @include('front.alerts')
+  @include('errors')
   <div class="row m-0">
     <div class="col-12 p-0">
       <div class="col-4 collPadding collFloat">
@@ -33,8 +34,8 @@
 
       <div class="col-12 p-0">
         <div class="select_input">
-          {!! Form::select("phone_code",$operatorCode::getList() ,['class'=>'', 'placeholder'=>'', 'form' => "#myform"]) !!}
-          <input type="tel" class="form-control" form="#myform" name="phone" placeholder="Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon1">
+          {!! Form::select("phone_code",$operatorCode::getList() ,['class'=>'', 'placeholder'=>'', 'form' => "myform"]) !!}
+          <input type="tel" class="form-control" form="myform" name="phone" placeholder="Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon1">
         </div>
       </div>
 
@@ -44,8 +45,8 @@
 
       <div class="col-12 p-0">
         <div class="select_input">
-          {!! Form::select("phone_code_confirmation",$operatorCode::getList() ,['class'=>'', 'placeholder'=>'', 'form' => "#myform"]) !!}
-          <input type="tel" class="form-control" form="#myform" name="phone_confirmation" placeholder="Confirm Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon2">
+          {!! Form::select("phone_code_confirmation",$operatorCode::getList() ,['class'=>'', 'placeholder'=>'', 'form' => "myform"]) !!}
+          <input type="tel" class="form-control" form="myform" name="phone_confirmation" placeholder="Confirm Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon2">
         </div>
       </div>
     </div>
