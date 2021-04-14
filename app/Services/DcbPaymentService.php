@@ -35,21 +35,36 @@ class DcbPaymentService implements PaymentInterface
   /**
    * likeCard
    *
-   * @var LikeCardService
+   * @var \App\Services\LikeCardService
    */
   private $likeCard;
+
+  /**
+   * dcbService
+   *
+   * @var \App\Services\DcbService
+   */
+  private $dcbService;
+
+  /**
+   * orderService
+   *
+   * @var \App\Services\OrderService
+   */
+  private $orderService;
 
   /**
    * Method __construct
    *
    * @param \App\Services\LikeCardService $likeCard
    * @param \App\Services\DcbService $dcbService
-   * @param \App\Services\OrderService $dcbService
+   * @param \App\Services\OrderService $orderService
    */
   public function __construct(LikeCardService $likeCard, DcbService $dcbService, OrderService $orderService)
   {
-      $this->likeCard    = $likeCard;
-      $this->dcbService  = $dcbService ;
+      $this->likeCard      = $likeCard;
+      $this->dcbService    = $dcbService ;
+      $this->orderService  = $orderService ;
   }
 
   /**
@@ -86,7 +101,7 @@ class DcbPaymentService implements PaymentInterface
     $this->checkBalance($data['total_price']);
     if($this->success) {
       try {
-        $response = $this->dcbService->dcb_verify_charging($data);
+        $response = $this->dcbService->verifyDOBCharging($data);
         if($response == 'faild') {
           $this->success = false;
           $this->error   = "canb't charge when verify pincode";

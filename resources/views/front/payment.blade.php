@@ -18,11 +18,10 @@
     </div>
   </div>
   <div class="grid_view">
-    @for($i=1; $i<=9; $i++)
-      <div class="price_background rounded">
-        <button class="price_currency btn" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency = "{{ $productCurrency }}" data-price = "{{ $productPrice * $i }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
-      </div>
-    @endfor
+    @for($i=1; $i<=9; $i++) <div class="price_background rounded">
+      <button class="price_currency btn" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency="{{ $productCurrency }}" data-price="{{ $productPrice * $i }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
+  </div>
+  @endfor
   </div>
 
   <div class="phone_number">
@@ -32,10 +31,12 @@
       </div>
 
       <div class="col-12 p-0">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">+965</span>
-          </div>
+        <div class="select_input">
+          <select>
+            <option>Action</option>
+            <option>Another action</option>
+            <option>Something else here</option>
+          </select>
           <input type="tel" class="form-control" placeholder="Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon1">
         </div>
       </div>
@@ -45,11 +46,13 @@
       </div>
 
       <div class="col-12 p-0">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon2">+965</span>
-          </div>
-          <input type="tel" class="form-control" placeholder="Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon2">
+        <div class="select_input">
+          <select>
+            <option>Action</option>
+            <option>Another action</option>
+            <option>Something else here</option>
+          </select>
+          <input type="tel" class="form-control" placeholder="Confirm Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon2">
         </div>
       </div>
     </div>
@@ -72,12 +75,16 @@
       <div class="col-6 d-flex justify-content-center">
         <form id='myform' method='POST' class='quantity' action='{{ route("front.pincode.request") }}'>
           @csrf
-          <input type="hidden" value="{{ $productPrice }}" name="price">
-          <input type="hidden" value="{{ $productCurrency }}" name="currency">
+          <input type="hidden" value="{{ $productPrice?? 10 }}" name="price">
+
+          <input type="hidden" value="{{ $productCurrency?? 'KWT' }}" name="currency">
+
           <div id="sub" class="qtyminus minus sub">
             <i class=" fas fa-minus-circle"></i>
           </div>
-          <input type="number" id="quantity" name='quantity' value="1" min="1" max="9" />
+
+          <input type="number" class="text-center rounded" id="quantity" name='quantity' value="1" min="1" max="9"/>
+
           <div id="add" class="qtyplus plus add">
             <i class=" fas fa-plus-circle"></i>
           </div>
@@ -114,35 +121,34 @@
 
 @section("script")
 <script>
-    var price = {{$productPrice}}
-    var currency = ' {{$productCurrency}}'
+  var price = '{{$productPrice}}'
+  var currency = ' {{$productCurrency}}'
 
-    $('.price_currency').click(function () {
-        var cuurentPrice = ($(this).data("price")).toFixed(1);
-        $('#total_price').text(cuurentPrice + currency);
-        $("#quantity").val($(this).data("quantity"));
-    });
+  $('.price_currency').click(function() {
+    var cuurentPrice = ($(this).data("price")).toFixed(1);
+    $('#total_price').text(cuurentPrice + currency);
+    $("#quantity").val($(this).data("quantity"));
+  });
 
-    $('.add').click(function () {
-        if (parseInt($("#quantity").val()) >= 9) {
-        return ;
-        }
-        $("#quantity").val(parseInt($("#quantity").val()) + 1);
-        setTotalPrice()
-    });
-
-    $('.sub').click(function () {
-        if (parseInt($("#quantity").val()) <= 1) {
-        return ;
-        }
-        $("#quantity").val(parseInt($("#quantity").val()) - 1);
-        setTotalPrice()
-    });
-
-    function setTotalPrice() {
-        $('#total_price').html((price * parseInt($("#quantity").val())).toFixed(1) + currency);
-        $("#price"+parseInt($("#quantity").val())).trigger('focus')
+  $('.add').click(function() {
+    if (parseInt($("#quantity").val()) >= 9) {
+      return;
     }
+    $("#quantity").val(parseInt($("#quantity").val()) + 1);
+    setTotalPrice()
+  });
 
+  $('.sub').click(function() {
+    if (parseInt($("#quantity").val()) <= 1) {
+      return;
+    }
+    $("#quantity").val(parseInt($("#quantity").val()) - 1);
+    setTotalPrice()
+  });
+
+  function setTotalPrice() {
+    $('#total_price').html((price * parseInt($("#quantity").val())).toFixed(1) + currency);
+    $("#price" + parseInt($("#quantity").val())).trigger('focus')
+  }
 </script>
 @stop

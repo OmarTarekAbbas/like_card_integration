@@ -65,11 +65,12 @@ class OrderController extends Controller
      */
     public function pincodeRequest(Request $request)
     {
-      $response = $this->dcbService->dcb_pincode_request($request);
-      if($response == 'failed') {
+      $response = $this->dcbService->pinCodeDCBRequest($request);
+      if(!$response['status']) {
         session()->flash("faild", "error when make pincode request");
         return back();
       }
+      $request->request->add(['pincode_request_id' => $response['pincode_request_id']]);
       $this->orderService->handle($request->all());
       session()->flash("success", "pincode send successfully");
       return redirect()->route("front.pincode.verify");

@@ -11,26 +11,29 @@ use Illuminate\Http\Request;
 class DcbService
 {
   /**
-   * Method dcb_pincode_request
+   * Method pinCodeDCBRequest
    *
    * @param \Illuminate\Http\Request $request
    *
-   * @return string
+   * @return array
    */
-  public function dcb_pincode_request(Request $request)
+  public function pinCodeDCBRequest(Request $request)
   {
     // Authentication
     $User = User;
     $Password = Password;
 
     // End-User
-    $MSISDN = auth()->guard("client")->user()->phone;
-    $OperatorID = request("op_id")?? 20;
+    $MSISDN = auth()->guard("client")->user()->phone;   // 96555410856
 
     // Applications/Service
     $ServiceID = ServiceID;
     $ChannelID = ChannelID;
     $ProfileID = ProfileID;
+
+
+    // Operator
+    $OperatorID = auth()->guard("client")->user()->phone_code;  //https://en.wikipedia.org/w/index.php?title=Mobile_country_code&01123656796= and https://en.wikipedia.org/wiki/Mobile_Network_Codes_in_ITU_region_4xx_(Asia)#Kuwait_%E2%80%93_KW
 
     // Request Info
     $RequestID = uniqid();
@@ -40,6 +43,8 @@ class DcbService
       'User' => $User,
       'password' => $Password,
       'MSISDN' => $MSISDN,
+      // 'TokenID' => $TokenID,
+      // 'DeviceID' => $DeviceID,
       'ServiceID' => $ServiceID,
       'ChannelID' => $ChannelID,
       'ProfileID' => $ProfileID,
@@ -63,12 +68,15 @@ class DcbService
     $actionName = 'PinCodeDOBRequest';
 
     $PincodeRequest['msisdn'] = $info['MSISDN'];
+    // $PincodeRequest['device_id'] = $info['DeviceID'];
     $PincodeRequest['operator_id'] = $info['OperatorID'];
     $PincodeRequest['request_id'] = $info['RequestID'];
     $PincodeRequest['request'] =  $getUrl;
     $PincodeRequest['response'] = $response;
 
-    PincodeRequest::create($PincodeRequest);
+
+    $pincodeRequest = PincodeRequest::create($PincodeRequest);
+    $out['pincode_request_id'] = $pincodeRequest->id;
 
     // check for success
     $segments = explode('&' ,$response);
@@ -78,51 +86,53 @@ class DcbService
     }
 
     if($arr['Status'] == '1' && $arr['Success-Code'] == '10400'){
-        $msg = 'success';
-    }else{
-        if(array_key_exists('Error-Code', $arr)){
-            $msg = $this->response_code($arr['Error-Code']);
-        }else{
-            $msg = 'failed';
-        }
+      $out['status']  = true;
+      $out['message'] = "successfully picode request";
+    } else {
+      $out['status']  = false;
+      $out['message'] = "Something went wrong, please try again later!";
     }
 
-    return $msg;
+    return $out;
   }
 
   /**
-   * Method dcb_verify_charging
+   * Method verifyDOBCharging
    *
-   * @param array $data
+   * @param array $data [pincode, total_price]
    *
-   * @return string
+   * @return array
    */
-  public function dcb_verify_charging($data)
+  public function verifyDOBCharging($data)
   {
     // Authentication
     $User = User;
     $Password = Password;
 
     // End-User
-    $MSISDN = $data['msisdn'];
-    $OperatorID = $data['operatorID'];
-    $Price = $data['price'];
-    $RequestPin = $data['pin'];
+    $MSISDN = auth()->guard("client")->user()->phone;
+
 
     // Applications/Service
     $ServiceID = ServiceID;
     $ChannelID = ChannelID;
     $ProfileID = ProfileID;
 
+    // Operator
+    $OperatorID = auth()->guard("client")->user()->phone_code;
+    $Price      = $data['total_price'];
 
     // Request Info
-    $RequestID = uniqid();
-    $Request = 'DOB-VR';
+    $RequestID  = uniqid();
+    $Request    = 'DOB-VR';
+    $RequestPin = $data['pincode'];
 
     $info = array(
       'User' => $User,
       'password' => $Password,
       'MSISDN' => $MSISDN,
+      // 'TokenID' => $TokenID,
+      // 'DeviceID' => $DeviceID,
       'ServiceID' => $ServiceID,
       'ChannelID' => $ChannelID,
       'ProfileID' => $ProfileID,
@@ -145,7 +155,6 @@ class DcbService
     $response = curl_exec($ch);    //   Status=1&Success-Code=10500&Error-Desc=DOB.UniqueID=80499&RequestId=20201231112823205   // biiling id
 
     curl_close($ch);
-
     $actionName = 'VerifyDOBCharging';
 
     $PincodeVerify['msisdn'] = $info['MSISDN'];
@@ -159,7 +168,6 @@ class DcbService
 
     PincodeVerify::create($PincodeVerify);
 
-
     $segments = explode('&' ,$response);
     foreach($segments as $segment){
       $key = explode('=' ,$segment);
@@ -168,20 +176,23 @@ class DcbService
 
     if($arr['Status'] == '1' && $arr['Success-Code'] == '10500'){
 
-        $create_msisdn['msisdn'] = $info['MSISDN'];
-        $create_msisdn['status'] = 1;
-        $create_msisdn['unique_id'] = $arr['RequestId'];
-        Msisdn::create($create_msisdn);
-        $msg = "success";
+      $create_msisdn['msisdn'] = $info['MSISDN'];
+      $create_msisdn['status'] = 1;
+      $create_msisdn['unique_id'] = $arr['RequestId'];
+      Msisdn::create($create_msisdn);
+
+      $out['message'] = 'Your payment is success';
+      $out['status']  = true;
+
+    }elseif($arr['Status'] == '0' && $arr['Success-Code'] == '10505'){
+      $out['message'] = "you don't have sufficient funds";
+      $out['status']  = false;
     }else{
-        if(array_key_exists('Error-Code', $arr)){
-            $msg = $this->response_code($arr['Error-Code']);
-        }else{
-            $msg = 'failed';
-        }
+      $out['message'] = 'Please try again later';
+      $out['status']  = false;
     }
 
-    return $msg;
+    return $out;
 
   }
 
