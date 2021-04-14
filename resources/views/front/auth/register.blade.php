@@ -19,7 +19,14 @@
 
         {!! Form::email("email",null ,['class'=>'form__input', 'placeholder'=>'Email']) !!}
 
-        {!! Form::tel("phone",null ,['class'=>'form__input', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*' ]) !!}
+        <div class="select_input">
+          <select class="">
+            <option class="">Action</option>
+            <option class="">Another action</option>
+            <option class="">Something else here</option>
+          </select>
+          {!! Form::tel("phone",null ,['class'=>'form__input', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*' ]) !!}
+        </div>
 
         {!! Form::password('password' ,['class'=>'form__input','placeholder'=>'Password']) !!}
 
