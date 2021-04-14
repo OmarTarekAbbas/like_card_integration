@@ -429,6 +429,10 @@ main {
           font-size: 1.2rem;
           font-weight: bold;
 
+          &:focus {
+            box-shadow: 0 0 0 0.1rem $petrolCol;
+          }
+
           .currency {}
         }
       }
@@ -437,9 +441,21 @@ main {
     .phone_number {
       margin-bottom: 0.75rem;
 
-      .input-group-text,
+      .select_input {
+        display: grid;
+        grid-template-columns: 25% 75%;
+
+        select {
+          border: 1px solid #368ca7;
+          border-right: 0;
+          outline: 0;
+          color: $petrolCol;
+        }
+      }
+
       input {
         border: 1px solid #368ca7;
+        border-left: 0;
         color: $petrolCol;
       }
 
@@ -723,6 +739,23 @@ main {
             &.btn:hover,
             &.btn:focus {
               box-shadow: 0 0 0 0.2rem $whiteCol;
+            }
+          }
+
+          .select_input {
+            display: grid;
+            grid-template-columns: 25% 75%;
+
+            select {
+              color: $whiteCol;
+              background: transparent;
+              border: 0;
+              padding: 0;
+              outline: 0;
+
+              option {
+                color: $blackCol;
+              }
             }
           }
 
