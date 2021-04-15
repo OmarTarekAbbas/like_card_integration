@@ -87,11 +87,11 @@ class DcbPaymentService implements PaymentInterface
       $this->balance = $response->balance ;
       $this->success = true;
       if($this->balance < $total_price) {
-        $this->error = "You Can't But This Item Now";
+        $this->error = "لايمكن شراء المنتج الان";
         $this->success = false;
       }
     } catch (\Throwable $th) {
-      $this->error = "error when get check balance";
+      $this->error = "حدث خطأ اثناء الشراء";
       $this->success = false;
     }
   }
@@ -111,13 +111,14 @@ class DcbPaymentService implements PaymentInterface
         $response = $this->dcbService->verifyDOBCharging($data);
         if(!$response['status']) {
           $this->success = false;
-          $this->error   = "canb't charge when verify pincode";
+          $this->error   = $response['message'];
         }
       } catch ( \Exception $e ) {
         $this->success = false;
-        $this->error   = "error when buy from dcb getway";
+        $this->error   = "حدث خطأ اثناء الدفع";
       } finally {
         $data['pincode_verify_id'] = $response['pincode_verify_id'];
+        $data['dcb_status'] = $response['dcb_status'];
         $this->createOrderFromLikeCard($data);
       }
     }
@@ -140,32 +141,28 @@ class DcbPaymentService implements PaymentInterface
         $this->updateOrderFromOurSide($data);
       } else {
         $this->sucess = false;
-        $this->error   = "You Can't Buy From Like Card";
+        $this->error   = "لانستطيع الشراء من البائع الاصلى";
       }
     } catch (\Throwable $th) {
       $this->success = false;
-      $this->error   = "error when buy from Like Card getway";
+      $this->error   = "حدث خطأ اثناء الشراء من البائع الاصلى";
     }
   }
 
   /**
    * Method updateOrderFromOurSide
    *
-   * update status, payment_status, payment_type
-   * @param array $data [pincode_verify_id]
+   * update status, dcb_status, payment_type
+   * @param array $data [pincode_verify_id, dec_status]
    *
    * @return void
    */
   public function updateOrderFromOurSide($data)
   {
-    $currentOrder = Order::where("client_id", auth()->guard("client")->user()->id)->where("payment", PaymentType::NO_PAYMENT)->where("payment_status", PaymentStatus::Pending)->where("status", OrderStatus::PENDING)->latest()->first();
+    $currentOrder = Order::where("client_id", auth()->guard("client")->user()->id)->where("payment", PaymentType::NO_PAYMENT)->where("status", OrderStatus::PENDING)->latest()->first();
     $data['status']          = OrderStatus::FINISHED;
     $data['payment']         = PaymentType::DCB;
-    $data['payment_status']  = PaymentStatus::Success;
     $data['transaction_id']  = $this->responseData->order_id;
-    session()->put("serial_id", $this->responseData->serials[0]->serialId);
-    session()->put("serial_code", $this->responseData->serials[0]->serialCode);
-    session()->put("valid_to", $this->responseData->serials[0]->validTo);
     $this->orderService->handle($data, $currentOrder);
   }
 

@@ -94,6 +94,8 @@ class DcbService
       $out['status']  = false;
     }
 
+    $out['dcb_status'] = $arr['Success-Code'];
+
     return $out;
   }
 
@@ -190,8 +192,9 @@ class DcbService
       $out['status']  = false;
     }
 
-    return $out;
+    $out['dcb_status'] = $arr['Success-Code'];
 
+    return $out;
   }
 
   public function response_code($code)

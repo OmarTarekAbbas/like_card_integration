@@ -2,14 +2,15 @@
 
 namespace App;
 
-use App\Constants\PaymentStatus;
+use App\Constants\DcbStatus;
 use App\Constants\PaymentType;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
   protected $fillable = [
-    'client_id', 'status', 'total_price', 'currency', 'payment', 'payment_status', 'transaction_id', 'pincode_request_id', 'pincode_verify_id'
+    'client_id', 'status', 'total_price', 'currency', 'payment', 'transaction_id', 'pincode_request_id', 'pincode_verify_id',
+    'product_name', 'product_image', 'valid_to', 'serial_id', 'serial_code', 'hash_serial_code', 'sell_price', 'original_price', 'phone', 'phone_code', 'operator_id', 'dcb_status'
   ];
 
   public function getPaymentAttribute($value)
@@ -17,9 +18,9 @@ class Order extends Model
     return PaymentType::getLabel($value);
   }
 
-  public function getPaymentStatusAttribute($value)
+  public function getDcbStatusAttribute($value)
   {
-    return PaymentStatus::getLabel($value);
+    return DcbStatus::getLabel($value);
   }
 
   public function products()

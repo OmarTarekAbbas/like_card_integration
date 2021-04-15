@@ -12,7 +12,7 @@ class Client extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'image', 'phone_code', 'phone'];
+    protected $fillable = ['name', 'email', 'password', 'image', 'phone', 'operator_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -20,5 +20,10 @@ class Client extends Authenticatable
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function oprerator()
+    {
+        return $this->belongsTo('App\Oprerator') ;
+    }
 
 }

@@ -17,7 +17,7 @@ class CreateClientsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone_code');
+            $table->unsignedBigInteger('operator_id');
             $table->string('phone')->unique();
             $table->string('password');
             $table->string('image')->nullable();

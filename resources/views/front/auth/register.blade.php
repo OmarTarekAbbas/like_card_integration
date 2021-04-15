@@ -24,6 +24,8 @@
           {!! Form::tel("phone",null ,['class'=>'form__input', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*' ]) !!}
         </div>
 
+        <input type="hidden" name="operator_id" value="1">
+        
         {!! Form::password('password' ,['class'=>'form__input','placeholder'=>'Password']) !!}
 
         {!! Form::password('password_confirmation' ,['class'=>'form__input','placeholder'=>'Confirm Password']) !!}

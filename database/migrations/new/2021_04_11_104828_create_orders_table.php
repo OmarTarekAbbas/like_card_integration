@@ -33,7 +33,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('total_price', 10, 2);
             $table->string('phone_code');
             $table->string('phone');
-            $table->string('operator_id');
+            $table->unsignedBigInteger('operator_id');
             $table->unsignedBigInteger('transaction_id')->nullable()->comment("like card order id");
             $table->unsignedBigInteger('pincode_request_id')->nullable();
             $table->unsignedBigInteger('pincode_verify_id')->nullable();

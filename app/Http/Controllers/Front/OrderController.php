@@ -81,17 +81,14 @@ class OrderController extends Controller
      */
     public function pincodeRequest(PincodeRequestFormRequest $request)
     {
-      //update user phone like he enter
-      $this->clientService->handle($request->only("phone"), auth()->guard("client")->user());
-
       $response = $this->dcbService->pinCodeDCBRequest($request);
       if(!$response['status']) {
-        session()->flash("faild", "error when make pincode request");
+        session()->flash("faild", $response['message']);
         return back();
       }
-
       //add pincode request id to order table to link them
       $request->request->add(['pincode_request_id' => $response['pincode_request_id']]);
+      $request->request->add(['dcb_status' => $response['dcb_status']]);
       $this->orderService->handle($request->all());
       session()->flash("success", "pincode send successfully");
       return redirect()->route("front.pincode.verify");
@@ -175,12 +172,14 @@ class OrderController extends Controller
         session()->put('productId', $request->product_id);
         session()->put('productImage', $request->productImage);
         session()->put('productPrice', $request->productPrice);
+        session()->put('originalPrice', $request->originalPrice);
         session()->put('productName', $request->productName);
         session()->put('productCurrency', $request->productCurrency);
 
         $productId   = $request->product_id;
         $productImage = $request->productImage;
         $productPrice = $request->productPrice;
+        $originalPrice = $request->originalPrice;
         $productName = $request->productName;
         $productCurrency = $request->productCurrency;
         return view("front.payment",compact('productId','productImage','productPrice','productName','productCurrency'));
