@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Constants\DcbStatus;
 use App\PincodeRequest;
 use App\PincodeVerify;
 use App\Msisdn;
@@ -89,8 +90,8 @@ class DcbService
       $out['status']  = true;
       $out['message'] = "successfully picode request";
     } else {
+      $out['message'] = DcbStatus::getLabel($arr['Success-Code']);
       $out['status']  = false;
-      $out['message'] = "Something went wrong, please try again later!";
     }
 
     return $out;
@@ -184,11 +185,8 @@ class DcbService
       $out['message'] = 'Your payment is success';
       $out['status']  = true;
 
-    }elseif($arr['Status'] == '0' && $arr['Success-Code'] == '10505'){
-      $out['message'] = "you don't have sufficient funds";
-      $out['status']  = false;
-    }else{
-      $out['message'] = 'Please try again later';
+    } else {
+      $out['message'] = DcbStatus::getLabel($arr['Success-Code']);
       $out['status']  = false;
     }
 
