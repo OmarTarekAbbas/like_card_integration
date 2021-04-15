@@ -35,7 +35,7 @@ class DcbService
 
     // Operator
     $newValue = explode('-', $request->phone_code);
-    $OperatorID = $newValue[1];  //https://en.wikipedia.org/w/index.php?title=Mobile_country_code&01123656796= and https://en.wikipedia.org/wiki/Mobile_Network_Codes_in_ITU_region_4xx_(Asia)#Kuwait_%E2%80%93_KW
+    $OperatorID = $newValue[0];  //https://en.wikipedia.org/w/index.php?title=Mobile_country_code&01123656796= and https://en.wikipedia.org/wiki/Mobile_Network_Codes_in_ITU_region_4xx_(Asia)#Kuwait_%E2%80%93_KW
 
     // Request Info
     $RequestID = uniqid();
