@@ -37,7 +37,7 @@ class OrderService
 
         $request['client_id'] = auth()->guard("client")->user()->id;
 
-        if(isset($request['price']) && isset($request['quantity'])) {
+        if(isset($request['sell_price']) && isset($request['quantity'])) {
           $request['total_price'] = $request['sell_price'] * $request['quantity'];
           session()->put("total_price", $request['total_price']);
         }

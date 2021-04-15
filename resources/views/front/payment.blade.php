@@ -72,7 +72,6 @@
 
           <input type="hidden" value="{{ $productCurrency?? 'KWT' }}" name="currency">
 
-          <input type="hidden" name="operator_id" value="1">
 
           <div id="sub" class="qtyminus minus sub">
             <i class=" fas fa-minus-circle"></i>
