@@ -33,7 +33,7 @@
       </div>
       <div class="col-12 p-0">
         <div class="select_input">
-          {!! Form::select("phone_code", getCountryOperators() ,['class'=>'', 'placeholder'=>'', 'form' => "myform"]) !!}
+          {!! Form::select("phone_code", getCountryOperators(), null, ['form' => "myform", 'required']) !!}
           <input type="tel" class="form-control" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
         </div>
       </div>

@@ -34,7 +34,8 @@ class DcbService
 
 
     // Operator
-    $OperatorID = auth()->guard("client")->user()->phone_code;  //https://en.wikipedia.org/w/index.php?title=Mobile_country_code&01123656796= and https://en.wikipedia.org/wiki/Mobile_Network_Codes_in_ITU_region_4xx_(Asia)#Kuwait_%E2%80%93_KW
+    $newValue = explode('-', $request->phone_code);
+    $OperatorID = $newValue[1];  //https://en.wikipedia.org/w/index.php?title=Mobile_country_code&01123656796= and https://en.wikipedia.org/wiki/Mobile_Network_Codes_in_ITU_region_4xx_(Asia)#Kuwait_%E2%80%93_KW
 
     // Request Info
     $RequestID = uniqid();
@@ -90,11 +91,11 @@ class DcbService
       $out['status']  = true;
       $out['message'] = "successfully picode request";
     } else {
-      $out['message'] = DcbStatus::getLabel($arr['Success-Code']);
+      $out['message'] = DcbStatus::getLabel($arr['Error-Code']);
       $out['status']  = false;
     }
 
-    $out['dcb_status'] = $arr['Success-Code'];
+    $out['dcb_status'] = isset($arr['Success-Code']) ? $arr['Success-Code'] : $arr['Error-Code'];
 
     return $out;
   }
@@ -188,11 +189,11 @@ class DcbService
       $out['status']  = true;
 
     } else {
-      $out['message'] = DcbStatus::getLabel($arr['Success-Code']);
+      $out['message'] = DcbStatus::getLabel($arr['Error-Code']);
       $out['status']  = false;
     }
 
-    $out['dcb_status'] = $arr['Success-Code'];
+    $out['dcb_status'] = isset($arr['Success-Code']) ? $arr['Success-Code'] : $arr['Error-Code'];
 
     return $out;
   }

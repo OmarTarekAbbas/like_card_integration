@@ -28,7 +28,10 @@
 
           {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input', 'placeholder'=>'Email', 'readonly']) !!}
 
-          {!! Form::tel("phone", auth()->guard('client')->user()->phone ,['class'=>'form__input', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*', 'readonly']) !!}
+          <div class="select_input">
+          {!! Form::select("operator_id", getCountryOperators(), auth()->guard('client')->user()->oprerator->code.'-'.auth()->guard('client')->user()->oprerator->id ,['class'=>'', 'placeholder'=>'', 'readonly']) !!}
+          {!! Form::tel("phone",auth()->guard('client')->user()->phone ,['class'=>'form__input', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*', 'readonly' ]) !!}
+          </div>
 
           {!! Form::submit('Submit',['class'=>'form__btn btn font-weight-bold']) !!}
         </div>

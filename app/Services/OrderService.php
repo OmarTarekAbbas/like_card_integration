@@ -50,6 +50,10 @@ class OrderService
         $request['serial_code']      = session()->has('serial_code') ? $this->likeCardService->decryptSerial(session("serial_code")) : null;
         $request['valid_to']         = session()->has('valid_to') ? session("valid_to") : null;
 
+        $newValue = explode('-', $request['phone_code']);
+        $request['phone_code']  = $newValue[0] ;
+        $request['operator_id'] = $newValue[1] ;
+
         $order->fill($request);
 
         $order->save();

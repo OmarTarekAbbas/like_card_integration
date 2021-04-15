@@ -21,9 +21,15 @@ class Client extends Authenticatable
      */
     protected $hidden = ['password', 'remember_token'];
 
+    public function setOperatorIdAttribute($value)
+    {
+      $newValue = explode('-', $value);
+      $this->attributes['operator_id']= $newValue[1] ;
+    }
+
     public function oprerator()
     {
-        return $this->belongsTo('App\Oprerator') ;
+        return $this->belongsTo('App\Operator', 'operator_id') ;
     }
 
 }

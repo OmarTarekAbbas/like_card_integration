@@ -1,5 +1,6 @@
 <?php
 
+use App\Country;
 use App\Operator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,12 +17,12 @@ class InsertOperatorData extends Migration
     {
         $country  = Country::Create([
           'title' => 'Kuwait',
-          'code'  => 1
         ]);
 
-        $operator  = Operator::Create([
-          'title' => 'Kuwait',
-          'code'  => 1
+        $operator  = DB::table('operators')->insert([
+          ['name' => 'Zain Kuwait', 'code'  => 41902, 'country_id' => 1],
+          ['name' => 'Ooredoo Kuwait', 'code'  => 41903, 'country_id' => 1 ],
+          ['name' => 'Stc Kuwait', 'code'  => 41904, 'country_id' => 1 ]
         ]);
     }
 

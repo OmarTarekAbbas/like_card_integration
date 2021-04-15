@@ -25,8 +25,8 @@ class PincodeRequestFormRequest extends FormRequest
     {
         return [
           'phone'       => 'required',
-          //'phone_code'  => 'required|confirmed',
-          'price'       => 'required',
+          'phone_code'  => 'required',
+          'sell_price'       => 'required',
           'quantity'    => 'required'
         ];
     }

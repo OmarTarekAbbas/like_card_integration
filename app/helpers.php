@@ -263,7 +263,7 @@ function dynamic_routes($route_model,$found_roles)
      $operators = $country->operator;
      if(isset($operators) && $operators!=null){
        foreach($operators as $operator){
-        $country_operators[$country->code.'-'.$operator->code.'-'.$operator->id] = $operator->name;
+        $country_operators[$operator->code.'-'.$operator->id] = $operator->name;
        }
      }
    }
