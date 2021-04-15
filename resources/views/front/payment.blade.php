@@ -31,35 +31,34 @@
       <div class="col-12 p-0">
         <h4 class="payment_card_title text-capitalize">mobile no - رقم التليفون</h4>
       </div>
-
       <div class="col-12 p-0">
         <div class="select_input">
-          {!! Form::select("phone_code",$operatorCode::getList() ,['class'=>'', 'placeholder'=>'', 'form' => "myform"]) !!}
-          <input type="tel" class="form-control" form="myform" name="phone" placeholder="Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon1">
+          {!! Form::select("phone_code", getCountryOperators() ,['class'=>'', 'placeholder'=>'', 'form' => "myform"]) !!}
+          <input type="tel" class="form-control" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
         </div>
       </div>
 
-      <div class="col-12 p-0">
+      <!--<div class="col-12 p-0">
         <h4 class="payment_card_title text-capitalize">confirm mobile no - تأكيد رقم التليفون</h4>
       </div>
 
       <div class="col-12 p-0">
         <div class="select_input">
-          {!! Form::select("phone_code_confirmation",$operatorCode::getList() ,['class'=>'', 'placeholder'=>'', 'form' => "myform"]) !!}
+          {!! Form::select("phone_code_confirmation",getCountryOperators() ,['class'=>'', 'placeholder'=>'', 'form' => "myform"]) !!}
           <input type="tel" class="form-control" form="myform" name="phone_confirmation" placeholder="Confirm Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon2">
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 
   <div class="quantity">
     <div class="row m-0">
       <div class="col-6 d-flex justify-content-center">
-        <span class="quantity_title text-capitalize font-weight-bold">quantity</span>
+        <span class="quantity_title text-capitalize font-weight-bold">quantity - الكمية</span>
       </div>
 
       <div class="col-6 d-flex justify-content-center">
-        <span class="total_title text-capitalize font-weight-bold">total</span>
+        <span class="total_title text-capitalize font-weight-bold">total - المجموع</span>
       </div>
 
       <div class="col-12">

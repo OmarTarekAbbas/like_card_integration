@@ -128,6 +128,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
+        'phone' => [
+          'required' => 'حقل رقم الهاتف مطلوب'
+      ]
     ],
 
     /*

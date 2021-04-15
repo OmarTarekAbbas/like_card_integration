@@ -10,6 +10,6 @@ class Country extends Model
 
     public function operator()
     {
-      return $this->hasMany('App\Operator','operator_id','id');
+      return $this->hasMany(Operator::class);
     }
 }
