@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Constants\OperatorCode;
 use App\Services\PaymentInterface;
 use App\Services\DcbPaymentService;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use View;
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      Schema::defaultStringLength(191);
+
       $this->app->singleton(PaymentInterface::class, DcbPaymentService::class);
 
       View::composer("*", function ($view) {
