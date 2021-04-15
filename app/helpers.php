@@ -1,4 +1,6 @@
 <?php
+
+use App\Country;
 use App\RoleRoute;
 use App\DeleteAll ;
 use App\Route as RouteModel;
@@ -251,4 +253,20 @@ function dynamic_routes($route_model,$found_roles)
     }
     return route('front.products', ['category_id' => $category->id ]);
 
+ }
+
+ function getCountryOperators(){
+   $country_operators = [];
+   $country = Country::where('title', 'Kuwait')->first();
+
+   if(isset($country) && $country!=null){
+     $operators = $country->operator;
+     if(isset($operators) && $operators!=null){
+       foreach($operators as $operator){
+        $country_operators[$country->code.'-'.$operator->code.'-'.$operator->id] = $operator->name;
+       }
+     }
+   }
+
+   return $country_operators;
  }

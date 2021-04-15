@@ -24,8 +24,8 @@ class PincodeRequestFormRequest extends FormRequest
     public function rules()
     {
         return [
-          'phone'       => 'required|confirmed',
-          'phone_code'  => 'required|confirmed',
+          'phone'       => 'required',
+          //'phone_code'  => 'required|confirmed',
           'price'       => 'required',
           'quantity'    => 'required'
         ];

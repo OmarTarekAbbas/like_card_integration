@@ -20,7 +20,7 @@
         {!! Form::email("email",null ,['class'=>'form__input', 'placeholder'=>'Email']) !!}
 
         <div class="select_input">
-          {!! Form::select("phone_code",$operatorCode::getList() ,['class'=>'', 'placeholder'=>'', ]) !!}
+          {!! Form::select("phone_code",getCountryOperators() ,['class'=>'', 'placeholder'=>'', ]) !!}
           {!! Form::tel("phone",null ,['class'=>'form__input', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*' ]) !!}
         </div>
 
