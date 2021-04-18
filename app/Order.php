@@ -13,11 +13,6 @@ class Order extends Model
     'product_name', 'product_image', 'valid_to', 'serial_id', 'serial_code', 'hash_serial_code', 'sell_price', 'original_price', 'phone', 'phone_code', 'operator_id', 'dcb_status', 'quantity'
   ];
 
-  public function getPaymentAttribute($value)
-  {
-    return PaymentType::getLabel($value);
-  }
-
   public function getDcbStatusAttribute($value)
   {
     return DcbStatus::getLabel($value);
