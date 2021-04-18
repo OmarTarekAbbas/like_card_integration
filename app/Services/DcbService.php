@@ -25,7 +25,7 @@ class DcbService
     $Password = Password;
 
     // End-User
-    $MSISDN = auth()->guard("client")->user()->phone;   // 96555410856
+    $MSISDN = $request->phone;   // 96555410856
 
     // Applications/Service
     $ServiceID = ServiceID;
@@ -177,7 +177,8 @@ class DcbService
     $PincodeVerify['request'] =  $getUrl;
     $PincodeVerify['response'] = $response;
 
-    PincodeVerify::create($PincodeVerify);
+     $pincodeVerify = PincodeVerify::create($PincodeVerify);
+     $out['pincode_verify_id'] = $pincodeVerify->id;
 
     $segments = explode('&' ,$response);
     foreach($segments as $segment){
