@@ -137,7 +137,7 @@ class DcbPaymentService implements PaymentInterface
       $response = json_decode($this->likeCard->createOrder(session("productId"), session("quantity")));
       if($response->response) {
         $this->sucess = true;
-        $this->updateOrderFromOurSide($data);
+        $this->updateOrderFromOurSide($data, $response);
       } else {
         $this->sucess = false;
         $this->error   = "لانستطيع الشراء من البائع الاصلى";
@@ -152,16 +152,21 @@ class DcbPaymentService implements PaymentInterface
    * Method updateOrderFromOurSide
    *
    * update status, dcb_status, payment_type
-   * @param array $data [pincode_verify_id, dec_status]
    *
+   * @param array $data [pincode_verify_id, dec_status]
+   * @param object $response []
    * @return void
    */
-  public function updateOrderFromOurSide($data)
+  public function updateOrderFromOurSide($data, $response)
   {
     $currentOrder = Order::where("client_id", auth()->guard("client")->user()->id)->where("payment", PaymentType::NO_PAYMENT)->where("status", OrderStatus::PENDING)->latest()->first();
-    $data['status']          = OrderStatus::FINISHED;
-    $data['payment']         = PaymentType::DCB;
-    $data['transaction_id']  = $this->responseData->order_id;
+    $data['status']           = OrderStatus::FINISHED;
+    $data['payment']          = PaymentType::DCB;
+    $data['transaction_id']   = $response->order_id;
+    $data['serial_id']        = $response->serials[0]->serial_id;
+    $data['hash_serial_code'] = $response->serials[0]->serial_code;
+    $data['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serial_code);
+    $data['valid_to']         = $response->serials[0]->valid_to;
     $this->orderService->handle($data, $currentOrder);
     $this->responseData = $currentOrder;
   }

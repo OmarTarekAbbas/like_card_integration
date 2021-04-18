@@ -45,10 +45,6 @@ class OrderService
         $request['product_name']     = session()->get('productName');
         $request['product_image']    = session()->get('productImage');
         $request['original_price']   = session()->get('originalPrice');
-        $request['serial_id']        = session()->has('serial_id') ? session("serial_id") : null;
-        $request['hash_serial_code'] = session()->has('serial_code') ? session("serial_code") : null;
-        $request['serial_code']      = session()->has('serial_code') ? $this->likeCardService->decryptSerial(session("serial_code")) : null;
-        $request['valid_to']         = session()->has('valid_to') ? session("valid_to") : null;
 
         $newValue = explode('-', $request['phone_code']);
         $request['phone_code']  = $newValue[0] ;
