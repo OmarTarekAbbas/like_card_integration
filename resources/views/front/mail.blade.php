@@ -7,6 +7,6 @@
   <title>Client Serial Code</title>
 </head>
 <body>
-  <p>Your Serial Code Is {{ $serial_code }}</p>
+  <p>Your Serial Code Is <strong>{{ $serial_code }}</strong></p>
 </body>
 </html>
