@@ -112,14 +112,14 @@ class DcbPaymentService implements PaymentInterface
         if(!$response['status']) {
           $this->success = false;
           $this->error   = $response['message'];
+        } else {
+          $data['pincode_verify_id'] = $response['pincode_verify_id'];
+          $data['dcb_status'] = $response['dcb_status'];
+          $this->createOrderFromLikeCard($data);
         }
       } catch ( \Exception $e ) {
         $this->success = false;
         $this->error   = "حدث خطأ اثناء الدفع";
-      } finally {
-        $data['pincode_verify_id'] = $response['pincode_verify_id'];
-        $data['dcb_status'] = $response['dcb_status'];
-        $this->createOrderFromLikeCard($data);
       }
     }
   }
