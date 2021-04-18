@@ -49,6 +49,7 @@
                       <h6 class="mb-0"> <span class="font-weight-bold">Product Name : </span>{{ $order->product_name }}</h6>
                     </div>
                     <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Id : </span><small> {{ $order->serial_id }}</small></div>
+                    <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Code : </span><small> {{ $order->serial_code }}</small></div>
                     <div class="col-12 my-auto">
                       <h6 class="mb-0"> <span class="font-weight-bold">Valid To: </span>{{ $order->valid_to }}</h6>
                     </div>
