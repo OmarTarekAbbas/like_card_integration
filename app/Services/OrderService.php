@@ -40,6 +40,7 @@ class OrderService
         if(isset($request['sell_price']) && isset($request['quantity'])) {
           $request['total_price'] = $request['sell_price'] * $request['quantity'];
           session()->put("total_price", $request['total_price']);
+          session()->put("quantity", $request['quantity']);
         }
 
         $request['product_name']     = session()->get('productName');
@@ -51,8 +52,6 @@ class OrderService
           $request['phone_code']  = $newValue[0] ;
           $request['operator_id'] = $newValue[1] ;
         }
-
-        session()->put("quantity", $request['quantity']);
 
         $order->fill($request);
 
