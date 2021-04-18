@@ -98,6 +98,12 @@ class DcbService
 
     $out['dcb_status'] = isset($arr['Success-Code']) ? $arr['Success-Code'] : $arr['Error-Code'];
 
+    if(!enable_dcb) {
+      $out['status']  = true;
+      $out['message'] = "successfully picode request";
+      $out['dcb_status'] = 1;
+    }
+
     return $out;
   }
 
@@ -195,6 +201,12 @@ class DcbService
     }
 
     $out['dcb_status'] = isset($arr['Success-Code']) ? $arr['Success-Code'] : $arr['Error-Code'];
+
+    if(!enable_dcb) {
+      $out['status']  = true;
+      $out['message'] = "successfully picode request";
+      $out['dcb_status'] = 1;
+    }
 
     return $out;
   }

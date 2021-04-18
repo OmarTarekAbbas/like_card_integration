@@ -9,6 +9,7 @@ define("ServiceID", "808");
 define("ChannelID", "12211");
 define("ProfileID", "1833");
 define("ShortCode", "50230");
+define('enable_dcb', false);
 
 Route::get("/home","HomeController@index")->name("front.home");
 Route::get("/category/{parent_id}","HomeController@listCategoryChilds")->name("front.category");
