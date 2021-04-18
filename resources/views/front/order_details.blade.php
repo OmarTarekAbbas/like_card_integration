@@ -3,6 +3,7 @@
 @section("content")
 @if($order)
 <section class="order_details">
+  @include("front/alerts")
   <div class="card card-1">
     <div class="card-header bg-white">
       <div class="media row justify-content-between mb-3">
