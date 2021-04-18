@@ -137,7 +137,6 @@ class DcbPaymentService implements PaymentInterface
       $response = json_decode($this->likeCard->createOrder($data['product_id'], $data['quantity']));
       if($response->response) {
         $this->sucess = true;
-        $this->responseData = $response;
         $this->updateOrderFromOurSide($data);
       } else {
         $this->sucess = false;
@@ -164,6 +163,7 @@ class DcbPaymentService implements PaymentInterface
     $data['payment']         = PaymentType::DCB;
     $data['transaction_id']  = $this->responseData->order_id;
     $this->orderService->handle($data, $currentOrder);
+    $this->responseData = $currentOrder;
   }
 
   /**

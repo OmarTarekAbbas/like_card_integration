@@ -15,13 +15,13 @@
       <tbody>
         @foreach($orders as $order)
         <tr class="table_grid">
-          <td><span class="title">Order Number:</span> <b class="title_value">{{ $order->orderNumber }}</b></td>
-          <td><span class="title">Order Final Total:</span> <b class="title_value">{{ $order->orderFinalTotal }}</b></td>
-          <td><span class="title">Currency Symbol:</span> <b class="title_value">{{ $order->currencySymbol }}</b></td>
-          <td><span class="title">Order Create Date:</span> <b class="title_value">{{ $order->orderCreateDate }}</b></td>
-          <td><span class="title">Order Current Status:</span> <b class="title_value">{{ $order->orderCurrentStatus }}</b></td>
-          <td><span class="title">Order Payment Method:</span> <b class="title_value">{{ $order->orderPaymentMethod }}</b></td>
-          <td class="last_grid"><a class="btn_show btn" href="{{ route('front.order.details', ['order_id' => $order->orderNumber]) }}"> Show </a></td>
+          <td><span class="title">Order Number:</span> <b class="title_value">{{ $order->id }}</b></td>
+          <td><span class="title">Order Final Total:</span> <b class="title_value">{{ $order->total_price }}</b></td>
+          <td><span class="title">Currency Symbol:</span> <b class="title_value">{{ $order->currency }}</b></td>
+          <td><span class="title">Order Create Date:</span> <b class="title_value">{{ $order->updated_at->format("D M Y") }}</b></td>
+          <td><span class="title">Order Current Status:</span> <b class="title_value">{{ $orderStatus::getLabel($order->status) }}</b></td>
+          <td><span class="title">Order Serial Code:</span> <b class="title_value">{{ $order->serial_code }}</b></td>
+          <td class="last_grid"><a class="btn_show btn" href="{{ route('front.order.details', ['order' => $order]) }}"> Show </a></td>
         </tr>
         @endforeach
       </tbody>

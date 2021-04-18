@@ -1,5 +1,8 @@
 <?php
 namespace App;
+
+use App\Constants\OrderStatus;
+use App\Constants\PaymentType;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,6 +33,11 @@ class Client extends Authenticatable
     public function oprerator()
     {
         return $this->belongsTo('App\Operator', 'operator_id') ;
+    }
+
+    public function orders()
+    {
+      return $this->hasMany(Order::class)->where("status", OrderStatus::FINISHED)->where("payment", PaymentType::DCB)->whereNotNull("transaction_id");
     }
 
 }

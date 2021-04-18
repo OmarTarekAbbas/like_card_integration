@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PincodeRequestFormRequest;
+use App\Order;
 use App\Services\ClientService;
 use App\Services\LikeCardService;
 use App\Services\PaymentInterface;
@@ -118,7 +119,7 @@ class OrderController extends Controller
       $this->payment->buyItems($request->all());
       if($this->payment->isSuccess()){
         $response = $this->payment->getData();
-        return redirect()->route("front.order.details",["id" => $response->orderId]);
+        return redirect()->route("front.order.details",["order" => $response]);
       }
       session()->flash("faild", $this->payment->getError());
       return back();
@@ -131,12 +132,7 @@ class OrderController extends Controller
      */
     public function ListOrders()
     {
-        try {
-            $response = json_decode($this->likeCard->Orders());
-            $orders = $response->data ;
-        } catch (\Throwable $th) {
-            $orders = [] ;
-        }
+        $orders = auth()->guard("client")->user()->orders;
 
         return view("front.order", compact("orders"));
     }
@@ -144,21 +140,11 @@ class OrderController extends Controller
     /**
      * Method ListOrders
      *
+     * @param \App\Order $order
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function orderDetails($order_id)
+    public function orderDetails($order)
     {
-        try {
-            $order = Cache::remember('order'.$order_id , 60*30 , function () use ($order_id) {
-                $response = json_decode($this->likeCard->orderDetails($order_id));
-                $order = $response ;
-                return $order;
-            });
-
-        } catch (\Throwable $th) {
-            $order = [] ;
-        }
-
         return view("front.order_details", compact("order"));
     }
 

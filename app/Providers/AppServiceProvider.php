@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Constants\OperatorCode;
+use App\Constants\OrderStatus;
 use App\Services\PaymentInterface;
 use App\Services\DcbPaymentService;
 use Illuminate\Support\Facades\Schema;
@@ -33,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
 
       View::composer("*", function ($view) {
         $view->with("operatorCode", OperatorCode::class);
+      });
+
+      View::composer("*", function ($view) {
+        $view->with("orderStatus", OrderStatus::class);
       });
 
     }
