@@ -119,7 +119,7 @@ class OrderController extends Controller
       $this->payment->buyItems($request->all());
       if($this->payment->isSuccess()){
         $response = $this->payment->getData();
-        session()->flash("Your Order Create Successfully");
+        session()->flash("success", "Your Order Create Successfully");
         return redirect()->route("front.order.details",["order_id" => $response]);
       }
       session()->flash("faild", $this->payment->getError());
