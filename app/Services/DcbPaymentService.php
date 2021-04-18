@@ -181,7 +181,7 @@ class DcbPaymentService implements PaymentInterface
    */
   public function sendMailToUserWithSerialCode($serial_code)
   {
-    Mail::send('front.mail', ['serial_code' => $serial_code], function ($m) {
+    \Mail::send('front.mail', ['serial_code' => $serial_code], function ($m) {
       $m->from("m.mahmoud@ivas.com",'Like Card');
       $m->to(auth()->guard("client")->user()->email, 'like Card')->subject('Serial Code');
     });
