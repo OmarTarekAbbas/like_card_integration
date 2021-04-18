@@ -36,6 +36,7 @@ class DcbService
     // Operator
     $newValue = explode('-', $request->phone_code);
     $OperatorID = $newValue[0];  //https://en.wikipedia.org/w/index.php?title=Mobile_country_code&01123656796= and https://en.wikipedia.org/wiki/Mobile_Network_Codes_in_ITU_region_4xx_(Asia)#Kuwait_%E2%80%93_KW
+    session()->put("operator_id", $OperatorID);
 
     // Request Info
     $RequestID = uniqid();
@@ -123,7 +124,7 @@ class DcbService
     $ProfileID = ProfileID;
 
     // Operator
-    $OperatorID = auth()->guard("client")->user()->phone_code;
+    $OperatorID = session("operator_id");
     $Price      = $data['total_price'];
 
     // Request Info
