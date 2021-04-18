@@ -134,7 +134,7 @@ class DcbPaymentService implements PaymentInterface
   public function createOrderFromLikeCard($data)
   {
     try {
-      $response = json_decode($this->likeCard->createOrder($data['product_id'], $data['quantity']));
+      $response = json_decode($this->likeCard->createOrder(session("productId"), session("quantity")));
       if($response->response) {
         $this->sucess = true;
         $this->updateOrderFromOurSide($data);

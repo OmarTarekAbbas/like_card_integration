@@ -54,6 +54,8 @@ class OrderService
         $request['phone_code']  = $newValue[0] ;
         $request['operator_id'] = $newValue[1] ;
 
+        session()->put("quantity", $request['quantity']);
+
         $order->fill($request);
 
         $order->save();
