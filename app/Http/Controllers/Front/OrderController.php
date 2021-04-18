@@ -119,7 +119,7 @@ class OrderController extends Controller
       $this->payment->buyItems($request->all());
       if($this->payment->isSuccess()){
         $response = $this->payment->getData();
-        return redirect()->route("front.order.details",["order" => $response]);
+        return redirect()->route("front.order.details",["order_id" => $response]);
       }
       session()->flash("faild", $this->payment->getError());
       return back();
@@ -140,11 +140,12 @@ class OrderController extends Controller
     /**
      * Method ListOrders
      *
-     * @param \App\Order $order
+     * @param int $order_id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function orderDetails(Order $order)
+    public function orderDetails($order_id)
     {
+        $order = Order::find($order_id);
         return view("front.order_details", compact("order"));
     }
 
