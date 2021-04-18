@@ -168,7 +168,23 @@ class DcbPaymentService implements PaymentInterface
     $data['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serialCode);
     $data['valid_to']         = $response->serials[0]->validTo;
     $this->orderService->handle($data, $currentOrder);
+    $this->sendMailToUserWithSerialCode($data['serial_code'] );
     $this->responseData = $currentOrder;
+  }
+
+  /**
+   * Method send Mail To User With Serial Code
+   *
+   * @param string $serial_code
+   *
+   * @return void
+   */
+  public function sendMailToUserWithSerialCode($serial_code)
+  {
+    Mail::send('front.mail', ['serial_code' => $serial_code], function ($m) {
+      $m->from("m.mahmoud@ivas.com",'Like Card');
+      $m->to(auth()->guard("client")->user()->email, 'like Card')->subject('Serial Code');
+    });
   }
 
   /**
