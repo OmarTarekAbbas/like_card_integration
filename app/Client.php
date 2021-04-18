@@ -37,7 +37,11 @@ class Client extends Authenticatable
 
     public function orders()
     {
-      return $this->hasMany(Order::class)->where("status", OrderStatus::FINISHED)->where("payment", PaymentType::DCB)->whereNotNull("transaction_id");
+      return $this->hasMany(Order::class)
+      ->orderBy("orders.created_at", "desc")
+      ->where("status", OrderStatus::FINISHED)
+      ->where("payment", PaymentType::DCB)
+      ->whereNotNull("transaction_id");
     }
 
 }

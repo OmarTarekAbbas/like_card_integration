@@ -171,7 +171,7 @@ class DcbService
     $PincodeVerify['msisdn'] = $info['MSISDN'];
     // $PincodeVerify['device_id'] = $info['DeviceID'];
     $PincodeVerify['operator_id'] = $info['OperatorID'];
-    $PincodeVerify['price'] = $info['Price'];
+    $PincodeVerify['price'] = number_format((float)$info['Price'], 2, '.', '');;
     $PincodeVerify['request_id'] = $info['RequestID'];
     $PincodeVerify['pin'] = $info['RequestPin'];
     $PincodeVerify['request'] =  $getUrl;
