@@ -3,12 +3,9 @@
 namespace App\Services;
 
 use App\Constants\OrderStatus;
-use App\Constants\PaymentStatus;
 use App\Constants\PaymentType;
 use App\Order;
-use App\OrderItem;
-use Faker\Provider\ar_SA\Payment;
-
+use Mail;
 class DcbPaymentService implements PaymentInterface
 {
   /**
@@ -168,7 +165,7 @@ class DcbPaymentService implements PaymentInterface
     $data['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serialCode);
     $data['valid_to']         = $response->serials[0]->validTo;
     $this->orderService->handle($data, $currentOrder);
-    $this->sendMailToUserWithSerialCode($data['serial_code'] );
+    $this->sendMailToUserWithSerialCode($data['serial_code']);
     $this->responseData = $currentOrder;
   }
 
@@ -181,7 +178,7 @@ class DcbPaymentService implements PaymentInterface
    */
   public function sendMailToUserWithSerialCode($serial_code)
   {
-    \Mail::send('front.mail', ['serial_code' => $serial_code], function ($m) {
+    Mail::send('front.mail', ['serial_code' => $serial_code], function ($m) {
       $m->from("m.mahmoud@ivas.com",'Like Card');
       $m->to(auth()->guard("client")->user()->email, 'like Card')->subject('Serial Code');
     });
