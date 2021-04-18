@@ -162,11 +162,11 @@ class DcbPaymentService implements PaymentInterface
     $currentOrder = Order::where("client_id", auth()->guard("client")->user()->id)->where("payment", PaymentType::NO_PAYMENT)->where("status", OrderStatus::PENDING)->latest()->first();
     $data['status']           = OrderStatus::FINISHED;
     $data['payment']          = PaymentType::DCB;
-    $data['transaction_id']   = $response->order_id;
-    $data['serial_id']        = $response->serials[0]->serial_id;
-    $data['hash_serial_code'] = $response->serials[0]->serial_code;
-    $data['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serial_code);
-    $data['valid_to']         = $response->serials[0]->valid_to;
+    $data['transaction_id']   = $response->orderId;
+    $data['serial_id']        = $response->serials[0]->serialId;
+    $data['hash_serial_code'] = $response->serials[0]->serialCode;
+    $data['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serialCode);
+    $data['valid_to']         = $response->serials[0]->validTo;
     $this->orderService->handle($data, $currentOrder);
     $this->responseData = $currentOrder;
   }

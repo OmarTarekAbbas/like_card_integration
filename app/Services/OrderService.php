@@ -46,9 +46,11 @@ class OrderService
         $request['product_image']    = session()->get('productImage');
         $request['original_price']   = session()->get('originalPrice');
 
-        $newValue = explode('-', $request['phone_code']);
-        $request['phone_code']  = $newValue[0] ;
-        $request['operator_id'] = $newValue[1] ;
+        if(isset($request['phone_code']) && $request['phone_code'] != '') {
+          $newValue = explode('-', $request['phone_code']);
+          $request['phone_code']  = $newValue[0] ;
+          $request['operator_id'] = $newValue[1] ;
+        }
 
         session()->put("quantity", $request['quantity']);
 
