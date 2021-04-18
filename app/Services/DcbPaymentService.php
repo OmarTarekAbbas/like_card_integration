@@ -96,8 +96,14 @@ class DcbPaymentService implements PaymentInterface
   /**
    * Method buyItems
    *
-   * @param array $data
+   * i'll describe all case that will happend in this function
    *
+   * 1- first check that balance that we have in like card more than order total price
+   *
+   * 2- pay with Dcb service by take the total price, pincode and verify after that pay
+   *
+   * 3- create order from like card after that create order in our database and store all needed data
+   * @param array $data
    * @return void
    */
   public function buyItems($data)
@@ -124,7 +130,7 @@ class DcbPaymentService implements PaymentInterface
   /**
    * Method createOrderFromLikeCard
    *
-   * @param array $data
+   * @param array $data [productId, quantity]
    *
    * @return void
    */
@@ -148,10 +154,10 @@ class DcbPaymentService implements PaymentInterface
   /**
    * Method updateOrderFromOurSide
    *
-   * update status, dcb_status, payment_type
+   * update [status, dcb_status, payment_type, transaction_id, serial_id, hash_serial_code, serial_code, valid_to]
    *
    * @param array $data [pincode_verify_id, dec_status]
-   * @param object $response []
+   * @param object $response [this our order that in database]
    * @return void
    */
   public function updateOrderFromOurSide($data, $response)
