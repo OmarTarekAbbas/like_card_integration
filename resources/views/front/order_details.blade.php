@@ -30,11 +30,10 @@
         </div>
 
         <div class="col-6 p-0">
-          <small class="font-weight-bold">Receipt Voucher : {{ $order->orderNumber }}</small>
+          <small class="font-weight-bold">Receipt Voucher : {{ $order->transaction_id }}</small>
         </div>
       </div>
 
-      @foreach($order->serials as $product)
       <div class="row mb-2">
         <div class="col-12 p-0">
           <div class="card card-2">
@@ -61,7 +60,6 @@
           </div>
         </div>
       </div>
-      @endforeach
 
       <div class="row mb-2">
         <div class="col-12 p-1">
@@ -71,19 +69,19 @@
             </div>
 
             <div class="col-12 text-center">
-              <p class="mb-1"><b>Total: </b><span>{{ $order->orderFinalTotal }} {{ $order->currencySymbol }}</span></p>
+              <p class="mb-1"><b>Total: </b><span>{{ $order->total_price }} {{ $order->currency }}</span></p>
             </div>
           </div>
 
           <div class="row justify-content-between">
             <div class="col-12 text-center">
-              <p class="mb-1"> <b>Payment:</b><span>{{ $order->orderPaymentMethod }}</span></p>
+              <p class="mb-1"> <b>Payment:</b><span>{{ $paymentType::getLabel($order->payment) }}</span></p>
             </div>
           </div>
 
           <div class="row justify-content-between">
             <div class="col-12 text-center">
-              <p class="mb-1"><b>Status</b><span>{{ $order->orderCurrentStatus }}</span></p>
+              <p class="mb-1"><b>Status</b><span>{{ $orderStatus::getLabel($order->status) }}</span></p>
             </div>
           </div>
         </div>
@@ -91,8 +89,8 @@
 
       <div class="row invoice ">
         <div class="col">
-          <p class="mb-1"> Invoice Number : {{ $order->orderNumber }}</p>
-          <p class="mb-1">Invoice Date : {{ $order->orderCreateDate }}</p>
+          <p class="mb-1"> Invoice Number : {{ $order->id }}</p>
+          <p class="mb-1">Invoice Date : {{ $order->updated_at->format("D M Y") }}</p>
         </div>
       </div>
     </div>
