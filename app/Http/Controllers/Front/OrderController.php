@@ -143,7 +143,7 @@ class OrderController extends Controller
      * @param \App\Order $order
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function orderDetails($order)
+    public function orderDetails(Order $order)
     {
         return view("front.order_details", compact("order"));
     }

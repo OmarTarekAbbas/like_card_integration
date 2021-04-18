@@ -40,17 +40,17 @@
             <div class="card-body">
               <div class="card_grid">
                 <div class="sq align-self-center ">
-                  <img class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="{{ $product->productImage }}"/>
+                  <img class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="{{ $order->product_image }}"/>
                 </div>
 
                 <div class="media-body my-auto">
                   <div class="row my-auto flex-column flex-md-row">
                     <div class="col-12 my-auto">
-                      <h6 class="mb-0"> <span class="font-weight-bold">Product Name : </span>{{ $product->productName }}</h6>
+                      <h6 class="mb-0"> <span class="font-weight-bold">Product Name : </span>{{ $order->product_name }}</h6>
                     </div>
-                    <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Id : </span><small> {{ $product->serialId }}</small></div>
+                    <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Id : </span><small> {{ $order->serial_id }}</small></div>
                     <div class="col-12 my-auto">
-                      <h6 class="mb-0"> <span class="font-weight-bold">Valid To: </span>{{ $product->validTo }}</h6>
+                      <h6 class="mb-0"> <span class="font-weight-bold">Valid To: </span>{{ $order->valid_to }}</h6>
                     </div>
                   </div>
                 </div>
