@@ -32,15 +32,15 @@
                 </li>
                 @endforeach
 
-                <li>
-                    <a href="{{ route('front.orders') }}" class="link text-capitalize link_href">orders</a>
-                </li>
-
-                <li>
-                    <a href="{{ route('client.profile') }}" class="link text-capitalize link_href">Profile</a>
-                </li>
-
                 @if(auth()->guard("client")->check())
+                  <li>
+                      <a href="{{ route('front.orders') }}" class="link text-capitalize link_href">orders</a>
+                  </li>
+
+                  <li>
+                      <a href="{{ route('client.profile') }}" class="link text-capitalize link_href">Profile</a>
+                  </li>
+
                   <li>
                     <a href="#" class="link text-capitalize"
                         onclick="event.preventDefault();
