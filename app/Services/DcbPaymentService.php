@@ -83,6 +83,10 @@ class DcbPaymentService implements PaymentInterface
       $response = json_decode($this->likeCard->checkBalance());
       $this->balance = $response->balance ;
       $this->success = true;
+      //send mail to admin with current balance in like card
+      if($this->balance <= balance_limit) {
+        $this->sendMailToAdmin($this->balance);
+      }
       if($this->balance < $total_price) {
         $this->error = "لايمكن شراء المنتج الان";
         $this->success = false;
@@ -184,9 +188,24 @@ class DcbPaymentService implements PaymentInterface
    */
   public function sendMailToUserWithSerialCode($serial_code)
   {
-    Mail::send('front.mail', ['serial_code' => $serial_code], function ($m) {
+    Mail::send('front.mails.serial_code', ['serial_code' => $serial_code], function ($m) {
       $m->from("m.mahmoud@ivas.com",'Like Card');
       $m->to(auth()->guard("client")->user()->email, 'like Card')->subject('Serial Code');
+    });
+  }
+
+  /**
+   * Method sendMailToAdmin
+   *
+   * @param float $balance
+   *
+   * @return void
+   */
+  public function sendMailToAdmin($balance)
+  {
+    Mail::send('front.mails.our_balance', ['balance' => $balance], function ($m) {
+      $m->from("m.mahmoud@ivas.com",'Like Card');
+      $m->to(admin_mail, 'like Card')->subject('Balance Limit');
     });
   }
 
