@@ -12,7 +12,7 @@ define("ShortCode", "50230");
 
 define('enable_dcb', false);
 define('balance_limit', 40);
-define('admin_mail', "m.mahmoud@ivas.com.eg");
+define('admin_mail', "mohammed_hs552yahoo.com");
 
 Route::get("/home","HomeController@index")->name("front.home");
 Route::get("/category/{parent_id}","HomeController@listCategoryChilds")->name("front.category");
