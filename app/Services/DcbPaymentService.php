@@ -195,21 +195,6 @@ class DcbPaymentService implements PaymentInterface
   }
 
   /**
-   * Method sendMailToAdmin
-   *
-   * @param float $balance
-   *
-   * @return void
-   */
-  public function sendMailToAdmin($balance)
-  {
-    Mail::send('front.mails.our_balance', ['balance' => $balance], function ($m) {
-      $m->from("m.mahmoud@ivas.com",'Like Card');
-      $m->to(admin_mail, 'like Card')->subject('Balance Limit');
-    });
-  }
-
-  /**
    * Method getError
    *
    * @return string

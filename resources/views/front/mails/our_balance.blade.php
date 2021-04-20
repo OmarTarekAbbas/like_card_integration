@@ -7,6 +7,9 @@
   <title>Client Serial Code</title>
 </head>
 <body>
-  <center> <p>Our Balance Now In Like Card Reach To Limit Balance and Balance Now Is <strong>{{ $balance }}</strong></p> </center>
+  <center>
+    <h3>Our Balance</h3>
+    <p>Our Balance Now In Like Card Reach To Limit Balance and Balance Now Is <strong>{{ $balance }}</strong></p>
+  </center>
 </body>
 </html>
