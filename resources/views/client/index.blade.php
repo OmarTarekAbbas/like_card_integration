@@ -38,7 +38,7 @@ clients
               <tr class="table-flag-blue">
                 <th><input type="checkbox" name="selected_rows[]" class="clients" value="{{$client->id}}" onclick="collect_selected(this)"></th>
                 <td> <img src="{{$client->image}}" alt="" width="100px" height="100px" style="border-radius:10px"> </td>
-                <td>{{$client->name}}</td>
+                <td>{{$client->name??'no name'}}</td>
                 <td>{{$client->email}}</td>
                 <td>{{$client->phone}}</td>
                 <td>{{$client->operator->name}}</td>

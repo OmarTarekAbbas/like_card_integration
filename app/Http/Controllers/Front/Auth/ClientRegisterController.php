@@ -67,7 +67,7 @@ class ClientRegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => '',
             'email' => 'required|string|email|max:255|unique:clients',
             'password' => 'required|string|min:6|confirmed',
             'phone' => 'required|unique:clients',

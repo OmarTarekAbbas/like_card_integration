@@ -43,7 +43,7 @@ class OrderController extends Controller
       })
       ->addColumn('client_name', function (Order $order) {
         if ($order->client && isset($order->client))
-          return $order->client_name;
+          return $order->client_name??'no name';
       })
       ->addColumn('total_price', function (Order $order) {
         return $order->total_price ;
