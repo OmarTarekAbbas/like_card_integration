@@ -12,6 +12,7 @@ class Operator extends Model
       'rbt_sms_code',
       'image',
       'rbt_ussd_code',
+      'code'
   ];
 
   public function setImageAttribute($value){

@@ -37,8 +37,7 @@
 								<th style="width:18px"><input type="checkbox" onclick="select_all('settings')"></th>
 								<th>operator image</th>
 								<th>operator name</th>
-								<th>Sms Code</th>
-								<th>Ussd Code</th>
+								<th>Code</th>
 								<th>county</th>
 								<th class="visible-md visible-lg" style="width:130px">Action</th>
 							</tr>
@@ -49,8 +48,7 @@
 								<td><input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{$operator->id}}" onclick="collect_selected(this)"></td>
 								<td><img src="{{$operator->image}}" width="300" height="225"></td>
 								<td>{{$operator->name}}</td>
-								<td>{{$operator->rbt_sms_code}}</td>
-								<td>{{$operator->rbt_ussd_code}}</td>
+								<td>{{$operator->code}}</td>
 								<td>{{$operator->country->title}}</td>
 								</td>
 								<td class="visible-md visible-lg">

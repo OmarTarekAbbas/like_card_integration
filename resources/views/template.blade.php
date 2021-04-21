@@ -384,7 +384,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
 
-                            <!-- BEGIN Submenu -->
+
                             <ul class="submenu">
                                 <li id="country_index"><a href="{{url('country')}}">List Country</a></li>
                                 <li id="country_create"><a href="{{url('country/create')}}">Create Country</a></li>
@@ -402,7 +402,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
 
-                            <!-- BEGIN Submenu -->
+
                             <ul class="submenu">
                                 <li id="operator_index"><a href="{{url('operator')}}">List operator</a></li>
                                 <li id="operator_create"><a href="{{url('operator/create')}}">Create Operator</a></li>
@@ -412,7 +412,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     @endif
 
                     @if (get_action_icons('provider', 'get'))
-                    <ul class="nav nav-list">
+                    <!-- <ul class="nav nav-list">
                         <li id="provider">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -420,17 +420,17 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
 
-                            <!-- BEGIN Submenu -->
+
                             <ul class="submenu">
                                 <li id="provider_index"><a href="{{url('provider')}}">List provider</a></li>
                                 <li id="provider_create"><a href="{{url('provider/create')}}">Create provider</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                     @endif
 
                     @if (get_action_icons('category', 'get'))
-                    <ul class="nav nav-list">
+                    <!-- <ul class="nav nav-list">
                         <li id="category">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -438,15 +438,15 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
 
-                            <!-- BEGIN Submenu -->
+
                             <ul class="submenu">
                                 <li id="category_index"><a href="{{url('category')}}">List category</a></li>
                                 <li id="category_create"><a href="{{url('category/create')}}">Create Category</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                     @endif
-                    <ul class="nav nav-list">
+                    <!-- <ul class="nav nav-list">
                         <li id="sub_category">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -460,12 +460,12 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <li id="sub_category_create"><a href="{{url('sub_category/create')}}">Create Sub Category</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
 
                     @if (get_action_icons('content_type', 'get'))
                     <?php $content_type_flag = DB::table('settings')->where('key','like','%content_type_flag%')->first(); ?>
                     @if($content_type_flag->value)
-                    <ul class="nav nav-list">
+                    <!-- <ul class="nav nav-list">
                         <li id="content_types">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-tag"></i>
@@ -473,18 +473,18 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
 
-                            <!-- BEGIN Submenu -->
+
                             <ul class="submenu">
                                 <li id="content_types_index"><a href="{{url('content_type')}}">List Content Type</a></li>
                                 <li id="content_types_create"><a href="{{url('content_type/create')}}">Create Content Type</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                     @endif
                     @endif
 
                     @if (get_action_icons('content', 'get'))
-                    <ul class="nav nav-list">
+                    <!-- <ul class="nav nav-list">
                         <li id="contents">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-cloud"></i>
@@ -492,17 +492,17 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
 
-                            <!-- BEGIN Submenu -->
+
                             <ul class="submenu">
                                 <li id="contents_index"><a href="{{url('content')}}">List Content </a></li>
                                 <li id="contents_create"><a href="{{url('content/create')}}">Create Content</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                     @endif
 
                     @if (get_action_icons('post', 'get'))
-                    <ul class="nav nav-list">
+                    <!-- <ul class="nav nav-list">
                         <li id="post">
                             <a href="#" class="dropdown-toggle">
                                 <i class="fa fa-file"></i>
@@ -510,31 +510,59 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
 
-                            <!-- BEGIN Submenu -->
+
                             <ul class="submenu">
                                 <li id="post_index"><a href="{{url('post')}}">List Post </a></li>
                                 <li id="post_create"><a href="{{url('post/create')}}">Create Post</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                     @endif
                     @if (get_action_icons('rbt', 'get'))
-                    <ul class="nav nav-list">
+                    <!-- <ul class="nav nav-list">
                         <li id="rbts">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-sound-stereo"></i>
                                 <span>Rbts</span>
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
-                            <!-- BEGIN Submenu -->
+
                             <ul class="submenu">
                                 <li id="rbts-index"><a href="{{url('rbt')}}">List Rbts</a></li>
                                 <li id="rbts-create"><a href="{{url('rbt/create')}}">Create New Item</a></li>
                             </ul>
-                            <!-- END Submenu -->
+
+                        </li>
+                    </ul> -->
+                    @endif
+                    <ul class="nav nav-list">
+                        <li id="client">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="glyphicon glyphicon-cloud"></i>
+                                <span>clients</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li id="client_index"><a href="{{url('client')}}">list_clients</a></li>
+                            </ul>
                         </li>
                     </ul>
-                    @endif
+
+                    <ul class="nav nav-list">
+                      <li id="order">
+                          <a href="#" class="dropdown-toggle">
+                              <i class="glyphicon glyphicon-cloud"></i>
+                              <span>orders</span>
+                              <b class="arrow fa fa-angle-right"></b>
+                          </a>
+
+                          <!-- BEGIN Submenu -->
+                          <ul class="submenu">
+                              <li id="order_index"><a href="{{url('order')}}">list_orders</a></li>
+                          </ul>
+                      </li>
+                    </ul>
                 </ul>
                 <!-- END Navlist -->
 

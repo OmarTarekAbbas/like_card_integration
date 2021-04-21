@@ -30,9 +30,9 @@ class Client extends Authenticatable
       $this->attributes['operator_id']= $newValue[1] ;
     }
 
-    public function oprerator()
+    public function operator()
     {
-        return $this->belongsTo('App\Operator', 'operator_id') ;
+        return $this->belongsTo('App\Operator') ;
     }
 
     public function orders()
