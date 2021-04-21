@@ -21,38 +21,19 @@ clients
         </div>
         <br><br>
         <div class="table-responsive">
-          <table id="example" class="table table-striped dt-responsive" cellspacing="0" width="100%">
+          <table id="dtposts" class="table table-striped dt-responsive" cellspacing="0" width="100%">
             <thead>
               <tr>
                 <th style="width:18px"><input type="checkbox" onclick="select_all()"></th>
                 <th>image</th>
                 <th>name</th>
-                <th>email</th>
                 <th>phone</th>
+                <th>email</th>
                 <th>operator</th>
                 <th class="visible-md visible-lg" style="width:130px">@lang('messages.action')</th>
               </tr>
             </thead>
-            <tbody>
-              @foreach($clients as $client)
-              <tr class="table-flag-blue">
-                <th><input type="checkbox" name="selected_rows[]" class="clients" value="{{$client->id}}" onclick="collect_selected(this)"></th>
-                <td> <img src="{{$client->image}}" alt="" width="100px" height="100px" style="border-radius:10px"> </td>
-                <td>{{$client->name??'no name'}}</td>
-                <td>{{$client->email}}</td>
-                <td>{{$client->phone}}</td>
-                <td>{{$client->operator->name}}</td>
-                <td class="visible-md visible-lg">
-                  <div class="btn-group">
-                    <a class="btn btn-sm btn-warning show-tooltip" title="Show Order" href="{{url("order?client_id=$client->id")}}" data-original-title="show Order"><i class="fa fa-step-forward"></i></a>
-                    @if(enable_delete)
-                    <a class="btn btn-sm btn-danger show-tooltip" title="" onclick="return confirm('Are you sure you want to delete this ?');" href="{{url('client/'.$client->id.'/delete')}}" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-                    @endif
-                  </div>
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
+
           </table>
         </div>
       </div>
@@ -65,5 +46,30 @@ clients
 <script>
   $('#client').addClass('active');
   $('#client-index').addClass('active');
+</script>
+
+<script>
+    window.onload = function () {
+      $('#dtposts').DataTable({
+        "processing": true,
+        "serverSide": true,
+        //"search": {"regex": true},
+        "ajax": {
+          type: "GET",
+          "url": "{!! url('allclient') !!}",
+          "data": "{{csrf_token()}}"
+        },
+        columns: [
+          {data: 'index', searchable: false, orderable: false},
+          {data: 'image', name: 'image'},
+          {data: 'name', name: 'name'},
+          {data: 'email', name: 'email'},
+          {data: 'phone', name: 'phone'},
+          {data: 'operator', name: 'operator'},
+          {data: 'action', searchable: false}
+        ]
+        , "pageLength": 10
+      });
+    };
 </script>
 @stop

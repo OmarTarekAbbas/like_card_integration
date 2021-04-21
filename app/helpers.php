@@ -89,6 +89,7 @@ Route::get('/test','DashboardController@test');
         Route::post('admin/migrate_tables', 'DashboardController@migrate_tables');
 
         Route::get("client", "ClientController@index");
+        Route::get('allclient', 'ClientController@allData');
         Route::get("client/{id}/delete", "ClientController@destroy");
         Route::resource('order', "OrderController");
         Route::get("order/{id}/delete", "OrderController@destroy");
