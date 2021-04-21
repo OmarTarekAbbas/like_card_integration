@@ -11,6 +11,7 @@ define("ProfileID", "1833");
 define("ShortCode", "50230");
 
 define('enable_dcb', false);
+define('enable_delete', false);
 define('balance_limit', 40);
 define('admin_mail', "mohammed_hs55@yahoo.com");
 
