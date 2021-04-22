@@ -32,7 +32,7 @@ orders
                             <div class="alert alert-info">
                                 <h4 class="text-center">Send_Mail</h4><br>
                                 <div class="row text-center">
-                                    <form action="{{url('orders/update_status')}}" method="post">
+                                    <form action="{{url('order/send_message')}}" method="post">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="order_id" value="{{$order->id}}">
                                         <input type="hidden" name="client_id" value="{{$order->client_id}}">
