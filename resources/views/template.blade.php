@@ -544,7 +544,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </a>
 
                             <ul class="submenu">
-                                <li id="client_index"><a href="{{url('client')}}">list_clients</a></li>
+                                <li id="client_index"><a href="{{url('client')}}">clients</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -559,7 +559,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                           <!-- BEGIN Submenu -->
                           <ul class="submenu">
-                              <li id="order_index"><a href="{{url('order')}}">list_orders</a></li>
+                              <li id="order_index"><a href="{{url('order')}}">orders</a></li>
                           </ul>
                       </li>
                     </ul>
