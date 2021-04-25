@@ -70,7 +70,7 @@ class OrderController extends Controller
 
   public function show($id)
   {
-    $order = Order::findOrFail($id);
+    $order = Order::with("replaies")->whereId($id)->first();
     return view('order.show', compact('order'));
   }
 
@@ -83,121 +83,31 @@ class OrderController extends Controller
     return back();
   }
 
-  public function delete_product(Request $request)
-  {
-    $product = OrderDetail::find($request->product_id);
-    $order = Order::find($request->order_id);
-    $order->total_price = $order->total_price - $product->total_price;
-    $order->save();
-    $product->delete();
-    if (count($order->products) == 0) {
-      $order->delete();
-      \Session::flash('success', 'Delete Order successful');
-      return redirect('order');
-    }
-    \Session::flash('success', 'Delete Product From This Order successful');
-    return back();
-  }
-
-  public function update_status(Request $request)
+  public function sendMessage(Request $request)
   {
     $client = Client::find($request->client_id);
-    $order = Order::find($request->order_id);
-    $last_order_status = $order->status;
-
-    //if old status is pending and admin make it finish direct make decrease product stock and increase product solid count
-    if ($request->status == OrderStatus::FINISHED && $last_order_status == OrderStatus::getLabel(OrderStatus::PENDING)  &&
-       ($order->payment == PaymentType::getLabel(PaymentType::CASH) || $order->payment == PaymentType::getLabel(PaymentType::VISA_AFTER_DELIVER))) {
-
-      $order->payment_status = DcbStatus::Success;
-      // $this->handleStockAndSolidCountForProductAfterChangeOrderStatus($request);
-    }
-
-    //if old status is pending and admin make it UNDER SHIPPING direct make decrease product stock and increase product solid count
-    if ($request->status == OrderStatus::UNDER_SHIPPING && $last_order_status == OrderStatus::getLabel(OrderStatus::PENDING)  &&
-       ($order->payment == PaymentType::getLabel(PaymentType::CASH) || $order->payment == PaymentType::getLabel(PaymentType::VISA_AFTER_DELIVER))) {
-
-      // $this->handleStockAndSolidCountForProductAfterChangeOrderStatus($request);
-    }
-
-    //if old status is UNDER SHIPPING and admin make it FINISHED direct make payment status success
-    if ($request->status == OrderStatus::FINISHED  && $last_order_status == OrderStatus::getLabel(OrderStatus::UNDER_SHIPPING) &&
-       ($order->payment == PaymentType::getLabel(PaymentType::CASH) || $order->payment == PaymentType::getLabel(PaymentType::VISA_AFTER_DELIVER))) {
-
-      $order->payment_status = DcbStatus::Success;
-    }
-
-    if($request->status == OrderStatus::NOT_AVAILABLE &&
-      ($order->payment == PaymentType::getLabel(PaymentType::CASH) || $order->payment == PaymentType::getLabel(PaymentType::VISA_AFTER_DELIVER))) {
-        $mail_template_page = "front.mail_not_available";
-        dispatch(new SendOrderMailJob($order, $client, $request->message, $mail_template_page));
-    } else {
-        $mail_template_page = "front.mail";
-        dispatch(new SendOrderMailJob($order, $client, $request->message, $mail_template_page));
-    }
-
-    $order->status = $request->status;
-    $order->save();
-    $this->savedOrderReply($order, $request);
-    \Session::flash('success', 'Email Is Send With Order Status');
+    Mail::send('front.mails.order_mail', ['data' => $request->message], function ($m) use ($client) {
+      $m->from(auth()->user()->email, 'super admin');
+      $m->to($client->email, $client->name ??'default name')->subject('Order Mail');
+    });
+    $this->savedOrderReply($request);
+    session()->flash('success', 'Email Is Send With Order Status');
     return back();
-  }
-
-  public function load_notify($number)
-  {
-    $notify_ids = \App\Notification::with('send_user')->where('notified_id', \Auth::id())->latest()->take($number)->pluck('id');
-    //return $notify_ids;
-    $notifys = \App\Notification::with('send_user')->where('notified_id', \Auth::id())->whereNotIn('id', $notify_ids)->latest()->take(2)->get();
-    return $notifys;
   }
 
   /**
    * Method savedOrderReply
    *
-   * @param Order $order
    * @param Request $request
-   *
    * @return void
    */
-  public function savedOrderReply($order, $request)
+  public function savedOrderReply($request)
   {
-    $data['status']    = $request->status;
-    $data['order_id']  = $order->id;
+    $data['order_id']  = $request->order_id;
     $data['client_id'] = $request->client_id;
     $data['admin_id']  = auth()->id();
     $data['message']   = $request->message;
 
     OrderReplay::create($data);
-  }
-
-  /**
-   * Method removeProductFromOrderDeatilsThatNotHaveOrder
-   *
-   * @return void
-   */
-  public function removeProductFromOrderDeatilsThatNotHaveOrder()
-  {
-      \App\OrderDetail::doesntHave("order")->delete();
-      echo "Done" ;
-  }
-
-  /**
-   * Method handleStockAndSolidCountForProductAfterChangeOrderStatus
-   *
-   * when order status change to finish or under shipping make decrease for product stock and increase for product solid count
-   *
-   * @param Request $request
-   *
-   * @return void
-   */
-  public function handleStockAndSolidCountForProductAfterChangeOrderStatus($request)
-  {
-    $carts = OrderDetail::where('order_id', $request->order_id)->get();
-    foreach ($carts as $key => $cart) {
-      $product = Product::find($cart->product_id);
-      $product->stock       = $product->stock - $cart->quantity;
-      $product->solid_count = $product->solid_count + $cart->quantity;
-      $product->save();
-    }
   }
 }

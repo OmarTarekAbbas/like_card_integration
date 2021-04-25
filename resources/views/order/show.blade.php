@@ -94,18 +94,17 @@ orders
     </div>
 
 
-    {{-- <div class="col-md-12">
+    <div class="col-md-12">
       <h4 class="text-danger"> Order Replay </h4>
       <div class="table-responsive">
           <table class="table table-striped table-bordered">
               <thead>
                   <tr>
-                      <th>@lang('front.auth.name')</th>
-                      <th>@lang('front.auth.email')</th>
-                      <th>@lang('front.admin_reply')</th>
-                      <th>@lang('front.status')</th>
-                      <th>  @lang('front.message') </th>
-                      <th> @lang('front.date')</th>
+                      <th>name</th>
+                      <th>email</th>
+                      <th>admin_reply</th>
+                      <th>message</th>
+                      <th>date</th>
                   </tr>
               </thead>
               <tbody>
@@ -114,14 +113,13 @@ orders
                       <td> {{  $order->client->name }} </td>
                       <td> {{  $order->client->email }} </td>
                       <td> {{  $replay->admin->name }} </td>
-                      <td>{{  $replay->status }}</td>
                       <td> {{  $replay->message }} </td>
-                      <td> {{  $replay->created_at }} </td>
+                      <td> {{  $replay->created_at->format('d-m-Y') }} </td>
                   </tr>
                   @endforeach
               </tbody>
           </table>
       </div>
-    </div> --}}
+    </div>
 </div>
 @stop

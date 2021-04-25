@@ -63,8 +63,8 @@ clients
           {data: 'index', searchable: false, orderable: false},
           {data: 'image', name: 'image'},
           {data: 'name', name: 'name'},
-          {data: 'email', name: 'email'},
           {data: 'phone', name: 'phone'},
+          {data: 'email', name: 'email'},
           {data: 'operator', name: 'operator'},
           {data: 'action', searchable: false}
         ]

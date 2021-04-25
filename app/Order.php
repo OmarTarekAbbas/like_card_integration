@@ -27,4 +27,9 @@ class Order extends Model
   {
     return $this->belongsTo('App\Client');
   }
+
+  public function replaies()
+  {
+    return $this->hasMany(OrderReplay::class);
+  }
 }

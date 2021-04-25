@@ -94,6 +94,7 @@ Route::get('/test','DashboardController@test');
         Route::resource('order', "OrderController");
         Route::get("order/{id}/delete", "OrderController@destroy");
         Route::get('allorder', 'OrderController@allData');
+        Route::post("order/send_message", "OrderController@sendMessage");
     });
 
 
