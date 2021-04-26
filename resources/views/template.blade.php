@@ -143,6 +143,9 @@ function ConfirmDelete()
 
             <!-- BEGIN Navbar Buttons -->
             <ul class="nav flaty-nav pull-right">
+                <li>
+                  <a href="">Balance : <span id="balance">{{ get_balance() }}<span> KWT</a>
+                </li>
 
                 <!-- BEGIN Tasks Dropdown -->
                 <li>

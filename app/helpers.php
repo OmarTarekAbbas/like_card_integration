@@ -278,3 +278,15 @@ function dynamic_routes($route_model,$found_roles)
 
    return $country_operators;
  }
+
+ if(!function_exists("get_balance")){
+   function get_balance() {
+     $likeCard = new LikeCardService;
+     try {
+       $balance = $likeCard->checkBalance();
+     } catch (\Throwable $th) {
+      $balance = 0;
+     }
+     return $balance;
+   }
+ }
