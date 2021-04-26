@@ -191,6 +191,7 @@ orders
                         <div class="col-xs-6" style="padding-top: 2vh;">
                             <ul type="none">
                                 <li>Serial Code: {{ $order->serial_code }}</li>
+                                <li>Hash Serial Code: {{ $order->hash_serial_code }}</li>
                                 <li>Valid To   : {{ $order->valid_to }}</li>
                             </ul>
                         </div>
@@ -200,9 +201,9 @@ orders
                         <div class="col-xs-6">
                             <ul type="none">
                                 <li class="left">Order number:</li>
-                                <li class="left">Original Price:</li>
-                                <li class="left">Price:</li>
+                                <li class="left">Like Card Price:</li>
                                 <li class="left">Date:</li>
+                                <li class="left">Sell Price:</li>
                                 <li class="left">quantity:</li>
                                 <li class="left">Total Price:</li>
                             </ul>
@@ -211,8 +212,8 @@ orders
                             <ul class="right" type="none">
                                 <li class="right">{{ $order->transaction_id }}</li>
                                 <li class="right">{{ $order->original_price }}</li>
-                                <li class="right">{{ $order->sell_price }}</li>
                                 <li class="right">{{ $order->updated_at->format('d-m-Y') }}</li>
+                                <li class="right">{{ $order->sell_price }}</li>
                                 <li class="right">{{ $order->quantity }}</li>
                                 <li class="right">{{ $order->total_price }}</li>
                             </ul>
