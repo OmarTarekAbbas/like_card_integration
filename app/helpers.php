@@ -283,7 +283,8 @@ function dynamic_routes($route_model,$found_roles)
    function get_balance() {
      $likeCard = new LikeCardService;
      try {
-       $balance = $likeCard->checkBalance();
+       $response = json_decode($likeCard->checkBalance());
+       $balance = $response->response ? $response->balance : 0;
      } catch (\Throwable $th) {
       $balance = 0;
      }
