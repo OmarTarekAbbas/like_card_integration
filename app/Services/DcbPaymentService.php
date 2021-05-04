@@ -85,7 +85,7 @@ class DcbPaymentService implements PaymentInterface
       $this->success = true;
       //send mail to admin with current balance in like card
       if($this->balance <= balance_limit) {
-        $this->sendMailToAdmin($this->balance);
+        // $this->sendMailToAdmin($this->balance);
       }
       if($this->balance < $total_price) {
         $this->error = "لايمكن شراء المنتج الان";

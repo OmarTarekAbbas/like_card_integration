@@ -16,7 +16,7 @@ define('balance_limit', 40);
 define('admin_mail', "mohammed_hs55@yahoo.com");
 
 Route::get("/home","HomeController@index")->name("front.home");
-Route::get("/category/{parent_id}","HomeController@listCategoryChilds")->name("front.category");
+Route::get("/categorys/{parent_id}","HomeController@listCategoryChilds")->name("front.category");
 Route::get("/products/{category_id}","HomeController@listProducts")->name("front.products");
 Route::get("/search","HomeController@search")->name("front.search");
 
