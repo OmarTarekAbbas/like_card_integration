@@ -25,7 +25,7 @@
     </div>
 
     <div class="card-body">
-      <div class="row justify-content-between mb-3">
+      <div class="row justify-content-between m-0">
         <div class="col-6 p-0">
           <h6 class="color-1 mb-0 font-weight-bold change-color">Receipt</h6>
         </div>
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div class="row mb-2">
+      <div class="row m-0">
         <div class="col-12 p-0">
           <div class="card card-2">
             <div class="">
