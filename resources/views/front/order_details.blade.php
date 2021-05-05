@@ -13,14 +13,14 @@
           </a>
         </div>
 
-        <div class="col-6 my-auto p-0">
+        <!-- <div class="col-6 my-auto p-0">
           <h6 class="mb-0 font-weight-bold">Thanks for your Order !</h6>
         </div>
 
         <div class="col-6 text-center my-auto pl-0 pt-sm-4">
           <img class="img-fluid my-auto align-items-center mb-0 pt-3 w-50" src="https://i.imgur.com/7q7gIzR.png">
           <p class="mb-4 pt-0 Glasses">Like Card</p>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -79,15 +79,15 @@
       </div>
 
       <div class="row m-0">
-        <div class="col-12 p-1">
+        <div class="col-12 pr-1 pl-1">
           <div class="row m-0 justify-content-between">
             <div class="col-12">
-              <p class="mb-1 text-dark">
+              <p class="mb-1 text-center text-dark">
                 <b>Order Details</b>
               </p>
             </div>
 
-            <div class="col-12">
+            <div class="col-12 pr-1 pl-1">
               <p class="mb-1">
                 <b>Total:</b>
                 <span class="float-right">{{ $order->total_price }}{{ $order->currency }}</span>
@@ -96,7 +96,7 @@
           </div>
 
           <div class="row m-0 justify-content-between">
-            <div class="col-12">
+            <div class="col-12 pr-1 pl-1">
               <p class="mb-1">
                 <b>Payment:</b>
                 <span class="float-right">{{ $paymentType::getLabel($order->payment) }}</span>
@@ -105,7 +105,7 @@
           </div>
 
           <div class="row m-0 justify-content-between">
-            <div class="col-12">
+            <div class="col-12 pr-1 pl-1">
               <p class="mb-1">
                 <b>Status:</b>
                 <span class="float-right">{{ $orderStatus::getLabel($order->status) }}</span>
@@ -116,7 +116,7 @@
       </div>
 
       <div class="row m-0 invoice justify-content-between">
-        <div class="col-12">
+        <div class="col-12 pr-1 pl-1">
           <p class="mb-1">
             <b>Invoice Number:</b>
             <span class="float-right">{{ $order->id }}</span>
