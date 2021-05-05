@@ -604,6 +604,18 @@ main {
 
   .order_details {
     .card {
+      border: 0;
+      .card-header {
+        margin-bottom: 3%;
+        border: 1px solid $blueGreenNew;
+
+        .media {
+          .card-header-title {
+            color: $petrolCol;
+          }
+        }
+      }
+
       .card-body {
         padding: 1rem;
 
@@ -618,6 +630,10 @@ main {
           .media-body {
             margin-left: 3%;
           }
+        }
+
+        .hr_border {
+          border: 1px solid $blueGreenNew;
         }
       }
     }
@@ -1354,14 +1370,6 @@ main {
 
   .loading-overlay {
     width: 30%;
-  }
-
-  .search_form {
-    .search-container {
-      .search-icon {
-        right: 90%;
-      }
-    }
   }
 
   #return-to-top {
