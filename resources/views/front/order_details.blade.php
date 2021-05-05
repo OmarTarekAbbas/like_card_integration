@@ -5,11 +5,11 @@
 <section class="order_details">
   @include('front.alerts')
   <div class="card card-1">
-    <div class="card-header bg-white">
+    <div class="card-header">
       <div class="media row justify-content-between mb-3">
         <div class="col-12 text-center mt-2 p-0">
-          <a href="{{ route('front.orders') }}" class="text-success">
-            <h4 class="mb-0">List Orders !</h4>
+          <a href="{{ route('front.orders') }}">
+            <h4 class="card-header-title mb-0">List Orders !</h4>
           </a>
         </div>
 
@@ -27,7 +27,7 @@
     <div class="card-body">
       <div class="row justify-content-between mb-3">
         <div class="col-6 p-0">
-          <h6 class="color-1 mb-0 change-color">Receipt</h6>
+          <h6 class="color-1 mb-0 font-weight-bold change-color">Receipt</h6>
         </div>
 
         <div class="col-6 p-0">
@@ -57,7 +57,7 @@
                   </div>
                 </div>
               </div>
-              <hr class="my-3 ">
+              <hr class="my-3 hr_border">
             </div>
           </div>
         </div>
