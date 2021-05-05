@@ -40,19 +40,19 @@
           <div class="card card-2">
             <div class="">
               <div class="card_grid">
-                <div class="sq align-self-center ">
-                  <img class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="{{ $order->product_image }}"/>
+                <div class="sq">
+                  <img class="img-fluid m-auto d-block" src="{{ $order->product_image }}"/>
                 </div>
 
                 <div class="media-body my-auto">
                   <div class="row my-auto flex-column flex-md-row">
                     <div class="col-12 my-auto">
-                      <h6 class="mb-0"> <span class="font-weight-bold">Product Name : </span>{{ $order->product_name }}</h6>
+                      <h6 class="mb-0"> <span class="font-weight-bold">Product Name :</span> <small class="float-right">{{ $order->product_name }}</small></h6>
                     </div>
-                    <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Id : </span><small> {{ $order->serial_id }}</small></div>
-                    <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Code : </span><small> {{ $order->serial_code }}</small></div>
+                    <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Id :</span> <small  class="float-right"> {{ $order->serial_id }}</small></div>
+                    <div class="col-12 my-auto"> <span class="font-weight-bold">Serial Code :</span> <small  class="float-right"> {{ $order->serial_code }}</small></div>
                     <div class="col-12 my-auto">
-                      <h6 class="mb-0"> <span class="font-weight-bold">Valid To: </span>{{ $order->valid_to }}</h6>
+                      <h6 class="mb-0"> <span class="font-weight-bold">Valid To:</span> <small class="float-right">{{ $order->valid_to }}</small></h6>
                     </div>
                   </div>
                 </div>
@@ -71,28 +71,28 @@
             </div>
 
             <div class="col-12 text-center">
-              <p class="mb-1"><b>Total: </b><span>{{ $order->total_price }} {{ $order->currency }}</span></p>
+              <p class="mb-1"><b>Total:</b> <span class="float-right">{{ $order->total_price }} {{ $order->currency }}</span></p>
             </div>
           </div>
 
           <div class="row justify-content-between">
             <div class="col-12 text-center">
-              <p class="mb-1"> <b>Payment:</b><span>{{ $paymentType::getLabel($order->payment) }}</span></p>
+              <p class="mb-1"> <b>Payment:</b> <span class="float-right">{{ $paymentType::getLabel($order->payment) }}</span></p>
             </div>
           </div>
 
           <div class="row justify-content-between">
             <div class="col-12 text-center">
-              <p class="mb-1"><b>Status</b><span>{{ $orderStatus::getLabel($order->status) }}</span></p>
+              <p class="mb-1"><b>Status:</b> <span class="float-right">{{ $orderStatus::getLabel($order->status) }}</span></p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row invoice ">
-        <div class="col">
-          <p class="mb-1"> Invoice Number : {{ $order->id }}</p>
-          <p class="mb-1">Invoice Date : {{ $order->updated_at->format("D M Y") }}</p>
+      <div class="row invoice justify-content-between">
+        <div class="col-12 text-center">
+          <p class="mb-1"><b>Invoice Number:</b> <span class="float-right">{{ $order->id }}</span></p>
+          <p class="mb-1"><b>Invoice Date:</b> <span class="float-right">{{ $order->updated_at->format("D M Y") }}</span></p>
         </div>
       </div>
     </div>
