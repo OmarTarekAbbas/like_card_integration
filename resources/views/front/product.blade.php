@@ -37,7 +37,7 @@
 
     @empty
     <div class="notFound text-center">
-        <h4>Not Found</h4>
+        <h4>There is no product</h4>
     </div>
     @endforelse
   </div>
