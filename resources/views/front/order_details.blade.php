@@ -14,7 +14,7 @@
         </div>
 
         <div class="col-6 my-auto p-0">
-          <h6 class="mb-0">Thanks for your Order !</h6>
+          <h6 class="mb-0 font-weight-bold">Thanks for your Order !</h6>
         </div>
 
         <div class="col-6 text-center my-auto pl-0 pt-sm-4">
@@ -38,7 +38,7 @@
       <div class="row mb-2">
         <div class="col-12 p-0">
           <div class="card card-2">
-            <div class="card-body">
+            <div class="">
               <div class="card_grid">
                 <div class="sq align-self-center ">
                   <img class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="{{ $order->product_image }}"/>
