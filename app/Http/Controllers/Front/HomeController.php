@@ -180,7 +180,7 @@ class HomeController extends Controller
     {
 
         foreach ($subCategories as $category) {
-          $products[] = Cache::remember('products'.$category->id , 60*30 , function () use ($category, $search_value) {
+          $products[] = Cache::remember('products'.$search_value.$category->id , 60*30 , function () use ($category, $search_value) {
               $response = json_decode($this->likeCard->Products($category->id));
               if($response->response){ //1 return data else no data
                   $products = array_filter($response->data, function($product) use ($search_value){
