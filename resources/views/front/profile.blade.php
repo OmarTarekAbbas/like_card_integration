@@ -40,15 +40,15 @@
   </div>
   {!! Form::close() !!}
 
-  {!! Form::open(['url'=> route('client.profile.submit') , 'method'=>'POST' , 'role'=>'form', 'enctype'=>'multipart/form-data' ]) !!}
+  {!! Form::open(['url'=> route('client.password.submit') , 'method'=>'POST' , 'role'=>'form', 'enctype'=>'multipart/form-data' ]) !!}
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
   <div class="main-content">
     <div class="login_form text-center">
       <div class="login_form_grid gridV2">
-        {!! Form::password('password' ,['class'=>'form__input','placeholder'=>'Password']) !!}
+        {!! Form::password('current-password' ,['class'=>'form__input','placeholder'=>'Old Password']) !!}
 
-        {!! Form::password('old_password' ,['class'=>'form__input','placeholder'=>'Old Password']) !!}
+        {!! Form::password('password' ,['class'=>'form__input','placeholder'=>'Password']) !!}
 
         {!! Form::password('password_confirmation' ,['class'=>'form__input','placeholder'=>'Confirm Password']) !!}
 

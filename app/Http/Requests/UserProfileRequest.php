@@ -25,6 +25,7 @@ class UserProfileRequest extends FormRequest
     {
         return [
           'phone' => '',
+          'name'  => '',
           'image' => ''
         ];
     }
