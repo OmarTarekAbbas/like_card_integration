@@ -10,6 +10,7 @@
   <div class="main-content text-center">
     <div class="logo text-center">
       <img src="{{ asset('front/images/logo1.png') }}" alt="Digi Card">
+      <h6 style="color: white">A verification code has been sent, please verify the mobile</h6>
     </div>
 
     {!! Form::text("pincode", null,['class'=>'form__input text-center', 'placeholder'=>'Pincode']) !!}
