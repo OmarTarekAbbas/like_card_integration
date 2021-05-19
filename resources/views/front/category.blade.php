@@ -17,7 +17,7 @@
     </div>
     @empty
     <div class="notFound text-center">
-        <h4>Not Found</h4>
+      <h4>There is no categorys</h4>
     </div>
     @endforelse
   </div>
