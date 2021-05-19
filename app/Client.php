@@ -35,6 +35,7 @@ class Client extends Authenticatable
         return $this->belongsTo('App\Operator') ;
     }
 
+
     public function orders()
     {
       return $this->hasMany(Order::class)
