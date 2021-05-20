@@ -14,6 +14,7 @@ class CreateLikeCardTable extends Migration
     public function up()
     {
         Schema::create('like_cards', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->text('req');
             $table->text('response');

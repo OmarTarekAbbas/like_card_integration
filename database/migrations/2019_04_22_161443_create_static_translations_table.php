@@ -14,6 +14,7 @@ class CreateStaticTranslationsTable extends Migration {
 	{
 		Schema::create('static_translations', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('key_word', 191);
 			$table->timestamps();

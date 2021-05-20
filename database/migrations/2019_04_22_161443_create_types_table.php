@@ -14,6 +14,7 @@ class CreateTypesTable extends Migration {
 	{
 		Schema::create('types', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->integer('id', true);
 			$table->string('title', 50);
 			$table->timestamps();

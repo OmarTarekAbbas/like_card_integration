@@ -14,6 +14,7 @@ class CreatePincodeRequestsTable extends Migration
     public function up()
     {
         Schema::create('pincode_requests', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('msisdn');
             $table->string('operator_id');

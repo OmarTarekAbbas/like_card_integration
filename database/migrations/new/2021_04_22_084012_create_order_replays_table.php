@@ -14,6 +14,7 @@ class CreateOrderReplaysTable extends Migration
     public function up()
     {
         Schema::create('order_replays', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->unsignedBigInteger('admin_id');
             $table->unsignedBigInteger('client_id');

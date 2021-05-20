@@ -14,6 +14,7 @@ class CreateTranslatablesTable extends Migration {
 	{
 		Schema::create('translatables', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('table_name', 191);
 			$table->string('record_id', 191);

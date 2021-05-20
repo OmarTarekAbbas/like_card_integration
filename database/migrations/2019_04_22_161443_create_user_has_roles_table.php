@@ -14,6 +14,7 @@ class CreateUserHasRolesTable extends Migration {
 	{
 		Schema::create('user_has_roles', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->integer('role_id')->unsigned();
 			$table->integer('user_id')->unsigned()->index('user_has_roles_user_id_foreign');
 			$table->primary(['role_id','user_id']);

@@ -14,6 +14,7 @@ class CreatePermissionsTable extends Migration {
 	{
 		Schema::create('permissions', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('name', 191)->unique();
 			$table->timestamps();

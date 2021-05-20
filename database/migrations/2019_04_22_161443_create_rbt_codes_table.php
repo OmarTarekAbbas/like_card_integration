@@ -14,6 +14,7 @@ class CreateRbtCodesTable extends Migration {
 	{
 		Schema::create('rbt_codes', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->integer('rbt_code');
 			$table->integer('content_id')->unsigned()->index('rbt_codes_content_id_foreign');

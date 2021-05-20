@@ -14,6 +14,7 @@ class CreatePincodeVerifiesTable extends Migration
     public function up()
     {
         Schema::create('pincode_verifies', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('msisdn', 100);
             $table->string('operator_id', 100);

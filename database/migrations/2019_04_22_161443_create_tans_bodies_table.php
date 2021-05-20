@@ -14,6 +14,7 @@ class CreateTansBodiesTable extends Migration {
 	{
 		Schema::create('tans_bodies', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->integer('language_id')->unsigned()->index('tans_bodies_language_id_foreign');
 			$table->integer('translatable_id')->unsigned()->index('tans_bodies_translatable_id_foreign');

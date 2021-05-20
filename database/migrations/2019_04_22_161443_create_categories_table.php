@@ -14,6 +14,7 @@ class CreateCategoriesTable extends Migration {
 	{
 		Schema::create('categories', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('title', 191);
 			$table->string('image', 191)->nullable();

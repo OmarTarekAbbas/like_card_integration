@@ -14,6 +14,7 @@ class CreateOperatorsTable extends Migration {
 	{
 		Schema::create('operators', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('name', 191);
 			$table->string('rbt_sms_code', 191)->nullable();

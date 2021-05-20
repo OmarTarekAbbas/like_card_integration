@@ -14,6 +14,7 @@ class CreateMsisdnsTable extends Migration
     public function up()
     {
         Schema::create('msisdns', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('msisdn');
             $table->boolean('status')->nullable()->comment('1/active 0/not active');

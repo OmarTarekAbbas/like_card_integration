@@ -14,6 +14,7 @@ class CreateRelationsTable extends Migration {
 	{
 		Schema::create('relations', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->integer('scaffoldinterface_id')->unsigned()->index('relations_scaffoldinterface_id_foreign');
 			$table->string('to', 191);

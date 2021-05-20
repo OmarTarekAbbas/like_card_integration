@@ -14,6 +14,7 @@ class CreateStaticBodiesTable extends Migration {
 	{
 		Schema::create('static_bodies', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->integer('language_id')->unsigned()->index('static_bodies_language_id_foreign');
 			$table->integer('static_translation_id')->unsigned()->index('static_bodies_static_translation_id_foreign');

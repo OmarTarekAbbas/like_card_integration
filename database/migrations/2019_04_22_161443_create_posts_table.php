@@ -14,6 +14,7 @@ class CreatePostsTable extends Migration {
 	{
 		Schema::create('posts', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->date('published_date');
 			$table->boolean('active');

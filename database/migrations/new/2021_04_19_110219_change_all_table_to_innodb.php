@@ -13,6 +13,8 @@ class ChangeAllTableToInnodb extends Migration
      */
     public function up()
     {
+      // DB::statement('REPAIR TABLE `ip_address`, `product_properties`, `properties`, `property_values`');
+
       $sql = "SELECT CONCAT('ALTER TABLE ',TABLE_NAME,' ENGINE=InnoDB;') as table_name
       FROM INFORMATION_SCHEMA.TABLES
       WHERE ENGINE='MyISAM'

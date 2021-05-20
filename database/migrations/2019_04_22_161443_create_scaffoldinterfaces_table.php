@@ -14,6 +14,7 @@ class CreateScaffoldinterfacesTable extends Migration {
 	{
 		Schema::create('scaffoldinterfaces', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('package', 191);
 			$table->string('migration', 191);

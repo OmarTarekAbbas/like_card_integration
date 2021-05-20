@@ -14,6 +14,7 @@ class CreateCountriesTable extends Migration {
 	{
 		Schema::create('countries', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('title', 191);
 			$table->timestamps();

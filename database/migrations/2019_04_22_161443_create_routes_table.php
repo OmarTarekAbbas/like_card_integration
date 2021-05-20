@@ -14,6 +14,7 @@ class CreateRoutesTable extends Migration {
 	{
 		Schema::create('routes', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->integer('id', true);
 			$table->string('method', 20);
 			$table->string('route', 100);

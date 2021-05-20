@@ -14,6 +14,7 @@ class CreateRoleHasPermissionsTable extends Migration {
 	{
 		Schema::create('role_has_permissions', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->integer('permission_id')->unsigned();
 			$table->integer('role_id')->unsigned()->index('role_has_permissions_role_id_foreign');
 			$table->primary(['permission_id','role_id']);

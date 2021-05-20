@@ -14,6 +14,7 @@ class CreateDeleteAllFlagsTable extends Migration {
 	{
 		Schema::create('delete_all_flags', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->integer('route_id')->index('delete_all_flags_route_id_foreign');
 			$table->timestamps();
