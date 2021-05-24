@@ -52,6 +52,14 @@
                         @csrf
                     </form>
                   </li>
+                 @else
+                 <li>
+                      <a href="{{ route('client.login') }}" class="link text-capitalize link_href">Login</a>
+                  </li>
+                  
+                  <li>
+                      <a href="{{ route('client.register') }}" class="link text-capitalize link_href">Register</a>
+                  </li>
                 @endif
             </ul>
         </nav>
