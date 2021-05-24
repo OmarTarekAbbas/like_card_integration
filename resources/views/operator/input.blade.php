@@ -19,6 +19,13 @@
     </div>
 </div>
 
+<div class="form-group">
+    <label class="col-sm-3 col-lg-2 control-label">Code </label>
+    <div class="col-sm-9 col-lg-10 controls">
+        {!! Form::number('code',null,['placeholder'=>'Code','class'=>'form-control','min'=>0]) !!}
+    </div>
+</div>
+
 @if(isset($_REQUEST['country_id']))
 <div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">Country <span class="text-danger">*</span></label>
