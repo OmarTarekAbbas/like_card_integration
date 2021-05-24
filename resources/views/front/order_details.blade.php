@@ -124,7 +124,7 @@
 
           <p class="mb-1">
             <b>Invoice Date:</b>
-            <span class="float-right">{{ $order->updated_at->format("D M Y") }}</span>
+            <span class="float-right">{{ $order->updated_at->format("d-m-Y") }}</span>
           </p>
         </div>
       </div>

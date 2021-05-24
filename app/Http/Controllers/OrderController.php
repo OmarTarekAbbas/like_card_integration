@@ -49,7 +49,7 @@ class OrderController extends Controller
         return $order->total_price ;
       })
       ->addColumn('created_at', function (Order $order) {
-          return $order->created_at->format('d-m-Y');
+          return $order->created_at;
       })
       ->addColumn('payment_status', function (Order $order) {
         return $order->dcb_status;
