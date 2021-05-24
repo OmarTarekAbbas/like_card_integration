@@ -14,7 +14,7 @@ class AddCodeToOperators extends Migration
     public function up()
     {
         Schema::table('operators', function (Blueprint $table) {
-          $table->string('code')->after("country_id");
+          //$table->string('code')->after("country_id");
         });
     }
 
