@@ -20,21 +20,52 @@
     </div>
   </div>
   <div class="grid_view">
-    @for($i=1; $i<=9; $i++) <div class="price_background rounded">
-      <button class="price_currency btn" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency="{{ $productCurrency }}" data-price="{{ $productPrice * $i }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
+    @for($i=1; $i<=1; $i++) <div class="price_background rounded">
+      <button class="price_currency btn float-right" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency="{{ $productCurrency }}" data-price="{{ $productPrice * $i }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
   </div>
   @endfor
   </div>
 
   <div class="phone_number">
     <div class="row m-0">
-      <div class="col-12 p-0">
-        <h4 class="payment_card_title text-capitalize">mobile no - رقم التليفون</h4>
+      <div class="col-12 d-flex justify-content-center align-items-center collPadding">
+        <h5 class="payment_methods_title">اختيار طريقة الدفع</h5>
       </div>
+
       <div class="col-12 p-0">
-        <div class="select_input">
-          {!! Form::select("phone_code", getCountryOperators(), auth()->guard('client')->user()->operator->code.'-'.auth()->guard('client')->user()->operator->id , ['form' => "myform", 'required']) !!}
-          <input type="tel" class="form-control" value="{{ auth()->guard('client')->user()->phone }}" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
+        <div class="payment_methods text-center">
+          <a href="#0">
+            <i class="fas fa-phone"></i>
+          </a>
+
+          <a href="#0">
+            <i class="fab fa-cc-visa"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="d-none">
+      <div class="row m-0">
+        <div class="col-12 p-0">
+          <h4 class="payment_card_title text-capitalize">mobile no - رقم التليفون</h4>
+        </div>
+
+        <div class="col-12 p-0">
+          <div class="select_input">
+            {!! Form::select("phone_code", getCountryOperators(), auth()->guard('client')->user()->operator->code.'-'.auth()->guard('client')->user()->operator->id , ['form' => "myform", 'required']) !!}
+            <input type="tel" class="form-control" value="{{ auth()->guard('client')->user()->phone }}" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
+          </div>
+        </div>
+
+        <div class="col-12 p-0">
+          <h4 class="payment_card_title text-capitalize">email - البريد الإلكتروني</h4>
+        </div>
+
+        <div class="col-12 p-0">
+          <div class="select_input" style="grid-template-columns: 100%;">
+            {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input form-control', 'placeholder'=>'Email' ]) !!}
+          </div>
+        </div>
         </div>
       </div>
 
@@ -89,9 +120,9 @@
         <span class="total_price text-uppercase" id="total_price">{{$productPrice}} {{ $productCurrency }}</span>
       </div>
 
-      <div class="col-12 d-flex justify-content-center align-items-center collPadding">
+      {{-- <div class="col-12 d-flex justify-content-center align-items-center collPadding">
         <p class="sms_payment">بعد اتمام عملية الدفع سيصلك كود البطاقة عن طريق sms على رقم تليفونك.</p>
-      </div>
+      </div> --}}
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
         <div class="form-group yes_understand">

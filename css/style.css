@@ -4,7 +4,7 @@
   }
 
   .navbar .navbar-brand {
-    min-width: 100px;
+    min-width: unset;
   }
 
   .box-content .table .table_thead {
