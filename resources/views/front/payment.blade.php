@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="col-12 p-0">
       <h4 class="payment_card_title text-capitalize">Amount - المبلغ</h4>
     </div>
@@ -119,7 +119,7 @@
   var currency = ' {{$productCurrency}}'
 
   $('.price_currency').click(function() {
-    var cuurentPrice = ($(this).data("price")).toFixed(1);
+    var cuurentPrice = ($(this).data("price")); //.toFixed(1)
     $('#total_price').text(cuurentPrice + currency);
     $("#quantity").val($(this).data("quantity"));
   });
