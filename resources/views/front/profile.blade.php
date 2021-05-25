@@ -10,8 +10,8 @@
   <div class="main-content">
     <div class="login_form text-center">
       <h2 class="title">Profile</h2>
-
-      <div class="login_form_grid">
+
+      <div class="login_form_grid ">
         <div class="upload_img">
           <a onclick="_upload()">
             <img id='output' class="img-fluid rounded-circle" src="{{ url(auth()->guard('client')->user()->image?? 'front/images/logo1.png') }}" alt="Profile Picture">
