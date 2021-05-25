@@ -41,3 +41,4 @@ Route::group(['middleware' => 'auth:client'], function () {
 
 Route::get("/cart","HomeController@cart")->name("front.cart");
 Route::get("/pincode","HomeController@pincode")->name("front.pincode");
+Route::get('test_fattora',"FattoraOrderController@initFattoraPaymentLink");
