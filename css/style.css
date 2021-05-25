@@ -1,0 +1,49 @@
+@media (min-width: 1px) and (max-width: 767.9px) {
+  #main-content {
+    padding: 10px 5px;
+  }
+
+  .navbar .navbar-brand {
+    min-width: 100px;
+  }
+
+  .box-content .table .table_thead {
+    display: none;
+  }
+
+  .box-content .table_view {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 100%;
+  }
+
+  .box-content .table tbody .table_tr td {
+    vertical-align: middle;
+  }
+
+  .box-content .table tbody .table_tr td.visible-xs {
+    vertical-align: middle;
+  }
+
+  .box .box-title .box-tool {
+    display: none;
+  }
+
+  .navbar .navbar-btn {
+    margin-right: 0;
+  }
+}
+
+.box .box-title h3 {
+  color: #000;
+}
+
+.box.box-black>.box-title,
+.box>.box-title {
+  background-color: transparent;
+}
+
+.box .box-title .box-tool>a {
+  color: #000;
+  opacity: 1;
+}

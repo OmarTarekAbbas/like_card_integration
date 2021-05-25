@@ -6,7 +6,7 @@
 	@include('errors')
 <!-- BEGIN Content -->
 <div id="main-content">
-	<div class="row">
+	<div class="row m-0">
 	    <div class="col-md-12">
 	        <div class="box box-black">
 	            <div class="box-title">
@@ -37,7 +37,7 @@
 								<th style="width:18px"><input type="checkbox" onclick="select_all('settings')"></th>
 								<th>Key</th>
 								<th>Value</th>
-								<th class="visible-md visible-lg" style="width:130px">Action</th>
+								<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">Action</th>
 							</tr>
 						</thead>
 						<tbody id="tablecontents">
@@ -68,7 +68,7 @@
 										{!! $setting->value !!}
 									@endif
 								</td>
-								<td class="visible-md visible-lg">
+								<td class="visible-xs visible-sm visible-md visible-lg">
 								    <div class="btn-group">
                                         @if (get_action_icons('setting/{id}/edit', 'get'))
 								    	<a class="btn btn-sm show-tooltip" title="" href="{{url('setting/'.$setting->id.'/edit')}}" data-original-title="Edit"><i class="fa fa-edit"></i></a>

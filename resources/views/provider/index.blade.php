@@ -3,9 +3,9 @@
 provider
 @stop
 @section('content')
-<div class="row">
+<div class="row m-0">
     <div class="col-md-12">
-        <div class="row">
+        <div class="row m-0">
 
             <div class="col-md-12">
                 <div class="box box-black">
@@ -57,7 +57,7 @@ provider
                                             <img class=" img-circle" width="100px" height="100px"
                                                 src="{{$value->image}}" />
                                         </td>
-                                        <td class="visible-md visible-lg">
+                                        <td class="visible-xs visible-sm visible-md visible-lg">
                                             <div class="btn-group">
                                             <a class="btn btn-sm btn-success"
                                                 href="{{url("category/create?provider_id=".$value->id."&title=".$value->title)}}" title="Add Category"><i

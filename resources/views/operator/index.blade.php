@@ -6,7 +6,7 @@
 	@include('errors')
 <!-- BEGIN Content -->
 <div id="main-content">
-	<div class="row">
+	<div class="row m-0">
 	    <div class="col-md-12">
 	        <div class="box box-black">
 	            <div class="box-title">
@@ -39,7 +39,7 @@
 								<th>operator name</th>
 								<th>Code</th>
 								<th>county</th>
-								<th class="visible-md visible-lg" style="width:130px">Action</th>
+								<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">Action</th>
 							</tr>
 						</thead>
 						<tbody id="tablecontents">
@@ -51,7 +51,7 @@
 								<td>{{$operator->code}}</td>
 								<td>{{$operator->country->title}}</td>
 								</td>
-								<td class="visible-md visible-lg">
+								<td class="visible-xs visible-sm visible-md visible-lg">
 								    <div class="btn-group">
                                         @if (get_action_icons('operator/{id}/edit', 'get'))
 								    	<a class="btn btn-sm show-tooltip" title="" href="{{url('operator/'.$operator->id.'/edit')}}" data-original-title="Edit"><i class="fa fa-edit"></i></a>

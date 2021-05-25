@@ -3,7 +3,7 @@
 clients
 @stop
 @section('content')
-<div class="row">
+<div class="row m-0">
   <div class="col-md-12">
     <div class="box box-black">
       <div class="box-title">
@@ -30,7 +30,7 @@ clients
                 <th>phone</th>
                 <th>email</th>
                 <th>operator</th>
-                <th class="visible-md visible-lg" style="width:130px">@lang('messages.action')</th>
+                <th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">@lang('messages.action')</th>
               </tr>
             </thead>
 

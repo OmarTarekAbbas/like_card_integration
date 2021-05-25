@@ -6,7 +6,7 @@
 	@include('errors')
 <!-- BEGIN Content -->
 <div id="main-content">
-	<div class="row">
+	<div class="row m-0">
 	    <div class="col-md-12">
 	        <div class="box box-black">
 	            <div class="box-title">
@@ -36,7 +36,7 @@
 							<tr>
 								<th style="width:18px"><input type="checkbox" onclick="select_all('settings')"></th>
 								<th>Title</th>
-								<th class="visible-md visible-lg" style="width:130px">Action</th>
+								<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">Action</th>
 							</tr>
 						</thead>
 						<tbody id="tablecontents">
@@ -44,7 +44,7 @@
 							<tr class="table-flag-blue">
 								<td><input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{$country->id}}" onclick="collect_selected(this)"></td>
 								<td>{{$country->title}}</td>
-								<td class="visible-md visible-lg">
+								<td class="visible-xs visible-sm visible-md visible-lg">
 								    <div class="btn-group">
                                         @if (get_action_icons('operator/create', 'get'))
                                         <a class="btn btn-sm btn-success show-tooltip" title="Add Operator" href="{{url("operator/create?country_id=".$country->id."&title=".$country->title)}}" data-original-title="Add Operator"><i class="fa fa-plus"></i></a>

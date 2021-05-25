@@ -3,7 +3,7 @@
 	Static Translation
 @stop
 @section('content')
-	<div class="row">
+	<div class="row m-0">
 		<div class="col-md-12">
 			<div class="box box-black">
 				<div class="box-title">
@@ -31,7 +31,7 @@
 							<th style="width:18px"><input type="checkbox" onclick="select_all('{{$table_name}}')"></th>
 							<th>Key Word</th>
 								<th>Translation</th>
-								<th class="visible-md visible-lg" style="width:130px">Action</th>
+								<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">Action</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -52,7 +52,7 @@
 											<a href="{{url('static_translation/'.$static_translation->id)}}" title="View Translation">View Translation</a>
 										@endif
 									</td>
-									<td class="visible-md visible-lg">
+									<td class="visible-xs visible-sm visible-md visible-lg">
 										<div class="btn-group">
                                             @if (get_action_icons('static_translation/{id}/edit', 'get'))
 											<a class="btn btn-sm show-tooltip" title="" href="{{url('static_translation/'.$static_translation->id.'/edit')}}" data-original-title="Edit"><i class="fa fa-edit"></i></a>

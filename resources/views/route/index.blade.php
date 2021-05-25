@@ -3,7 +3,7 @@
 	Routes
 @stop
 @section('content')
-	<div class="row">
+	<div class="row m-0">
 		<div class="col-md-12">
 			<div class="box box-black">
 				<div class="box-title">
@@ -34,7 +34,7 @@
 								<th>controller</th>
 								<th>method</th>
 								<th>Roles Assigned</th>
-								<th class="visible-md visible-lg" style="width:130px">Action</th>
+								<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">Action</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -50,7 +50,7 @@
 									        - {{$item->role->name}}<br>
 									    @endforeach
 									</td>
-									<td class="visible-md visible-lg">
+									<td class="visible-xs visible-sm visible-md visible-lg">
 										<div class="btn-group">
                                             @if (get_action_icons('all_routes/{id}/edit', 'get'))
 											<a class="btn btn-sm show-tooltip" title="" href="{{url('all_routes/'.$route->id.'/edit')}}" data-original-title="Edit"><i class="fa fa-edit"></i></a>

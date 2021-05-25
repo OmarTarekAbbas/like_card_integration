@@ -6,7 +6,7 @@
 	@include('errors')
 <!-- BEGIN Content -->
 <div id="main-content">
-	<div class="row">
+	<div class="row m-0">
 	    <div class="col-md-12">
 	        <div class="box box-black">
 	            <div class="box-title">
@@ -36,7 +36,7 @@
 							<tr>
 								<th style="width:18px"><input type="checkbox" onclick="select_all('settings')"></th>
 								<th>Title</th>
-								<th class="visible-md visible-lg" style="width:130px">Action</th>
+								<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">Action</th>
 							</tr>
 						</thead>
 						<tbody id="tablecontents">
@@ -44,7 +44,7 @@
 							<tr class="table-flag-blue">
 								<td><input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{$type->id}}" onclick="collect_selected(this)"></td>
 								<td>{{$type->title}}</td>
-								<td class="visible-md visible-lg">
+								<td class="visible-xs visible-sm visible-md visible-lg">
 								    <div class="btn-group">
 											<!-- <a class="btn btn-sm btn-success show-tooltip" title="Add Content" href="{{url("content/create?type_id=".$type->id."&title=".$type->title)}}" data-original-title="Add Content"><i class="fa fa-plus"></i></a> -->
 								    	<a class="btn btn-sm show-tooltip" title="" href="{{url('content_type/'.$type->id.'/edit')}}" data-original-title="Edit"><i class="fa fa-edit"></i></a>

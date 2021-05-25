@@ -3,9 +3,9 @@
  Post
 @stop
 @section('content')
-<div class="row">
+<div class="row m-0">
     <div class="col-md-12">
-        <div class="row">
+        <div class="row m-0">
 
             <div class="col-md-12">
                 <div class="box box-black">
@@ -62,7 +62,7 @@
                                         </td>
                                         <td>{{DB::table('users')->where('id',$value->pivot->user_id)->first()->name}}</td>
                                         </td>
-                                        <td class="visible-md visible-lg">
+                                        <td class="visible-xs visible-sm visible-md visible-lg">
                                             <div class="btn-group">
                                                 @if (get_action_icons('post/{id}/edit', 'get'))
                                                 <a class="btn btn-sm show-tooltip" href="{{url("post/".$value->pivot->id."/edit")}}" title="Edit"><i class="fa fa-edit"></i></a>

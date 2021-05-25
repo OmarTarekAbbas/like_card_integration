@@ -3,7 +3,7 @@
 	@lang('messages.users.users')
 @stop
 @section('content')
-	<div class="row">
+	<div class="row m-0">
 		<div class="col-md-12">
 			<div class="box box-black">
 				<div class="box-title">
@@ -33,7 +33,7 @@
 								<th>@lang('messages.users.email')</th>
 								<th>@lang('messages.users.role')</th>
 								<th>@lang('messages.users.phone')</th>
-								<th class="visible-md visible-lg" style="width:130px">@lang('messages.action')</th>
+								<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">@lang('messages.action')</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -45,7 +45,7 @@
 										<td>{{$user->email}}</td>
 										<td>{{$user->role}}</td>
 										<td>{{$user->phone}}</td>
-										<td class="visible-md visible-lg">
+										<td class="visible-xs visible-sm visible-md visible-lg">
 											<div class="btn-group">
                                                 @if (get_action_icons('users/{id}/edit', 'get'))
 												<a class="btn btn-sm show-tooltip" title="" href="{{url('users/'.$user->id.'/edit')}}" data-original-title="Edit"><i class="fa fa-edit"></i></a>

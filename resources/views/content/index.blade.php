@@ -3,9 +3,9 @@
  @if(isset($category)) {{$category->title}} @else Content @endif
 @stop
 @section('content')
-<div class="row">
+<div class="row m-0">
     <div class="col-md-12">
-        <div class="row">
+        <div class="row m-0">
 
             <div class="col-md-12">
                 <div class="box box-black">
@@ -76,7 +76,7 @@
                                         @endif
                                         <td>{{$value->type->title}}</td>
                                         <td>{{$value->patch_number}}</td>
-                                        <td class="visible-md visible-lg">
+                                        <td class="visible-xs visible-sm visible-md visible-lg">
                                             <div class="btn-group">
                                                 @if (get_action_icons('post/create', 'get'))
                                                 <a class="btn btn-sm btn-success show-tooltip" title="Add Post" href="{{url("post/create?content_id=".$value->id."&title=".$value->title)}}" data-original-title="Add Post"><i class="fa fa-plus"></i></a>

@@ -3,7 +3,7 @@
     @lang('messages.role')
 @stop
 @section('content')
-	<div class="row">
+	<div class="row m-0">
         <div class="col-md-12">
             <div class="box box-black">
                 <div class="box-title">
@@ -30,14 +30,14 @@
 								<tr>
 									<th style="width:18px"><input type="checkbox" onclick="select_all('{{$table_name}}')"></th>
 									<th>Role name</th>
-									<th class="visible-md visible-lg" style="width:130px">Action</th>
+									<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">Action</th>
 								</tr>
 							</thead>
 						        @foreach($roles as $role)
 						            <tr class="table-flag-blue">
 										<th><input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{$role->id}}" class="roles" onclick="collect_selected(this)"></th>
 						                <td>{{$role->name}}</td>
-						                <td class="visible-md visible-lg">
+						                <td class="visible-xs visible-sm visible-md visible-lg">
 						                    <div class="btn-group">
                                                 @if (get_action_icons('roles/{id}/view_access', 'get'))
                                                 <a class="btn btn-sm show-tooltip btn-success" data-original-title="View Access"  href="{{url('roles/'.$role->id.'/view_access')}}">

@@ -3,7 +3,7 @@
 	@lang('messages.type.types')
 @stop
 @section('content')
-<div class="row">
+<div class="row m-0">
 		<div class="col-md-12">
 			<div class="box box-black">
 				<div class="box-title">
@@ -32,7 +32,7 @@
 							<th style="width:18px"><input type="checkbox" onclick="select_all('{{$table_name}}')"></th>
 							<th>@lang('messages.type.name-type')</th>
 
-								<th class="visible-md visible-lg" style="width:130px">@lang('messages.type.type-action')</th>
+								<th class="visible-xs visible-sm visible-md visible-lg" style="width:130px">@lang('messages.type.type-action')</th>
 
 
 							</tr>
@@ -44,7 +44,7 @@
                                     <th><input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{$type->id}}" onclick="collect_selected(this)"></th>
                                     <td>{{$type->title}}</td>
 
-                                    <td class="visible-md visible-lg">
+                                    <td class="visible-xs visible-sm visible-md visible-lg">
 										<div class="btn-group">
                                             @if (get_action_icons('types/{id}/edit', 'get'))
 											<a class="btn btn-sm show-tooltip" title="" href="{{url('types/'.$type->id.'/edit')}}" data-original-title="Edit"><i class="fa fa-edit"></i></a>

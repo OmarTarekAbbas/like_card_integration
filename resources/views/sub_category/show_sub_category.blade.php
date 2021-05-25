@@ -3,9 +3,9 @@
  {{$sub_categorys[0]->cat->title}}
 @stop
 @section('content')
-<div class="row">
+<div class="row m-0">
     <div class="col-md-12">
-        <div class="row">
+        <div class="row m-0">
 
             <div class="col-md-12">
                 <div class="box box-black">
@@ -52,7 +52,7 @@
                                       <td>
                                           <img class=" img-circle" width="100px" height="100px" src="{{$value->image}}"/>
                                       </td>
-                                      <td class="visible-md visible-lg">
+                                      <td class="visible-xs visible-sm visible-md visible-lg">
                                           <div class="btn-group">
                                               <a class="btn btn-sm btn-success show-tooltip" title="Add Content" href="{{url("content/create?category_id=".$value->id."&title=".$value->title)}}" data-original-title="Add Content"><i class="fa fa-plus"></i></a>
                                               @if(count($value->contents) > 0)
