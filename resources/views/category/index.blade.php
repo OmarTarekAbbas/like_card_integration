@@ -52,7 +52,7 @@
                                         <td>
                                             <img class=" img-circle" width="100px" height="100px" src="{{$value->image}}"/>
                                         </td>
-                                        <td class="visible-md visible-lg">
+                                        <td class="visible-sm visible-md visible-lg visible-xl">
                                             <div class="btn-group">
                                                 <a class="btn btn-sm btn-success show-tooltip" title="Add Content" href="{{url("content/create?category_id=".$value->id."&title=".$value->title)}}" data-original-title="Add Content"><i class="fa fa-plus"></i></a>
                                                 @if(count($value->contents) > 0)
