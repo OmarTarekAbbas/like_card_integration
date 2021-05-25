@@ -353,7 +353,7 @@ main .payment_card .phone_number {
 }
 main .payment_card .phone_number .select_input {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 38% 62%;
 }
 main .payment_card .phone_number .select_input select {
   border: 1px solid #368ca7;
@@ -638,7 +638,7 @@ main .login_page .main-content .login_form .login_form_grid .select_input,
 main .register_page .main-content .login_form .login_form_grid .select_input,
 main .profile_page .main-content .login_form .login_form_grid .select_input {
   display: grid;
-  grid-template-columns: 35% 65%;
+  grid-template-columns: 38% 62%;
 }
 main .login_page .main-content .login_form .login_form_grid .select_input select,
 main .register_page .main-content .login_form .login_form_grid .select_input select,
