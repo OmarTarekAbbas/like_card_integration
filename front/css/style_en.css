@@ -653,7 +653,7 @@ main .login_page .main-content .login_form .login_form_grid .select_input,
 main .register_page .main-content .login_form .login_form_grid .select_input,
 main .profile_page .main-content .login_form .login_form_grid .select_input {
   display: grid;
-  grid-template-columns: 38% 62%;
+  grid-template-columns: 45% 55%;
 }
 main .login_page .main-content .login_form .login_form_grid .select_input select,
 main .register_page .main-content .login_form .login_form_grid .select_input select,
