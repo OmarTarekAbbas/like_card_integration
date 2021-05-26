@@ -9,6 +9,7 @@ class FatoorahController extends Controller
 {
 	/* ------------------------ Configurations ---------------------------------- */
 	//Test
+	// visa 4005550000000001 05/18 123
 	private $apiURL;
 	private $apiKey;
 
@@ -204,7 +205,7 @@ class FatoorahController extends Controller
 		$json       = $this->callAPI("$this->apiURL/v2/getPaymentStatus", $this->apiKey, $postFields);
 
 		//Display the payment result to your customer
-		return  $json->Data->InvoiceStatus;
+		return  $json->Data;
 	}
 
 }
