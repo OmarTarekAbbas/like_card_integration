@@ -93,7 +93,7 @@ class FatoorahController extends Controller
 		//Display the payment link to your customer
 		// echo "Click on <a href='$paymentLink' target='_blank'>$paymentLink</a> to pay with invoiceID $invoiceId.";
 		// 
-		return resirect()->away($paymentLink);
+		return redirect()->away($paymentLink);
 	}
 
 	/* ------------------------ Functions --------------------------------------- */
