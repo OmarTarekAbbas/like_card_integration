@@ -417,14 +417,14 @@ main {
 
     .grid_view {
       display: grid;
-      grid-template-columns: 33.3% 33.3% 33.3%;
+      grid-template-columns: 100%;
       margin-bottom: 0.75rem;
 
       .price_background {
         padding: 0 1.5%;
 
         .price_currency {
-          width: 100%;
+          width: 30%;
           margin-bottom: 10%;
           font-size: 1.2rem;
           font-weight: bold;
@@ -441,9 +441,27 @@ main {
     .phone_number {
       margin-bottom: 0.75rem;
 
+      .payment_methods_title {
+        color: $petrolCol;
+      }
+
+      .payment_methods {
+        margin-bottom: 5%;
+        a {
+          color: $petrolCol;
+          font-size: 1.75rem;
+
+          i {
+            padding-left: 10px;
+          }
+        }
+      }
+
       .select_input {
+        display: none;
         display: grid;
         grid-template-columns: 38% 62%;
+        margin-bottom: 3%;
 
         select {
           border: 1px solid #368ca7;
@@ -762,7 +780,7 @@ main {
 
           .select_input {
             display: grid;
-            grid-template-columns: 38% 62%;
+            grid-template-columns: 45% 55%;
 
             select {
               color: $whiteCol;

@@ -26,11 +26,11 @@
         <div class="login_form_grid_child">
           {!! Form::text("name", auth()->guard('client')->user()->name ,['class'=>'form__input', 'placeholder'=>'Username']) !!}
 
-          {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input', 'style'=>'cursor: no-drop;' 'placeholder'=>'Email', 'readonly', 'disabled' ]) !!}
+          {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input', 'style'=>'cursor: no-drop;', 'placeholder'=>'Email', 'readonly', 'disabled' ]) !!}
 
           <div class="select_input">
           {!! Form::select("operator_id", getCountryOperators(), auth()->guard('client')->user()->operator->code.'-'.auth()->guard('client')->user()->operator->id ,['disabled']) !!}
-          {!! Form::tel("phone",auth()->guard('client')->user()->phone ,['class'=>'form__input', 'style'=>'cursor: no-drop;' 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*', 'readonly', 'disabled' ]) !!}
+          {!! Form::tel("phone",auth()->guard('client')->user()->phone ,['class'=>'form__input', 'style'=>'cursor: no-drop;', 'placeholder'=>'Mobile No.', 'pattern'=>'[0-9]*', 'readonly', 'disabled' ]) !!}
           </div>
 
           {!! Form::submit('Submit',['class'=>'form__btn btn font-weight-bold']) !!}
