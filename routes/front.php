@@ -37,6 +37,10 @@ Route::group(['middleware' => 'auth:client'], function () {
   Route::post("/pincode/verify","OrderController@pincodeVerify")->name("front.pincode.verify.submit");
   Route::get("/orders","OrderController@listOrders")->name("front.orders");
   Route::get("/orders/{id}","OrderController@orderDetails")->name("front.order.details");
+
+  //route myfatoorah
+  Route::post('myfatoorah/readirect', "FatoorahController@redirectToPaymentPage")->name("front.myfatoorah.redirect.payment");
+  Route::get('myfatoorah/callback', "FatoorahController@handleCallback")->name("front.myfatoorah.handle.callback");
 });
 
 Route::get("/cart","HomeController@cart")->name("front.cart");

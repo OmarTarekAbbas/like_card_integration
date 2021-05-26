@@ -20,10 +20,11 @@
     </div>
   </div>
   <div class="grid_view">
-    @for($i=1; $i<=1; $i++) <div class="price_background rounded">
-      <button class="price_currency btn float-right" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency="{{ $productCurrency }}" data-price="{{ $productPrice * $i }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
-  </div>
-  @endfor
+    @for($i=1; $i<=1; $i++) 
+      <div class="price_background rounded">
+        <button class="price_currency btn float-right" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency="{{ $productCurrency }}" data-price="{{ $productPrice * $i }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
+      </div>
+    @endfor
   </div>
 
   <div class="phone_number">
@@ -34,18 +35,32 @@
 
       <div class="col-12 p-0">
         <div class="payment_methods text-center">
-          <a href="#0">
+          <a href="#0" class="payment dcb">
             <i class="fas fa-phone"></i>
           </a>
 
-          <a href="#0">
+          <a href="#0" class="payment myfatoorah">
             <i class="fab fa-cc-visa"></i>
           </a>
         </div>
       </div>
 
-      <div class="d-none">
-      <div class="row m-0">
+      <div class="show_details d-none">
+        <div class="row m-1 myfatoorah-payment d-none">
+          <div class="payment-method col-2">
+            <a href="#" class="btn btn-primary" data-method="KNET">KNET</a>
+          </div>
+          <div class="payment-method ml-2 col-4">
+            <a href="#" class="btn btn-success" data-method="VISA/MASTER">VISA/MASTER</a>
+          </div>
+          <div class="payment-method col-2">
+            <a href="#" class="btn btn-info" data-method="Sadad">Sadad</a>
+          </div>
+          <div class="payment-method ml-2 col-2">
+            <a href="#" class="btn btn-danger" data-method="Meeza">Meeza</a>
+          </div>
+        </div>
+        <div class="row m-0">
         <div class="col-12 p-0">
           <h4 class="payment_card_title text-capitalize">mobile no - رقم التليفون</h4>
         </div>
@@ -57,7 +72,7 @@
           </div>
         </div>
 
-        <div class="col-12 p-0">
+        <!-- <div class="col-12 p-0">
           <h4 class="payment_card_title text-capitalize">email - البريد الإلكتروني</h4>
         </div>
 
@@ -65,7 +80,7 @@
           <div class="select_input" style="grid-template-columns: 100%;">
             {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input form-control', 'placeholder'=>'Email' ]) !!}
           </div>
-        </div>
+        </div> -->
         </div>
       </div>
 
@@ -97,11 +112,13 @@
       </div>
 
       <div class="col-6 d-flex justify-content-center">
-        <form id='myform' method='POST' class='quantity' action='{{ route("front.pincode.request") }}'>
+        <form id='myform' method='POST' class='quantity' action=''>
           @csrf
           <input type="hidden" value="{{ $productPrice?? 10 }}" name="sell_price">
 
-          <input type="hidden" value="{{ $productCurrency?? 'KWT' }}" name="currency">
+          <input type="hidden" value="{{ $productCurrency?? 'KWD' }}" name="currency">
+
+          <input type="hidden" class="payment-method-value" name="payment_method" value="" readonly>
 
 
           <div id="sub" class="qtyminus minus sub">
@@ -135,7 +152,7 @@
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
         <div class="my_checkout">
-          <button type="submit" class="btn_checkout btn text-capitalize" form="myform">checkout</button>
+          <button type="submit" class="btn_checkout btn text-capitalize" disabled form="myform">checkout</button>
         </div>
       </div>
     </div>
@@ -175,5 +192,32 @@
     $('#total_price').html((price * parseInt($("#quantity").val())).toFixed(1) + currency);
     $("#price" + parseInt($("#quantity").val())).trigger('focus')
   }
+</script>
+
+<script>
+  function readyForm(url) {
+    $("#myform").attr('action', url)
+    $('.show_details').removeClass('d-none')
+    $('.show_details .myfatoorah-payment').removeClass('d-none')
+    $('.payment-method-value').removeAttr('readonly')
+    $('.btn_checkout').removeAttr('disabled')
+  }
+
+  $('.payment').click(function(e){
+    e.preventDefault()
+    if($(this).hasClass('dcb')) {
+      readyForm('{{ route("front.pincode.request") }}')
+      $('.show_details .myfatoorah-payment').addClass('d-none')
+      $('.payment-method-value').attr('readonly', true)
+    } else {
+      readyForm('{{ route("front.myfatoorah.redirect.payment") }}')
+    }
+  })
+
+  $('.payment-method').click(function(e){
+    e.preventDefault()
+    var method = $(this).children('a').data('method')
+    $('.payment-method-value').val(method)
+  })
 </script>
 @stop
