@@ -442,10 +442,7 @@ main {
         a {
           color: $petrolCol;
           font-size: 1.75rem;
-
-          i {
-            padding-left: 10px;
-          }
+          margin: 0 5%;
         }
       }
 
@@ -1401,4 +1398,8 @@ main {
   #return-to-top {
     right: 35%;
   }
+}
+
+.active_methods {
+  border-bottom: 2px solid $petrolCol;
 }

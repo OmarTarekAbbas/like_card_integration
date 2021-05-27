@@ -355,9 +355,7 @@ main .payment_card .phone_number .payment_methods {
 main .payment_card .phone_number .payment_methods a {
   color: #093543;
   font-size: 1.75rem;
-}
-main .payment_card .phone_number .payment_methods a i {
-  padding-left: 10px;
+  margin: 0 5%;
 }
 main .payment_card .phone_number .select_input {
   display: none;
@@ -1164,6 +1162,9 @@ main .register_page .main-content .login_form .login_form_grid {
   #return-to-top {
     right: 35%;
   }
+}
+.active_methods {
+  border-bottom: 2px solid #093543;
 }
 
 /*# sourceMappingURL=style_en.css.map */
