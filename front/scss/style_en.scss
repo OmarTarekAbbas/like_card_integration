@@ -415,25 +415,17 @@ main {
       margin-bottom: 0.75rem;
     }
 
-    .grid_view {
-      display: grid;
-      grid-template-columns: 100%;
-      margin-bottom: 0.75rem;
+    .price_background {
+      padding: 0 1.5%;
 
-      .price_background {
-        padding: 0 1.5%;
+      .price_currency {
+        width: 70%;
+        margin-bottom: 10%;
+        font-size: 1.2rem;
+        font-weight: bold;
 
-        .price_currency {
-          width: 30%;
-          margin-bottom: 10%;
-          font-size: 1.2rem;
-          font-weight: bold;
-
-          &:focus {
-            box-shadow: 0 0 0 0.1rem $petrolCol;
-          }
-
-          .currency {}
+        &:focus {
+          box-shadow: 0 0 0 0.1rem $petrolCol;
         }
       }
     }
@@ -460,7 +452,7 @@ main {
       .select_input {
         display: none;
         display: grid;
-        grid-template-columns: 38% 62%;
+        grid-template-columns: 50% 50%;
         margin-bottom: 3%;
 
         select {
@@ -485,10 +477,24 @@ main {
           border-color: unset;
         }
       }
+
+      .show_details {
+        .payment-method {
+          .payment-method-btn {
+            background-color: $petrolCol;
+            color: $whiteCol;
+            width: 100%;
+            margin-bottom: 3%;
+
+            &:focus {
+              box-shadow: 0 0 0 0.2rem $blueGreenCol;
+            }
+          }
+        }
+      }
     }
 
     .quantity {
-
       .quantity_title,
       .total_title {
         color: $petrolCol;

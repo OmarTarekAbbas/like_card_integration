@@ -14,87 +14,17 @@
         </div>
       </div>
     </div>
-    
-    <div class="col-12 p-0">
+
+    <div class="col-6 p-0">
       <h4 class="payment_card_title text-capitalize">Amount - المبلغ</h4>
     </div>
-  </div>
-  <div class="grid_view">
-    @for($i=1; $i<=1; $i++) 
-      <div class="price_background rounded">
+
+    <div class="col-6 p-0">
+      @for($i=1; $i<=1; $i++) <div class="price_background rounded">
         <button class="price_currency btn float-right" id="price{{ $i }}" data-quantity="{{ $i }}" data-currency="{{ $productCurrency }}" data-price="{{ $productPrice * $i }}"> {{ $productPrice * $i }} {{ $productCurrency }}</button>
-      </div>
+    </div>
     @endfor
   </div>
-
-  <div class="phone_number">
-    <div class="row m-0">
-      <div class="col-12 d-flex justify-content-center align-items-center collPadding">
-        <h5 class="payment_methods_title">اختيار طريقة الدفع</h5>
-      </div>
-
-      <div class="col-12 p-0">
-        <div class="payment_methods text-center">
-          <a href="#0" class="payment dcb">
-            <i class="fas fa-phone"></i>
-          </a>
-
-          <a href="#0" class="payment myfatoorah">
-            <i class="fab fa-cc-visa"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="show_details d-none">
-        <div class="row m-1 myfatoorah-payment d-none">
-          <div class="payment-method col-2">
-            <a href="#" class="btn btn-primary" data-method="KNET">KNET</a>
-          </div>
-          <div class="payment-method ml-2 col-4">
-            <a href="#" class="btn btn-success" data-method="VISA/MASTER">VISA/MASTER</a>
-          </div>
-          <div class="payment-method col-2">
-            <a href="#" class="btn btn-info" data-method="Sadad">Sadad</a>
-          </div>
-          <div class="payment-method ml-2 col-2">
-            <a href="#" class="btn btn-danger" data-method="Meeza">Meeza</a>
-          </div>
-        </div>
-        <div class="row m-0">
-        <div class="col-12 p-0">
-          <h4 class="payment_card_title text-capitalize">mobile no - رقم التليفون</h4>
-        </div>
-
-        <div class="col-12 p-0">
-          <div class="select_input">
-            {!! Form::select("phone_code", getCountryOperators(), auth()->guard('client')->user()->operator->code.'-'.auth()->guard('client')->user()->operator->id , ['form' => "myform", 'required']) !!}
-            <input type="tel" class="form-control" value="{{ auth()->guard('client')->user()->phone }}" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
-          </div>
-        </div>
-
-        <!-- <div class="col-12 p-0">
-          <h4 class="payment_card_title text-capitalize">email - البريد الإلكتروني</h4>
-        </div>
-
-        <div class="col-12 p-0">
-          <div class="select_input" style="grid-template-columns: 100%;">
-            {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input form-control', 'placeholder'=>'Email' ]) !!}
-          </div>
-        </div> -->
-        </div>
-      </div>
-
-      <!--<div class="col-12 p-0">
-        <h4 class="payment_card_title text-capitalize">confirm mobile no - تأكيد رقم التليفون</h4>
-      </div>
-
-      <div class="col-12 p-0">
-        <div class="select_input">
-          {!! Form::select("phone_code_confirmation",getCountryOperators() ,['class'=>'', 'placeholder'=>'', 'form' => "myform"]) !!}
-          <input type="tel" class="form-control" form="myform" name="phone_confirmation" placeholder="Confirm Mobile No." aria-label="Mobile_No" aria-describedby="basic-addon2">
-        </div>
-      </div>-->
-    </div>
   </div>
 
   <div class="quantity">
@@ -125,7 +55,7 @@
             <i class=" fas fa-minus-circle"></i>
           </div>
 
-          <input type="number" class="text-center rounded" id="quantity" name='quantity' value="1" min="1" max="9"/>
+          <input type="number" class="text-center rounded" id="quantity" name='quantity' value="1" min="1" max="9" />
 
           <div id="add" class="qtyplus plus add">
             <i class=" fas fa-plus-circle"></i>
@@ -140,6 +70,69 @@
       {{-- <div class="col-12 d-flex justify-content-center align-items-center collPadding">
         <p class="sms_payment">بعد اتمام عملية الدفع سيصلك كود البطاقة عن طريق sms على رقم تليفونك.</p>
       </div> --}}
+    </div>
+  </div>
+
+  <div class="phone_number">
+    <div class="row m-0">
+      <div class="col-12 d-flex justify-content-center align-items-center collPadding">
+        <h5 class="payment_methods_title">اختيار طريقة الدفع</h5>
+      </div>
+
+      <div class="col-12 p-0">
+        <div class="payment_methods text-center">
+          <a href="#0" class="payment dcb">
+            <i class="fas fa-phone"></i>
+          </a>
+
+          <a href="#0" class="payment myfatoorah">
+            <i class="fab fa-cc-visa"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="show_details d-none">
+        <div class="row m-1 myfatoorah-payment d-none">
+          <div class="payment-method col-6 text-center">
+            <a href="#0" class="btn payment-method-btn" data-method="KNET">KNET</a>
+          </div>
+
+          <div class="payment-method col-6 text-center">
+            <a href="#0" class="btn payment-method-btn" data-method="VISA/MASTER">VISA/MASTER</a>
+          </div>
+
+          <div class="payment-method col-6 text-center">
+            <a href="#0" class="btn payment-method-btn" data-method="Sadad">Sadad</a>
+          </div>
+
+          <div class="payment-method col-6 text-center">
+            <a href="#0" class="btn payment-method-btn" data-method="Meeza">Meeza</a>
+          </div>
+        </div>
+
+        <div class="row m-0">
+          <div class="col-12 p-0">
+            <h4 class="payment_card_title text-capitalize">mobile no - رقم التليفون</h4>
+          </div>
+
+          <div class="col-12 p-0">
+            <div class="select_input">
+              {!! Form::select("phone_code", getCountryOperators(), auth()->guard('client')->user()->operator->code.'-'.auth()->guard('client')->user()->operator->id , ['form' => "myform", 'required']) !!}
+              <input type="tel" class="form-control" value="{{ auth()->guard('client')->user()->phone }}" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
+            </div>
+          </div>
+
+          <!-- <div class="col-12 p-0">
+          <h4 class="payment_card_title text-capitalize">email - البريد الإلكتروني</h4>
+        </div>
+
+        <div class="col-12 p-0">
+          <div class="select_input" style="grid-template-columns: 100%;">
+            {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input form-control', 'placeholder'=>'Email' ]) !!}
+          </div>
+        </div> -->
+        </div>
+      </div>
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
         <div class="form-group yes_understand">
@@ -157,7 +150,6 @@
       </div>
     </div>
   </div>
-
 </section>
 @stop
 
