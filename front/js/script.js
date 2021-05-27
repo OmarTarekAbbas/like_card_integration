@@ -154,3 +154,11 @@ $(window).on('load', function () {
     $(this).remove();
   });
 });
+
+
+$(document).ready(function(){
+  $('.phone_number .payment_methods .payment').click(function(){
+    $('.payment_methods .payment').removeClass("active_methods");
+    $(this).addClass("active_methods");
+});
+});
