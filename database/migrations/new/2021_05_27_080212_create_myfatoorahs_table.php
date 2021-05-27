@@ -19,6 +19,8 @@ class CreateMyfatoorahsTable extends Migration
             $table->text('url');
             $table->text('request');
             $table->text('response');
+            $table->string("type")->comment("InitiatePayment| ExecutePayment | PaymentStatus")->nullable();;
+            $table->unsignedBigInteger('order_id')->nullable();
             $table->timestamps();
         });
     }

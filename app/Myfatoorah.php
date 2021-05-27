@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Myfatoorah extends Model
 {
-    protected $fillable = ['url', 'request', 'response'];
+    protected $fillable = ['url', 'request', 'response', 'type', 'order_id'];
 }

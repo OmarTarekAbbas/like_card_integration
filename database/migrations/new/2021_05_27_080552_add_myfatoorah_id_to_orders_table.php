@@ -14,7 +14,7 @@ class AddMyfatoorahIdToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->unsignedBigInteger('myfatoorah_id')->nullable();
+            $table->unsignedBigInteger('myfatoorah_id')->nullable()->after('dcb_status');
         });
     }
 

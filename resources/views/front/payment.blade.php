@@ -48,7 +48,7 @@
 
           <input type="hidden" value="{{ $productCurrency?? 'KWD' }}" name="currency">
 
-          <input type="hidden" class="payment-method-value" name="payment_method" value="" readonly>
+          <input type="hidden" class="payment-method-value" name="payment" value="" readonly>
 
 
           <div id="sub" class="qtyminus minus sub">
@@ -93,24 +93,14 @@
 
       <div class="show_details d-none">
         <div class="row m-1 myfatoorah-payment d-none">
-          <div class="payment-method col-6 text-center">
-            <a href="#0" class="btn payment-method-btn" data-method="KNET">KNET</a>
-          </div>
-
-          <div class="payment-method col-6 text-center">
-            <a href="#0" class="btn payment-method-btn" data-method="VISA/MASTER">VISA/MASTER</a>
-          </div>
-
-          <div class="payment-method col-6 text-center">
-            <a href="#0" class="btn payment-method-btn" data-method="Sadad">Sadad</a>
-          </div>
-
-          <div class="payment-method col-6 text-center">
-            <a href="#0" class="btn payment-method-btn" data-method="Meeza">Meeza</a>
-          </div>
+          @for($i=2;$i<count($paymentType::getList());$i++)
+            <div class="payment-method col-6 text-center">
+              <a href="#0" class="btn payment-method-btn" data-method="{{ $i }}">{{ $paymentType::getLabel($i) }}</a>
+            </div>
+          @endfor
         </div>
 
-        <div class="row m-0">
+        <div class="row m-0 payment-phone d-none">
           <div class="col-12 p-0">
             <h4 class="payment_card_title text-capitalize">mobile no - رقم التليفون</h4>
           </div>
@@ -191,6 +181,7 @@
     $("#myform").attr('action', url)
     $('.show_details').removeClass('d-none')
     $('.show_details .myfatoorah-payment').removeClass('d-none')
+    $('.show_details .payment-phone').removeClass('d-none')
     $('.payment-method-value').removeAttr('readonly')
     $('.btn_checkout').removeAttr('disabled')
   }
@@ -203,6 +194,7 @@
       $('.payment-method-value').attr('readonly', true)
     } else {
       readyForm('{{ route("front.myfatoorah.redirect.payment") }}')
+      $('.show_details .payment-phone').addClass('d-none')
     }
   })
 

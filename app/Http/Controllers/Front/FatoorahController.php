@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Constants\PaymentType;
 use App\Http\Controllers\Controller;
+use App\Myfatoorah;
 use App\Services\LikeCardService;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
@@ -17,6 +19,7 @@ class FatoorahController extends Controller
   private $likeCard;
   private $orderService;
   private $isSuccess;
+  private $order_id;
 
 	//Live
 	//$this->apiURL = 'https://api.myfatoorah.com';
@@ -30,11 +33,16 @@ class FatoorahController extends Controller
     $this->likeCard     = $likeCard;
     $this->orderService = $orderService;
     $this->isSuccess    = true;
+    $this->order_di     = null;
 	}
 
 	public function redirectToPaymentPage(Request $request)
 	{
 		/* ------------------------ Call InitiatePayment Endpoint ------------------- */
+    //init order with pending status
+    $order = $this->orderService->handle($request->all());
+    $this->order_id = $order->id;
+
 		//Fill POST fields array
 		$total_price = $request->sell_price * $request->quantity;
 		$ipPostFields = ['InvoiceAmount' => $total_price, 'CurrencyIso' => $request->currency];
@@ -56,7 +64,7 @@ class FatoorahController extends Controller
 
 		//You can save $paymentMethods information in database to be used later
 		foreach ($paymentMethods as $pm) {
-		    if ($pm->PaymentMethodEn == $request->payment_method) {
+		    if ($pm->PaymentMethodEn == PaymentType::getLabel($request->payment)) {
 		        $paymentMethodId = $pm->PaymentMethodId;
 		        break;
 		    }
@@ -113,8 +121,6 @@ class FatoorahController extends Controller
 		$invoiceId   = $data->InvoiceId;
 		$paymentLink = $data->PaymentURL;
 
-    //init order with pending status
-    $this->orderService->handle($request->all());
 
 		//Redirect your customer to the payment page to complete the payment process
 		//Display the payment link to your customer
@@ -130,8 +136,7 @@ class FatoorahController extends Controller
 
 	public function initiatePayment($apiURL, $apiKey, $postFields)
   {
-
-	    $json = $this->callAPI("$this->apiURL/v2/InitiatePayment", $this->apiKey, $postFields);
+	    $json = $this->callAPI("$apiURL/v2/InitiatePayment", $apiKey, $postFields);
       if(!$this->isSuccess) {
         return ;
       }
@@ -145,7 +150,7 @@ class FatoorahController extends Controller
 
 	public function executePayment($apiURL, $apiKey, $postFields)
   {
-	    $json = $this->callAPI("$this->apiURL/v2/ExecutePayment", $this->apiKey, $postFields);
+	    $json = $this->callAPI("$apiURL/v2/ExecutePayment", $apiKey, $postFields);
       if(!$this->isSuccess) {
         return ;
       }
@@ -159,12 +164,11 @@ class FatoorahController extends Controller
 
 	public function callAPI($endpointURL, $apiKey, $postFields)
   {
-
 	    $curl = curl_init($endpointURL);
 	    curl_setopt_array($curl, array(
 	        CURLOPT_CUSTOMREQUEST  => "POST",
 	        CURLOPT_POSTFIELDS     => json_encode($postFields),
-	        CURLOPT_HTTPHEADER     => array("Authorization: Bearer $this->apiKey", 'Content-Type: application/json'),
+	        CURLOPT_HTTPHEADER     => array("Authorization: Bearer $apiKey", 'Content-Type: application/json'),
 	        CURLOPT_RETURNTRANSFER => true,
 	    ));
 
@@ -186,7 +190,8 @@ class FatoorahController extends Controller
           session()->flash("faild", $error);
 	        // die("Error: $error");
 	    }
-
+      $type = explode('/', $endpointURL);
+      $this->log($endpointURL, json_encode($postFields), json_encode($response), end($type));
 	    return json_decode($response);
 	}
 
@@ -240,6 +245,7 @@ class FatoorahController extends Controller
 		    'Key'     => $keyId,
 		    'KeyType' => $KeyType
 		];
+
 		//Call endpoint
 		$json       = $this->callAPI("$this->apiURL/v2/getPaymentStatus", $this->apiKey, $postFields);
 
@@ -271,6 +277,17 @@ class FatoorahController extends Controller
       $error = "حدث خطأ اثناء الشراء";
     }
     return ['error' => $error, 'success' => $success];
+  }
+
+  private function log($url, $request, $response, $type)
+  {
+    Myfatoorah::create([
+      'url'      => $url,
+      'request'  => $request,
+      'response' => $response,
+      'type'     => $type,
+      'order_id' => $this->order_id
+    ]);
   }
 
 }
