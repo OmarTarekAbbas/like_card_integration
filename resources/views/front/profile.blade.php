@@ -10,7 +10,7 @@
   <div class="main-content">
     <div class="login_form text-center">
       <h2 class="title">Profile</h2>
-
+
       <div class="login_form_grid ">
         <div class="upload_img">
           <a onclick="_upload()">

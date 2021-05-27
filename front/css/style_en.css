@@ -331,21 +331,16 @@ main .payment_card .payment_card_title {
   font-size: 1.16rem;
   margin-bottom: 0.75rem;
 }
-main .payment_card .grid_view {
-  display: grid;
-  grid-template-columns: 100%;
-  margin-bottom: 0.75rem;
-}
-main .payment_card .grid_view .price_background {
+main .payment_card .price_background {
   padding: 0 1.5%;
 }
-main .payment_card .grid_view .price_background .price_currency {
-  width: 30%;
+main .payment_card .price_background .price_currency {
+  width: 70%;
   margin-bottom: 10%;
   font-size: 1.2rem;
   font-weight: bold;
 }
-main .payment_card .grid_view .price_background .price_currency:focus {
+main .payment_card .price_background .price_currency:focus {
   box-shadow: 0 0 0 0.1rem #093543;
 }
 main .payment_card .phone_number {
@@ -367,7 +362,7 @@ main .payment_card .phone_number .payment_methods a i {
 main .payment_card .phone_number .select_input {
   display: none;
   display: grid;
-  grid-template-columns: 38% 62%;
+  grid-template-columns: 50% 50%;
   margin-bottom: 3%;
 }
 main .payment_card .phone_number .select_input select {
@@ -384,6 +379,15 @@ main .payment_card .phone_number input {
 main .payment_card .phone_number input:hover, main .payment_card .phone_number input:focus {
   box-shadow: 0 0 0 0.2rem #368ca7;
   border-color: unset;
+}
+main .payment_card .phone_number .show_details .payment-method .payment-method-btn {
+  background-color: #093543;
+  color: #fff;
+  width: 100%;
+  margin-bottom: 3%;
+}
+main .payment_card .phone_number .show_details .payment-method .payment-method-btn:focus {
+  box-shadow: 0 0 0 0.2rem #368ca7;
 }
 main .payment_card .quantity .quantity_title,
 main .payment_card .quantity .total_title {
