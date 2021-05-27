@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Services\LikeCardService;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
 class FatoorahController extends Controller
@@ -12,28 +14,45 @@ class FatoorahController extends Controller
 	// visa 4005550000000001 05/18 123
 	private $apiURL;
 	private $apiKey;
+  private $likeCard;
+  private $orderService;
+  private $isSuccess;
 
 	//Live
 	//$this->apiURL = 'https://api.myfatoorah.com';
 	//$this->apiKey = ''; //Live token value to be placed here: https://myfatoorah.readme.io/docs/live-token
 	//
 	//
-	public function __construct()
+	public function __construct(LikeCardService $likeCard, OrderService $orderService)
 	{
-	    $this->apiURL = env('MYFATOORAH_API_ENDPOINT');
-		$this->apiKey = env('MYFATOORAH_KEY');
+	  $this->apiURL       = env('MYFATOORAH_API_ENDPOINT');
+		$this->apiKey       = env('MYFATOORAH_KEY');
+    $this->likeCard     = $likeCard;
+    $this->orderService = $orderService;
+    $this->isSuccess    = true;
 	}
 
 	public function redirectToPaymentPage(Request $request)
 	{
-		// dd(route('front.myfatoorah.handle.callback'));
 		/* ------------------------ Call InitiatePayment Endpoint ------------------- */
 		//Fill POST fields array
 		$total_price = $request->sell_price * $request->quantity;
 		$ipPostFields = ['InvoiceAmount' => $total_price, 'CurrencyIso' => $request->currency];
 
+    // check balance
+    // $response = $this->checkBalance($total_price);
+    // if(!$response['success']){
+    //   session()->flash("faild", $response['error']);
+    //   return back();
+    // }
+
 		//Call endpoint
 		$paymentMethods = $this->initiatePayment($this->apiURL, $this->apiKey, $ipPostFields);
+
+    //check if erro happend when call initiatePayment function
+    if(!$this->isSuccess) {
+      return back();
+    }
 
 		//You can save $paymentMethods information in database to be used later
 		foreach ($paymentMethods as $pm) {
@@ -66,7 +85,7 @@ class FatoorahController extends Controller
 		    'paymentMethodId' => $paymentMethodId,
 		    'InvoiceValue'    => $total_price,
 		    'CallBackUrl'     => route('front.myfatoorah.handle.callback'),
-		    'ErrorUrl'        => route('front.myfatoorah.handle.callback'),   
+		    'ErrorUrl'        => route('front.myfatoorah.handle.callback'),
 		        //Fill optional data
 		        //'CustomerName'       => 'fname lname',
 		        //'DisplayCurrencyIso' => 'KWD',
@@ -86,36 +105,50 @@ class FatoorahController extends Controller
 		//Call endpoint
 		$data = $this->executePayment($this->apiURL, $this->apiKey, $postFields);
 
+    if(!$this->isSuccess) {
+      return back();
+    }
+
 		//You can save payment data in database as per your needs
 		$invoiceId   = $data->InvoiceId;
 		$paymentLink = $data->PaymentURL;
 
+    //init order with pending status
+    $this->orderService->handle($request->all());
+
 		//Redirect your customer to the payment page to complete the payment process
 		//Display the payment link to your customer
 		// echo "Click on <a href='$paymentLink' target='_blank'>$paymentLink</a> to pay with invoiceID $invoiceId.";
-		// 
+		//
 		return redirect()->away($paymentLink);
 	}
 
 	/* ------------------------ Functions --------------------------------------- */
 	/*
-	 * Initiate Payment Endpoint Function 
+	 * Initiate Payment Endpoint Function
 	 */
 
-	public function initiatePayment($apiURL, $apiKey, $postFields) {
+	public function initiatePayment($apiURL, $apiKey, $postFields)
+  {
 
 	    $json = $this->callAPI("$this->apiURL/v2/InitiatePayment", $this->apiKey, $postFields);
+      if(!$this->isSuccess) {
+        return ;
+      }
 	    return $json->Data->PaymentMethods;
 	}
 
 	//------------------------------------------------------------------------------
 	/*
-	 * Execute Payment Endpoint Function 
+	 * Execute Payment Endpoint Function
 	 */
 
-	public function executePayment($apiURL, $apiKey, $postFields) {
-
+	public function executePayment($apiURL, $apiKey, $postFields)
+  {
 	    $json = $this->callAPI("$this->apiURL/v2/ExecutePayment", $this->apiKey, $postFields);
+      if(!$this->isSuccess) {
+        return ;
+      }
 	    return $json->Data;
 	}
 
@@ -124,7 +157,8 @@ class FatoorahController extends Controller
 	 * Call API Endpoint Function
 	 */
 
-	public function callAPI($endpointURL, $apiKey, $postFields) {
+	public function callAPI($endpointURL, $apiKey, $postFields)
+  {
 
 	    $curl = curl_init($endpointURL);
 	    curl_setopt_array($curl, array(
@@ -141,12 +175,16 @@ class FatoorahController extends Controller
 
 	    if ($curlErr) {
 	        //Curl is not working in your server
-	        die("Curl Error: $curlErr");
+          $this->isSuccess = false;
+          session()->flash("faild", $curlErr);
+	        // die("Curl Error: $curlErr");
 	    }
 
 	    $error = $this->handleError($response);
 	    if ($error) {
-	        die("Error: $error");
+          $this->isSuccess = false;
+          session()->flash("faild", $error);
+	        // die("Error: $error");
 	    }
 
 	    return json_decode($response);
@@ -154,10 +192,11 @@ class FatoorahController extends Controller
 
 	//------------------------------------------------------------------------------
 	/*
-	 * Handle Endpoint Errors Function 
+	 * Handle Endpoint Errors Function
 	 */
 
-	public function handleError($response) {
+	public function handleError($response)
+  {
 
 	    $json = json_decode($response);
 	    if (isset($json->IsSuccess) && $json->IsSuccess == true) {
@@ -192,7 +231,7 @@ class FatoorahController extends Controller
 		$keyId   = $request->paymentId;
 		$KeyType = 'paymentId';
 
-		//Inquiry using invoiceId 
+		//Inquiry using invoiceId
 		/*$keyId   = '613842';
 		$KeyType = 'invoiceId';*/
 
@@ -204,8 +243,34 @@ class FatoorahController extends Controller
 		//Call endpoint
 		$json       = $this->callAPI("$this->apiURL/v2/getPaymentStatus", $this->apiKey, $postFields);
 
+    if(!$this->isSuccess) {
+      return ;
+    }
+
 		//Display the payment result to your customer
 		return  response()->json($json->Data);
 	}
+
+  /**
+   * Method checkBalance
+   *
+   * @param float $data
+   * @return array
+   */
+  private function checkBalance($total_price)
+  {
+    $success = false;
+    try {
+      $response = json_decode($this->likeCard->checkBalance());
+      $this->balance = $response->balance ;
+      $success = true;
+      if($this->balance < $total_price) {
+        $error = "لايمكن شراء المنتج الان";
+      }
+    } catch (\Throwable $th) {
+      $error = "حدث خطأ اثناء الشراء";
+    }
+    return ['error' => $error, 'success' => $success];
+  }
 
 }
