@@ -261,8 +261,10 @@ class FatoorahController extends Controller
   public function updateOrder($response, $order_id)
   {
     $order = Order::find($order_id);
-    $order->payment = PaymentType::$response->InvoiceTransactions[0]->PaymentGateway;
-    $order->status  = OrderStatus::$response->InvoiceStatus;
+    $geteway = $response->InvoiceTransactions[0]->PaymentGateway;
+    $status  = $response->InvoiceStatus;
+    $order->payment = PaymentType::$geteway;
+    $order->status  = OrderStatus::$status;
     $order->myfatoorah_id  = session("myfatoorah_id");
     $order->save();
   }

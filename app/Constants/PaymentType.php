@@ -6,12 +6,12 @@ namespace App\Constants;
 
 final class PaymentType
 {
-  const NO_PAYMENT         = 0;
-  const DCB                = 1;
-  const KNET               = 2;
-  const VISA_MASTER        = 3;
-  const Sadad              = 4;
-  const Meeza              = 5;
+  static const NO_PAYMENT         = 0;
+  static const DCB                = 1;
+  static const KNET               = 2;
+  static const VISA_MASTER        = 3;
+  static const Sadad              = 4;
+  static const Meeza              = 5;
 
   public static function getList()
   {
