@@ -304,7 +304,7 @@ class FatoorahController extends Controller
   {
     $currentOrder = Order::find($data->CustomerReference);
     $post['status']           = OrderStatus::FINISHED;
-    $data['payment']          = PaymentType::getKey($data->InvoiceTransactions[0]->PaymentGateway);
+    $post['payment']          = PaymentType::getKey($data->InvoiceTransactions[0]->PaymentGateway);
     $post['transaction_id']   = $response->orderId;
     $post['serial_id']        = $response->serials[0]->serialId;
     $post['hash_serial_code'] = $response->serials[0]->serialCode;
