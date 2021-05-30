@@ -50,9 +50,8 @@ class FatoorahController extends Controller
 		$ipPostFields = ['InvoiceAmount' => $total_price, 'CurrencyIso' => $request->currency];
 
     // check balance
-    $response = $this->checkBalance($total_price);
-    if(!$response['success']){
-      session()->flash("faild", $response['error']);
+    $this->checkBalance($total_price);
+    if(!$this->isSuccess){
       return back();
     }
 
@@ -280,7 +279,7 @@ class FatoorahController extends Controller
     try {
       $response = json_decode($this->likeCard->createOrder(session("productId"), session("quantity")));
       if($response->response) {
-        $this->sucess = true;
+        $this->isSuccess = true;
         $this->updateOrderFromOurSide($data, $response);
       } else {
         $this->isSuccess = false;
@@ -339,18 +338,19 @@ class FatoorahController extends Controller
    */
   private function checkBalance($total_price)
   {
-    $success = false;
     try {
       $response = json_decode($this->likeCard->checkBalance());
       $this->balance = $response->balance ;
-      $success = true;
+
       if($this->balance < $total_price) {
-        $error = "لايمكن شراء المنتج الان";
+        $this->isSuccess = false;
+        session()->flash("faild", "لانستطيع الشراء من البائع الاصلى");
       }
     } catch (\Throwable $th) {
-      $error = "حدث خطأ اثناء الشراء";
+      $this->isSuccess = false;
+      session()->flash("faild", "حدث خطأ اثناء الشراء");
     }
-    return ['error' => $error, 'success' => $success];
+
   }
 
   private function log($url, $request, $response, $type)
