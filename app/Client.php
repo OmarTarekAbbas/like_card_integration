@@ -41,7 +41,6 @@ class Client extends Authenticatable
       return $this->hasMany(Order::class)
       ->orderBy("orders.created_at", "desc")
       ->where("status", OrderStatus::FINISHED)
-      ->where("payment", PaymentType::DCB)
       ->whereNotNull("transaction_id");
     }
 
