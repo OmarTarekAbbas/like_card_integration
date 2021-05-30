@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Constants\OrderStatus;
 use App\Constants\PaymentType;
 use App\Http\Controllers\Controller;
 use App\Myfatoorah;
+use App\Order;
 use App\Services\LikeCardService;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
@@ -33,7 +35,7 @@ class FatoorahController extends Controller
     $this->likeCard     = $likeCard;
     $this->orderService = $orderService;
     $this->isSuccess    = true;
-    $this->order_di     = null;
+    $this->order_id     = null;
 	}
 
 	public function redirectToPaymentPage(Request $request)
@@ -48,11 +50,11 @@ class FatoorahController extends Controller
 		$ipPostFields = ['InvoiceAmount' => $total_price, 'CurrencyIso' => $request->currency];
 
     // check balance
-    // $response = $this->checkBalance($total_price);
-    // if(!$response['success']){
-    //   session()->flash("faild", $response['error']);
-    //   return back();
-    // }
+    $response = $this->checkBalance($total_price);
+    if(!$response['success']){
+      session()->flash("faild", $response['error']);
+      return back();
+    }
 
 		//Call endpoint
 		$paymentMethods = $this->initiatePayment($this->apiURL, $this->apiKey, $ipPostFields);
@@ -90,10 +92,11 @@ class FatoorahController extends Controller
 		//Fill POST fields array
 		$postFields = [
 		    //Fill required data
-		    'paymentMethodId' => $paymentMethodId,
-		    'InvoiceValue'    => $total_price,
-		    'CallBackUrl'     => route('front.myfatoorah.handle.callback'),
-		    'ErrorUrl'        => route('front.myfatoorah.handle.callback'),
+		    'paymentMethodId'    => $paymentMethodId,
+		    'InvoiceValue'       => round($total_price, 2),
+		    'CallBackUrl'        => route('front.myfatoorah.handle.callback'),
+		    'ErrorUrl'           => route('front.myfatoorah.handle.callback'),
+        'CustomerReference'  => $this->order_id,
 		        //Fill optional data
 		        //'CustomerName'       => 'fname lname',
 		        //'DisplayCurrencyIso' => 'KWD',
@@ -101,7 +104,6 @@ class FatoorahController extends Controller
 		        //'CustomerMobile'     => '1234567890',
 		        //'CustomerEmail'      => 'email@example.com',
 		        //'Language'           => 'en', //or 'ar'
-		        //'CustomerReference'  => 'orderId',
 		        //'CustomerCivilId'    => 'CivilId',
 		        //'UserDefinedField'   => 'This could be string, number, or array',
 		        //'ExpiryDate'         => '', //The Invoice expires after 3 days by default. Use 'Y-m-d\TH:i:s' format in the 'Asia/Kuwait' time zone.
@@ -117,16 +119,7 @@ class FatoorahController extends Controller
       return back();
     }
 
-		//You can save payment data in database as per your needs
-		$invoiceId   = $data->InvoiceId;
-		$paymentLink = $data->PaymentURL;
-
-
-		//Redirect your customer to the payment page to complete the payment process
-		//Display the payment link to your customer
-		// echo "Click on <a href='$paymentLink' target='_blank'>$paymentLink</a> to pay with invoiceID $invoiceId.";
-		//
-		return redirect()->away($paymentLink);
+		return redirect()->away($data->PaymentURL);
 	}
 
 	/* ------------------------ Functions --------------------------------------- */
@@ -236,10 +229,6 @@ class FatoorahController extends Controller
 		$keyId   = $request->paymentId;
 		$KeyType = 'paymentId';
 
-		//Inquiry using invoiceId
-		/*$keyId   = '613842';
-		$KeyType = 'invoiceId';*/
-
 		//Fill POST fields array
 		$postFields = [
 		    'Key'     => $keyId,
@@ -250,12 +239,97 @@ class FatoorahController extends Controller
 		$json       = $this->callAPI("$this->apiURL/v2/getPaymentStatus", $this->apiKey, $postFields);
 
     if(!$this->isSuccess) {
-      return ;
+      return redirect('payment');
     }
 
+    if($json->Data->InvoiceStatus != OrderStatus::getLabel(OrderStatus::FINISHED))
+    {
+      $this->updateOrder($json->Data, $json->Data->CustomerReference);
+      session()->flash("faild", "Transaction status is ".$json->Data->InvoiceTransactions[0]->TransactionStatus);
+      return redirect('payment');
+    }
+
+    $this->createOrderFromLikeCard($json->Data);
+    if(!$this->isSuccess) {
+      return redirect('payment');
+    }
 		//Display the payment result to your customer
-		return  response()->json($json->Data);
+		session()->flash("success", "Your Order Create Successfully");
+    return redirect()->route("front.order.details",["order_id" => $json->Data->CustomerReference]);
 	}
+
+  //  {"InvoiceId","InvoiceStatus","InvoiceReference","CustomerReference":,"CreatedDate","ExpiryDate","InvoiceValue","Comments","CustomerName","CustomerMobile","CustomerEmail","UserDefinedField","InvoiceDisplayValue","InvoiceItems","InvoiceTransactions": [ {"TransactionDate","PaymentGateway","ReferenceId","TrackId","TransactionId","PaymentId","AuthorizationId","TransactionStatus","TransationValue",CustomerServiceCharge","DueValue","PaidCurrency","PaidCurrencyValue","Currency","Error","CardNumber",}],"Suppliers": []}
+  public function updateOrder($response, $order_id)
+  {
+    $order = Order::find($order_id);
+    $order->payment = PaymentType::$response->InvoiceTransactions[0]->PaymentGateway;
+    $order->status  = OrderStatus::$response->InvoiceStatus;
+    $order->myfatoorah_id  = session("myfatoorah_id");
+    $order->save();
+  }
+
+   /**
+   * Method createOrderFromLikeCard
+   *
+   * @param array $data [productId, quantity]
+   *
+   * @return void
+   */
+  public function createOrderFromLikeCard($data)
+  {
+    try {
+      $response = json_decode($this->likeCard->createOrder(session("productId"), session("quantity")));
+      if($response->response) {
+        $this->sucess = true;
+        $this->updateOrderFromOurSide($data, $response);
+      } else {
+        $this->isSuccess = false;
+        session()->flash("faild", "لانستطيع الشراء من البائع الاصلى");
+      }
+    } catch (\Throwable $th) {
+      $this->isSuccess = false;
+      session()->flash("faild", "حدث خطأ اثناء الشراء من البائع الاصلى");
+    }
+  }
+
+  /**
+   * Method updateOrderFromOurSide
+   *
+   * update [status, dcb_status, payment_type, transaction_id, serial_id, hash_serial_code, serial_code, valid_to]
+   *
+   * @param object $data [pincode_verify_id, dec_status]
+   * @param object $response [this our order that in database]
+   * @return void
+   */
+  public function updateOrderFromOurSide($data, $response)
+  {
+    $currentOrder = Order::find($data->CustomerReference);
+    $post['status']           = OrderStatus::FINISHED;
+    $data['payment']          = PaymentType::$data->InvoiceTransactions[0]->PaymentGateway;
+    $post['transaction_id']   = $response->orderId;
+    $post['serial_id']        = $response->serials[0]->serialId;
+    $post['hash_serial_code'] = $response->serials[0]->serialCode;
+    $post['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serialCode);
+    $post['valid_to']         = $response->serials[0]->validTo;
+    $post['myfatoorah_id']    = session("myfatoorah_id");
+    $this->orderService->handle($post, $currentOrder);
+    $this->sendMailToUserWithSerialCode($post['serial_code']);
+  }
+
+  /**
+   * Method send Mail To User With Serial Code
+   *
+   * @param string $serial_code
+   *
+   * @return void
+   */
+  public function sendMailToUserWithSerialCode($serial_code)
+  {
+    \Mail::send('front.mails.serial_code', ['serial_code' => $serial_code], function ($m) {
+      $m->from("m.mahmoud@ivas.com",'Like Card');
+      $m->to(auth()->guard("client")->user()->email, 'like Card')->subject('Serial Code');
+    });
+  }
 
   /**
    * Method checkBalance
@@ -281,13 +355,14 @@ class FatoorahController extends Controller
 
   private function log($url, $request, $response, $type)
   {
-    Myfatoorah::create([
+    $myfatoorah = Myfatoorah::create([
       'url'      => $url,
       'request'  => $request,
       'response' => $response,
       'type'     => $type,
       'order_id' => $this->order_id
     ]);
+    session('myfatoorah_id', $myfatoorah->id);
   }
 
 }

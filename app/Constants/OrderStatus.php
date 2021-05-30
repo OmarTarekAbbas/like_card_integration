@@ -8,14 +8,14 @@ final class OrderStatus
 {
     const PENDING        = 0;
     const FINISHED       = 1;
-    const FAIL           = 2;
+    const CANCEL         = 2;
 
     public static function getList()
     {
         return [
             self::PENDING        => trans('Pending'),
-            self::FINISHED       => trans('Finished'),
-            self::FAIL           => trans('Fail'),
+            self::FINISHED       => trans('Paid'),
+            self::CANCEL         => trans('Canceled'),
         ];
     }
 
