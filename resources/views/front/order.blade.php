@@ -21,6 +21,7 @@
           <td><span class="title">Order Create Date:</span> <b class="title_value">{{ $order->updated_at->format("d-m-Y") }}</b></td>
           <td><span class="title">Order Current Status:</span> <b class="title_value">{{ $orderStatus::getLabel($order->status) }}</b></td>
           <td><span class="title">Order Serial Code:</span> <b class="title_value">{{ $order->serial_code }}</b></td>
+          <td><span class="title">Payment Type:</span> <b class="title_value">{{ $paymentType::getLabel($order->payment) }}</b></td>
           <td class="last_grid"><a class="btn_show btn" href="{{ route('front.order.details', ['order_id' => $order->id]) }}"> Show </a></td>
         </tr>
         @endforeach
