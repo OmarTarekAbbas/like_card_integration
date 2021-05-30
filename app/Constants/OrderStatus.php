@@ -23,4 +23,9 @@ final class OrderStatus
     {
         return self::getList()[$key];
     }
+
+    public static function getKey($label)
+    {
+        return array_search($label, array_values(self::getList()));
+    }
 }
