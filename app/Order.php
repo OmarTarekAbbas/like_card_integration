@@ -10,7 +10,7 @@ class Order extends Model
 {
   protected $fillable = [
     'client_id', 'status', 'total_price', 'currency', 'payment', 'transaction_id', 'pincode_request_id', 'pincode_verify_id',
-    'product_name', 'product_image', 'valid_to', 'serial_id', 'serial_code', 'hash_serial_code', 'sell_price', 'original_price', 'phone', 'phone_code', 'operator_id', 'dcb_status', 'quantity'
+    'product_name', 'product_image', 'valid_to', 'serial_id', 'serial_code', 'hash_serial_code', 'sell_price', 'original_price', 'phone', 'phone_code', 'operator_id', 'dcb_status', 'quantity', 'myfatoorah_id'
   ];
 
   public function getDcbStatusAttribute($value)
