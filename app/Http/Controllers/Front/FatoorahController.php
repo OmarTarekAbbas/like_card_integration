@@ -116,6 +116,12 @@ class FatoorahController extends Controller
 		//Call endpoint
 		$data = $this->executePayment($this->apiURL, $this->apiKey, $postFields);
 
+    //save myfatoorah info
+    $post['invoiceId'] = $data->InvoiceId;
+    $post['payment_url'] = $data->PaymentURL;
+    $post['payment_method'] = PaymentType::getLabel($request->payment);
+    $this->updateMyfatoorah($post);
+
     if(!$this->isSuccess) {
       return back();
     }
@@ -226,6 +232,7 @@ class FatoorahController extends Controller
 	}
 
 	/* -------------------------------------------------------------------------- */
+   //  {"InvoiceId","InvoiceStatus","InvoiceReference","CustomerReference":,"CreatedDate","ExpiryDate","InvoiceValue","Comments","CustomerName","CustomerMobile","CustomerEmail","UserDefinedField","InvoiceDisplayValue","InvoiceItems","InvoiceTransactions": [ {"TransactionDate","PaymentGateway","ReferenceId","TrackId","TransactionId","PaymentId","AuthorizationId","TransactionStatus","TransationValue",CustomerServiceCharge","DueValue","PaidCurrency","PaidCurrencyValue","Currency","Error","CardNumber",}],"Suppliers": []}
 
 	public function handleCallback(Request $request)
 	{
@@ -255,15 +262,22 @@ class FatoorahController extends Controller
     }
 
     $this->createOrderFromLikeCard($json->Data);
+
     if(!$this->isSuccess) {
       return redirect('payment');
     }
+
+    //save myfatoorah info
+    $post['invoice_status']       = $json->Data->InvoiceStatus;
+    $post['transaction_status']    = $json->Data->InvoiceTransactions[0]->TransactionStatus;
+    $this->updateMyfatoorah($post);
+
 		//Display the payment result to your customer
 		session()->flash("success", "Your Order Create Successfully");
     return redirect()->route("front.order.details",["order_id" => $json->Data->CustomerReference]);
 	}
 
-  //  {"InvoiceId","InvoiceStatus","InvoiceReference","CustomerReference":,"CreatedDate","ExpiryDate","InvoiceValue","Comments","CustomerName","CustomerMobile","CustomerEmail","UserDefinedField","InvoiceDisplayValue","InvoiceItems","InvoiceTransactions": [ {"TransactionDate","PaymentGateway","ReferenceId","TrackId","TransactionId","PaymentId","AuthorizationId","TransactionStatus","TransationValue",CustomerServiceCharge","DueValue","PaidCurrency","PaidCurrencyValue","Currency","Error","CardNumber",}],"Suppliers": []}
+
   public function updateOrder($response, $order_id)
   {
     $order = Order::find($order_id);
@@ -369,6 +383,12 @@ class FatoorahController extends Controller
       'order_id' => $this->order_id
     ]);
     $this->myfatoorah_id = $myfatoorah->id;
+  }
+
+  public function updateMyfatoorah($data)
+  {
+    $myfatoorah = Myfatoorah::find($this->myfatoorah_id);
+    $myfatoorah->update($data);
   }
 
 }
