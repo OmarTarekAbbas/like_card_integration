@@ -15,7 +15,7 @@
       <tbody>
         @foreach($orders as $order)
         <tr class="table_grid">
-          <td><span class="title">Order Number:</span> <b class="title_value">{{ $order->id }}</b></td>
+          <td><span class="title">Order Number:</span> <b class="title_value">{{ $order->transaction_id }}</b></td>
           <td><span class="title">Order Final Total:</span> <b class="title_value">{{ $order->total_price }}</b></td>
           <td><span class="title">Currency Symbol:</span> <b class="title_value">{{ $order->currency }}</b></td>
           <td><span class="title">Order Create Date:</span> <b class="title_value">{{ $order->updated_at->format("d-m-Y") }}</b></td>

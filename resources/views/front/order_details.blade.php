@@ -119,7 +119,7 @@
         <div class="col-12 pr-1 pl-1">
           <p class="mb-1">
             <b>Invoice Number:</b>
-            <span class="float-right">{{ $order->id }}</span>
+            <span class="float-right">{{ $order->transaction_id }}</span>
           </p>
 
           <p class="mb-1">
