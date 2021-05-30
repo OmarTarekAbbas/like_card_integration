@@ -183,6 +183,8 @@ class FatoorahController extends Controller
 	        // die("Error: $error");
 	    }
       $type = explode('/', $endpointURL);
+      $data = json_decode($response);
+      $this->order_id = $data->Data->CustomerReference;
       $this->log($endpointURL, json_encode($postFields), json_encode($response), end($type));
 	    return json_decode($response);
 	}
