@@ -22,6 +22,7 @@ class FatoorahController extends Controller
   private $orderService;
   private $isSuccess;
   private $order_id;
+  private $myfatoorah_id;
 
 	//Live
 	//$this->apiURL = 'https://api.myfatoorah.com';
@@ -36,6 +37,7 @@ class FatoorahController extends Controller
     $this->orderService = $orderService;
     $this->isSuccess    = true;
     $this->order_id     = null;
+    $this->myfatoorah_id= null;
 	}
 
 	public function redirectToPaymentPage(Request $request)
@@ -265,7 +267,7 @@ class FatoorahController extends Controller
     $order = Order::find($order_id);
     $order->payment = PaymentType::getKey($response->InvoiceTransactions[0]->PaymentGateway);
     $order->status  = OrderStatus::getKey($response->InvoiceStatus);
-    $order->myfatoorah_id  = session("myfatoorah_id");
+    $order->myfatoorah_id  = $this->myfatoorah_id;
     $order->save();
   }
 
@@ -312,7 +314,7 @@ class FatoorahController extends Controller
     $post['hash_serial_code'] = $response->serials[0]->serialCode;
     $post['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serialCode);
     $post['valid_to']         = $response->serials[0]->validTo;
-    $post['myfatoorah_id']    = session("myfatoorah_id");
+    $post['myfatoorah_id']    = $this->myfatoorah_id;
     $this->orderService->handle($post, $currentOrder);
     $this->sendMailToUserWithSerialCode($post['serial_code']);
   }
@@ -364,7 +366,7 @@ class FatoorahController extends Controller
       'type'     => $type,
       'order_id' => $this->order_id
     ]);
-    session('myfatoorah_id', $myfatoorah->id);
+    $this->myfatoorah_id = $myfatoorah->id;
   }
 
 }
