@@ -117,7 +117,7 @@ class FatoorahController extends Controller
 		$data = $this->executePayment($this->apiURL, $this->apiKey, $postFields);
 
     //save myfatoorah info
-    $post['invoiceId'] = $data->InvoiceId;
+    $post['invoice_id'] = $data->InvoiceId;
     $post['payment_url'] = $data->PaymentURL;
     $post['payment_method'] = PaymentType::getLabel($request->payment);
     $this->updateMyfatoorah($post);
