@@ -51,7 +51,7 @@ class OrderController extends Controller
       ->addColumn('created_at', function (Order $order) {
           return $order->created_at;
       })
-      ->addColumn('payment_status', function (Order $order) {
+      ->addColumn('dcb_status', function (Order $order) {
         return $order->payment == PaymentType::DCB ?  $order->dcb_status : '----';
       })
       ->addColumn('payment', function (Order $order) {
