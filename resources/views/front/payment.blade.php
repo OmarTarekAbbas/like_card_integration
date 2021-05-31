@@ -187,17 +187,22 @@
     $('.show_details .payment-phone').removeClass('d-none')
     $('.payment-method-value').removeAttr('readonly')
     $('.btn_checkout').removeAttr('disabled')
+    $('.payment_methods .payment').css('color', "#368ca7")
   }
 
   $('.payment').click(function(e){
     e.preventDefault()
+
     if($(this).hasClass('dcb')) {
       readyForm('{{ route("front.pincode.request") }}')
       $('.show_details .myfatoorah-payment').addClass('d-none')
       $('.payment-method-value').attr('readonly', true)
+      $('.myfatoorah ').css('color', '#093543')
+      $('.payment-method').children(".payment-method-btn").css("background-color", '#093543')
     } else {
       readyForm('{{ route("front.myfatoorah.redirect.payment") }}')
       $('.show_details .payment-phone').addClass('d-none')
+      $('.dcb').css('color', '#093543')
     }
   })
 
@@ -205,6 +210,9 @@
     e.preventDefault()
     var method = $(this).children('a').data('method')
     $('.payment-method-value').val(method)
+
+    $(this).parent().children('.payment-method').children(".payment-method-btn").css("background-color", '#093543')
+    $(this).children(".payment-method-btn").css("background-color", '#368ca7')
   })
 </script>
 @stop
