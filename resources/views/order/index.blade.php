@@ -29,7 +29,7 @@
                   <tr>
                     <th style="width:18px"><input type="checkbox" onclick="select_all('products')"></th>
                     <th>id</th>
-                    <th>client_name</th>
+                    <th>client email</th>
                     <th>total_price</th>
                     <th>order date</th>
                     <th>dcb_status</th>
@@ -73,7 +73,7 @@
         columns: [
           {data: 'index', searchable: false, orderable: false},
           {data: 'id'},
-          {data: 'client_name', name: 'client_name'},
+          {data: 'client_email', name: 'client_email'},
           {data: 'total_price', name: 'total_price'},
           {data: 'created_at', name: 'created_at'},
           {data: 'dcb_status', name: 'dcb_status'},

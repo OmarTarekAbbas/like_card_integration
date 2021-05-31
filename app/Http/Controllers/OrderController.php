@@ -41,9 +41,9 @@ class OrderController extends Controller
       ->addColumn('id', function (Order $order) {
           return $order->id;
       })
-      ->addColumn('client_name', function (Order $order) {
+      ->addColumn('client_email', function (Order $order) {
         if ($order->client && isset($order->client))
-          return $order->client_name??'no name';
+          return $order->client->email??'no email';
       })
       ->addColumn('total_price', function (Order $order) {
         return $order->total_price ;
@@ -52,7 +52,7 @@ class OrderController extends Controller
           return $order->created_at;
       })
       ->addColumn('payment_status', function (Order $order) {
-        return $order->dcb_status;
+        return $order->payment == PaymentType::DCB ?  $order->dcb_status : '----';
       })
       ->addColumn('payment', function (Order $order) {
         return PaymentType::getLabel($order->payment);

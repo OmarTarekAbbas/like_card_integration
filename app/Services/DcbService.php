@@ -102,7 +102,7 @@ class DcbService
     if(!enable_dcb) {
       $out['status']  = true;
       $out['message'] = "successfully picode request";
-      $out['dcb_status'] = 1;
+      $out['dcb_status'] = 10500;
     }
 
     return $out;
@@ -207,7 +207,7 @@ class DcbService
     if(!enable_dcb) {
       $out['status']  = true;
       $out['message'] = "Your payment is success";
-      $out['dcb_status'] = 1;
+      $out['dcb_status'] = 10500;
     }
 
     return $out;

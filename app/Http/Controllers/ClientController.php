@@ -26,13 +26,13 @@ class ClientController extends Controller
           return $client->name??'no name';
       })
       ->addColumn('phone', function (Client $client) {
-        return $client->phone ;
+        return $client->phone?? 'no pnone' ;
       })
       ->addColumn('email', function (Client $client) {
           return $client->email;
       })
       ->addColumn('operator', function (Client $client) {
-        return $client->operator->name;
+        return optional($client->operator)->name;
       })
       ->addColumn('action', function (Client $client) {
         return view('client.action', compact('client'))->render();

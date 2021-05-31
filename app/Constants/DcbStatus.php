@@ -7,6 +7,7 @@ namespace App\Constants;
 final class DcbStatus
 {
     const Pending                        = 0;
+    const SUCCESS                        = 10500;
     const Unknown                        = 10101;
     const Invalid_IP                     = 10102;
     const Invalid_Username_And_Password  = 10103;
@@ -25,6 +26,7 @@ final class DcbStatus
     {
         return [
             self::Pending                         => trans('Pending'),
+            self::SUCCESS                         => trans('success'),
             self::Unknown                         => trans('there are unknown error'),
             self::Invalid_IP                      => trans('Invalid_IP'),
             self::Invalid_Username_And_Password   => trans('Invalid_Username_And_Password'),
