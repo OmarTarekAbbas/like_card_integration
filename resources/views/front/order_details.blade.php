@@ -27,11 +27,11 @@
     <div class="card-body">
       <div class="row justify-content-between m-0">
         <div class="col-6 p-0">
-          <h6 class="color-1 mb-0 font-weight-bold change-color">Receipt</h6>
+          <h6 class="color-1 mb-0 font-weight-bold change-color">Serial Code</h6>
         </div>
 
         <div class="col-6 p-0">
-          <small class="font-weight-bold">Receipt Voucher : {{ $order->transaction_id }}</small>
+          <small class="font-weight-bold">Serial Code : {{ $order->serial_code }}</small>
         </div>
       </div>
 
@@ -51,16 +51,6 @@
                         <span class="font-weight-bold">Product Name :</span>
                         <small class="float-right">{{ $order->product_name }}</small>
                       </h6>
-                    </div>
-
-                    <div class="col-12 my-auto">
-                      <span class="font-weight-bold">Serial Id :</span>
-                      <small class="float-right"> {{ $order->serial_id }}</small>
-                    </div>
-
-                    <div class="col-12 my-auto">
-                      <span class="font-weight-bold">Serial Code :</span>
-                      <small class="float-right"> {{ $order->serial_code }}</small>
                     </div>
 
                     <div class="col-12 my-auto">

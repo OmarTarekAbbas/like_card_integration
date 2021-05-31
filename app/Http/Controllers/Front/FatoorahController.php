@@ -55,7 +55,7 @@ class FatoorahController extends Controller
     $this->order_id = $order->id;
 
 		//Fill POST fields array
-		$total_price = $request->sell_price * $request->quantity;
+		$total_price = round($request->sell_price * $request->quantity, 2);
 		$ipPostFields = ['InvoiceAmount' => $total_price, 'CurrencyIso' => $request->currency];
 
     // check balance
@@ -101,7 +101,7 @@ class FatoorahController extends Controller
 		$postFields = [
 		    //Fill required data
 		    'paymentMethodId'    => $paymentMethodId,
-		    'InvoiceValue'       => round($total_price, 2),
+		    'InvoiceValue'       => $total_price,
 		    'CallBackUrl'        => route('front.myfatoorah.handle.callback'),
 		    'ErrorUrl'           => route('front.myfatoorah.handle.callback'),
         'CustomerReference'  => $this->order_id,
