@@ -48,7 +48,7 @@
 
           <input type="hidden" value="{{ $productCurrency?? 'KWD' }}" name="currency">
 
-          <input type="hidden" class="payment-method-value" name="payment" value="" readonly>
+          <input type="hidden" class="payment-method-value" name="payment" value="" disabled>
 
 
           <div id="sub" class="qtyminus minus sub">
@@ -185,7 +185,7 @@
     $('.show_details').removeClass('d-none')
     $('.show_details .myfatoorah-payment').removeClass('d-none')
     $('.show_details .payment-phone').removeClass('d-none')
-    $('.payment-method-value').removeAttr('readonly')
+    $('.payment-method-value').removeAttr('disabled')
     $('.btn_checkout').removeAttr('disabled')
     $('.payment_methods .payment').css('color', "#368ca7")
   }
@@ -196,7 +196,7 @@
     if($(this).hasClass('dcb')) {
       readyForm('{{ route("front.pincode.request") }}')
       $('.show_details .myfatoorah-payment').addClass('d-none')
-      $('.payment-method-value').attr('readonly', true)
+      $('.payment-method-value').attr('disabled', true)
       $('.myfatoorah ').css('color', '#093543')
       $('.payment-method').children(".payment-method-btn").css("background-color", '#093543')
     } else {
