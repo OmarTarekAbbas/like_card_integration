@@ -270,6 +270,7 @@ class FatoorahController extends Controller
     //save myfatoorah info
     $post['invoice_status']       = $json->Data->InvoiceStatus;
     $post['transaction_status']   = $json->Data->InvoiceTransactions[0]->TransactionStatus;
+    $post['payment_id']           = $request->paymentId;
     $this->updateMyfatoorah($post);
 
 		//Display the payment result to your customer

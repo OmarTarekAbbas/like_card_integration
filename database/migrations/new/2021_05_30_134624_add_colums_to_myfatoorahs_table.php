@@ -14,7 +14,8 @@ class AddColumsToMyfatoorahsTable extends Migration
     public function up()
     {
         Schema::table('myfatoorahs', function (Blueprint $table) {
-          $table->string("invoice_id")->nullable()->after("type");
+          $table->string("payment_id")->nullable()->after("type");
+          $table->string("invoice_id")->nullable()->after("payment_id");
           $table->text("payment_url")->nullable()->after("invoice_id");
           $table->string("payment_method")->nullable()->after("payment_url");
           $table->string("invoice_status")->nullable()->after("payment_method");
@@ -30,6 +31,7 @@ class AddColumsToMyfatoorahsTable extends Migration
     public function down()
     {
         Schema::table('myfatoorahs', function (Blueprint $table) {
+          $table->dropColumn("payment_id");
           $table->dropColumn("invoiceId");
           $table->dropColumn("paymentUrl");
           $table->dropColumn("paymentMethod");
