@@ -26,6 +26,7 @@ class DcbService
 
     // End-User
     $MSISDN = $request->phone;   // 96555410856
+    session("phone", $request->phone);
 
     // Applications/Service
     $ServiceID = ServiceID;
@@ -121,7 +122,7 @@ class DcbService
     $Password = Password;
 
     // End-User
-    $MSISDN = auth()->guard("client")->user()->phone;
+    $MSISDN = session("phone");
 
 
     // Applications/Service
