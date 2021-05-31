@@ -82,6 +82,10 @@ class OrderController extends Controller
      */
     public function pincodeRequest(PincodeRequestFormRequest $request)
     {
+      //login with user
+      if(!auth()->guard('client')->check()){
+        $this->clientService->registerAndLogin($request->email);
+      }
       $response = $this->dcbService->pinCodeDCBRequest($request);
       if(!$response['status']) {
         session()->flash("faild", $response['message']);

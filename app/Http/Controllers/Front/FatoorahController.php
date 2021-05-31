@@ -7,6 +7,7 @@ use App\Constants\PaymentType;
 use App\Http\Controllers\Controller;
 use App\Myfatoorah;
 use App\Order;
+use App\Services\ClientService;
 use App\Services\LikeCardService;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
@@ -23,18 +24,20 @@ class FatoorahController extends Controller
   private $isSuccess;
   private $order_id;
   private $myfatoorah_id;
+  private $clientService;
 
 	//Live
 	//$this->apiURL = 'https://api.myfatoorah.com';
 	//$this->apiKey = ''; //Live token value to be placed here: https://myfatoorah.readme.io/docs/live-token
 	//
 	//
-	public function __construct(LikeCardService $likeCard, OrderService $orderService)
+	public function __construct(LikeCardService $likeCard, OrderService $orderService, ClientService $clientService)
 	{
 	  $this->apiURL       = env('MYFATOORAH_API_ENDPOINT');
 		$this->apiKey       = env('MYFATOORAH_KEY');
     $this->likeCard     = $likeCard;
     $this->orderService = $orderService;
+    $this->clientService= $clientService;
     $this->isSuccess    = true;
     $this->order_id     = null;
     $this->myfatoorah_id= null;
@@ -43,6 +46,10 @@ class FatoorahController extends Controller
 	public function redirectToPaymentPage(Request $request)
 	{
 		/* ------------------------ Call InitiatePayment Endpoint ------------------- */
+    //login with user
+    if(!auth()->guard('client')->check()){
+      $this->clientService->registerAndLogin($request->email);
+    }
     //init order with pending status
     $order = $this->orderService->handle($request->all());
     $this->order_id = $order->id;

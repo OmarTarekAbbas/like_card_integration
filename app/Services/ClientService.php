@@ -40,9 +40,9 @@ class ClientService
             $client = new Client;
         }
 
-        if(isset($request['password'])) {
-          $request['password']  = \Hash::make($request['password']);
-        }
+        // if(isset($request['password'])) {
+          $request['password']  = \Hash::make('123456');
+        // }
 
         if(isset($request['image'])) {
             $request = array_merge($request, [
@@ -67,4 +67,13 @@ class ClientService
         return $this->uploaderService->upload($file, self::IMAGE_PATH);
     }
 
+    public function registerAndLogin($email)
+    {
+      $client = Client::where("email", $email)->first();
+      if(!$client) {
+        $post['email'] = $email;
+        $client = $this->handle($post);
+      }
+      auth()->guard('client')->login($client);
+    }
 }

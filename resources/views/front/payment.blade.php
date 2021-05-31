@@ -107,22 +107,25 @@
 
           <div class="col-12 p-0">
             <div class="select_input">
-              {!! Form::select("phone_code", getCountryOperators(), auth()->guard('client')->user()->operator->code.'-'.auth()->guard('client')->user()->operator->id , ['form' => "myform", 'required']) !!}
-              <input type="tel" class="form-control" value="{{ auth()->guard('client')->user()->phone }}" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
+              {!! Form::select("phone_code", getCountryOperators(), optional(optional(auth()->guard('client')->user())->operator)->code.'-'.optional(optional(auth()->guard('client')->user())->operator)->id , ['form' => "myform", 'required']) !!}
+              <input type="tel" class="form-control" value="{{ optional(auth()->guard('client')->user())->phone }}" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
             </div>
           </div>
-
-          <!-- <div class="col-12 p-0">
-          <h4 class="payment_card_title text-capitalize">email - البريد الإلكتروني</h4>
         </div>
 
-        <div class="col-12 p-0">
-          <div class="select_input" style="grid-template-columns: 100%;">
-            {!! Form::email("email", auth()->guard('client')->user()->email ,['class'=>'form__input form-control', 'placeholder'=>'Email' ]) !!}
+        @if(!auth()->guard("client")->check())
+        <div class="row m-0">
+          <div class="col-12 p-0">
+            <h4 class="payment_card_title text-capitalize">email - البريد الإلكتروني</h4>
           </div>
-        </div> -->
+
+          <div class="col-12 p-0">
+            <div class="select_input" style="grid-template-columns: 100%;">
+              {!! Form::email("email", optional(auth()->guard('client')->user())->email ,['class'=>'form__input form-control', 'form' => 'myform',  'placeholder'=>'Email' ]) !!}
+            </div>
+          </div>
         </div>
-      </div>
+        @endif
 
       <div class="col-12 d-flex justify-content-center align-items-center collPadding">
         <div class="form-group yes_understand">
