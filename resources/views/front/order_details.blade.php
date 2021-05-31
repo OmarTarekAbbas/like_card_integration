@@ -27,11 +27,11 @@
     <div class="card-body">
       <div class="row justify-content-between m-0">
         <div class="col-6 p-0">
-          <h6 class="color-1 mb-0 font-weight-bold change-color">Serial Code</h6>
+          <h5 class="color-1 mb-0 font-weight-bold change-color">Serial Code</h5>
         </div>
 
         <div class="col-6 p-0">
-          <small class="font-weight-bold">Serial Code : {{ $order->serial_code }}</small>
+          <h5 class="color-1 float-right mb-0 font-weight-bold change-color">Serial Code : {{ $order->serial_code }}</h5>
         </div>
       </div>
 
