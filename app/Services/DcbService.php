@@ -26,7 +26,7 @@ class DcbService
 
     // End-User
     $MSISDN = $request->phone;   // 96555410856
-    session("phone", $request->phone);
+    session()->put("phone", $request->phone);
 
     // Applications/Service
     $ServiceID = ServiceID;
