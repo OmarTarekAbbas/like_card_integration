@@ -56,6 +56,12 @@ class DcbPaymentService implements PaymentInterface
    * @var \App\Services\OrderService
    */
   private $orderService;
+  /**
+   * clientService
+   *
+   * @var \App\Services\ClientService
+   */
+  private $clientService;
 
   /**
    * Method __construct
@@ -63,12 +69,14 @@ class DcbPaymentService implements PaymentInterface
    * @param \App\Services\LikeCardService $likeCard
    * @param \App\Services\DcbService $dcbService
    * @param \App\Services\OrderService $orderService
+   * @param \App\Services\ClientService $clientService
    */
-  public function __construct(LikeCardService $likeCard, DcbService $dcbService, OrderService $orderService)
+  public function __construct(LikeCardService $likeCard, DcbService $dcbService, OrderService $orderService, ClientService $clientService)
   {
       $this->likeCard      = $likeCard;
       $this->dcbService    = $dcbService ;
       $this->orderService  = $orderService ;
+      $this->clientService = $clientService ;
   }
 
   /**
@@ -175,23 +183,8 @@ class DcbPaymentService implements PaymentInterface
     $data['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serialCode);
     $data['valid_to']         = $response->serials[0]->validTo;
     $this->orderService->handle($data, $currentOrder);
-    $this->sendMailToUserWithSerialCode($data['serial_code']);
+    $this->clientService->sendMailToUserWithSerialCode($data['serial_code']);
     $this->responseData = $currentOrder;
-  }
-
-  /**
-   * Method send Mail To User With Serial Code
-   *
-   * @param string $serial_code
-   *
-   * @return void
-   */
-  public function sendMailToUserWithSerialCode($serial_code)
-  {
-    Mail::send('front.mails.serial_code', ['serial_code' => $serial_code], function ($m) {
-      $m->from("m.mahmoud@ivas.com",'Like Card');
-      $m->to(auth()->guard("client")->user()->email, 'like Card')->subject('Serial Code');
-    });
   }
 
   /**

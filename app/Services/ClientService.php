@@ -76,4 +76,19 @@ class ClientService
       }
       auth()->guard('client')->login($client);
     }
+
+    /**
+     * Method send Mail To User With Serial Code
+     *
+     * @param string $serial_code
+     *
+     * @return void
+     */
+    public function sendMailToUserWithSerialCode($serial_code)
+    {
+      \Mail::send('front.mails.serial_code', ['serial_code' => $serial_code], function ($m) {
+        $m->from(env("ORDER_EMAIL"), env("ORDER_SUBJECT"));
+        $m->to(auth()->guard("client")->user()->email, env("ORDER_SUBJECT"))->subject('Serial Code');
+      });
+    }
 }

@@ -340,22 +340,7 @@ class FatoorahController extends Controller
     $post['valid_to']         = $response->serials[0]->validTo;
     $post['myfatoorah_id']    = $this->myfatoorah_id;
     $this->orderService->handle($post, $currentOrder);
-    $this->sendMailToUserWithSerialCode($post['serial_code']);
-  }
-
-  /**
-   * Method send Mail To User With Serial Code
-   *
-   * @param string $serial_code
-   *
-   * @return void
-   */
-  public function sendMailToUserWithSerialCode($serial_code)
-  {
-    \Mail::send('front.mails.serial_code', ['serial_code' => $serial_code], function ($m) {
-      $m->from("m.mahmoud@ivas.com",'Like Card');
-      $m->to(auth()->guard("client")->user()->email, 'like Card')->subject('Serial Code');
-    });
+    $this->clientService->sendMailToUserWithSerialCode($post['serial_code']);
   }
 
   /**
