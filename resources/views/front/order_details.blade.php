@@ -33,7 +33,7 @@
         <div class="col-6 p-0">
           <h5 class="color-1 float-right mb-0 font-weight-bold change-color">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" style="border: none;color: red;font-weight: bolder;font-size: 18px;text-align:right" id="serial_code" value="{{ $order->serial_code?? '9QY03J8ME5' }}" aria-describedby="basic-addon3">
+            <input type="text" class="form-control" style="border: none;color: red;font-weight: bolder;font-size: 18px;text-align:right" id="serial_code" value="{{ $order->serial_code }}" aria-describedby="basic-addon3">
             <div class="input-group-append">
               <span class="input-group-text" onclick="x = document.getElementById('serial_code'); x.select();document.execCommand('copy')">
                 <i class="fa fa-copy"></i>
