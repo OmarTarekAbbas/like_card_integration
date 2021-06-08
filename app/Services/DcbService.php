@@ -12,6 +12,24 @@ use Illuminate\Http\Request;
 class DcbService
 {
   /**
+   * likeCard
+   *
+   * @var LikeCardService
+   */
+  private $likeCard;
+
+  /**
+   * Method __construct
+   *
+   * @param LikeCardService $likeCard
+   *
+   */
+  public function __construct(LikeCardService $likeCard)
+  {
+    $this->likeCard = $likeCard;
+  }
+
+  /**
    * Method pinCodeDCBRequest
    *
    * @param \Illuminate\Http\Request $request
@@ -20,6 +38,12 @@ class DcbService
    */
   public function pinCodeDCBRequest(Request $request)
   {
+
+    $check = $this->checkBalance($request);
+    if(!$check['status']) {
+      return $check;
+    }
+
     // Authentication
     $User = User;
     $Password = Password;
@@ -253,5 +277,36 @@ class DcbService
         default:
             return 'Unknown';
     }
+  }
+
+
+  /**
+   * Method checkBalance
+   *
+   * @param Request $request
+   *
+   * @return void
+   */
+  private function checkBalance(Request $request)
+  {
+    $total_price = round($request->sell_price * $request->quantity);
+    try {
+      $response = json_decode($this->likeCard->checkBalance());
+      $balance = $response->balance ;
+      $data['status'] = true;
+      //send mail to admin with current balance in like card
+      if($balance <= balance_limit) {
+        // $this->sendMailToAdmin($this->balance);
+      }
+      if($balance < $total_price) {
+        $data['message'] = "لايمكن شراء المنتج الان";
+        $data['status'] = false;
+      }
+    } catch (\Throwable $th) {
+      $data['message'] = "حدث خطأ اثناء الشراء";
+      $data['status'] = false;
+    }
+
+    return $data;
   }
 }

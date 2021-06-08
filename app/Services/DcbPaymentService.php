@@ -80,32 +80,6 @@ class DcbPaymentService implements PaymentInterface
   }
 
   /**
-   * Method checkBalance
-   *
-   * @param float $data
-   * @return void
-   */
-  private function checkBalance($total_price)
-  {
-    try {
-      $response = json_decode($this->likeCard->checkBalance());
-      $this->balance = $response->balance ;
-      $this->success = true;
-      //send mail to admin with current balance in like card
-      if($this->balance <= balance_limit) {
-        // $this->sendMailToAdmin($this->balance);
-      }
-      if($this->balance < $total_price) {
-        $this->error = "لايمكن شراء المنتج الان";
-        $this->success = false;
-      }
-    } catch (\Throwable $th) {
-      $this->error = "حدث خطأ اثناء الشراء";
-      $this->success = false;
-    }
-  }
-
-  /**
    * Method buyItems
    *
    * i'll describe all case that will happend in this function
@@ -120,8 +94,6 @@ class DcbPaymentService implements PaymentInterface
    */
   public function buyItems($data)
   {
-    $this->checkBalance($data['total_price']);
-    if($this->success) {
       try {
         $response = $this->dcbService->verifyDOBCharging($data);
         if(!$response['status']) {
@@ -136,7 +108,6 @@ class DcbPaymentService implements PaymentInterface
         $this->success = false;
         $this->error   = "حدث خطأ اثناء الدفع";
       }
-    }
   }
 
   /**
