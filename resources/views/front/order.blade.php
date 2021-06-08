@@ -2,8 +2,8 @@
 
 @section("content")
 <section class="order_sec ">
-  <h2 class="text-center">List Order</h2>
-  <p class="text-center">List All Previous Order With Status:</p>
+  <h2 class="text-center">List Orders</h2>
+  <p class="text-center">List All Previous Orders With Status:</p>
   @if(session()->has("success"))
   <p class="text-success"> {{ session()->get("success") }} </p>
   @endif
