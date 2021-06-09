@@ -44,7 +44,7 @@
       <div class="col-6 d-flex justify-content-center">
         <form id='myform' method='POST' class='quantity' action=''>
           @csrf
-          <input type="hidden" value="{{ $productPrice?? 10 }}" name="sell_price">
+          <input type="hidden" value="{{ $productPrice }}" name="sell_price">
 
           <input type="hidden" value="{{ $productCurrency?? 'KWD' }}" name="currency">
 
@@ -152,7 +152,7 @@
   var currency = ' {{$productCurrency}}'
 
   $('.price_currency').click(function() {
-    var cuurentPrice = ($(this).data("price")); //.toFixed(1)
+    var cuurentPrice = ($(this).data("price")).toFixed(3); //.toFixed(1)
     $('#total_price').text(cuurentPrice + currency);
     $("#quantity").val($(this).data("quantity"));
   });
@@ -174,7 +174,7 @@
   });
 
   function setTotalPrice() {
-    $('#total_price').html((price * parseInt($("#quantity").val())).toFixed(1) + currency);
+    $('#total_price').html((price * parseInt($("#quantity").val())).toFixed(3) + currency);
     $("#price" + parseInt($("#quantity").val())).trigger('focus')
   }
 </script>

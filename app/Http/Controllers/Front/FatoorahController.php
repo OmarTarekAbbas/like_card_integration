@@ -122,6 +122,9 @@ class FatoorahController extends Controller
 
 		//Call endpoint
 		$data = $this->executePayment($this->apiURL, $this->apiKey, $postFields);
+    if(!$this->isSuccess) {
+      return back();
+    }
 
     //save myfatoorah info
     $post['invoice_id'] = $data->InvoiceId;
@@ -129,9 +132,6 @@ class FatoorahController extends Controller
     $post['payment_method'] = PaymentType::getLabel($request->payment);
     $this->updateMyfatoorah($post);
 
-    if(!$this->isSuccess) {
-      return back();
-    }
 
 		return redirect()->away($data->PaymentURL);
 	}
