@@ -46,6 +46,7 @@ class FatoorahController extends Controller
 	public function redirectToPaymentPage(Request $request)
 	{
 		/* ------------------------ Call InitiatePayment Endpoint ------------------- */
+    ini_set( 'serialize_precision', -1 ); // keep float number in normal 12.36513213213212 to be12.36
     //login with user
     if(!auth()->guard('client')->check()){
       $this->clientService->registerAndLogin($request->email);
