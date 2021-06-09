@@ -202,7 +202,7 @@ class FatoorahController extends Controller
         $data = json_decode($response);
         $this->order_id = $data->Data->CustomerReference;
       }
-      $this->log($endpointURL, json_encode($postFields), json_encode($response), end($type));
+      $this->log($endpointURL, json_encode($postFields), $response, end($type));
 	    return json_decode($response);
 	}
 
