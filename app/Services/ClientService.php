@@ -4,6 +4,8 @@
 namespace App\Services;
 
 use App\Client;
+use App\Constants\OrderStatus;
+use App\Constants\PaymentType;
 use Illuminate\Http\UploadedFile;
 
 class ClientService
@@ -87,7 +89,12 @@ class ClientService
     public function sendMailToUserWithSerialCode($order)
     {
       $client = Client::find($order->client_id);
-      \Mail::send('front.mails.serial_code', ['order' => $order, 'client' => $client], function ($m) {
+      \Mail::send('front.mails.serial_code',
+      ['order' => $order,
+      'client' => $client,
+      'paymentType' => new PaymentType,
+      'orderStatus' => new OrderStatus],
+      function ($m) {
         $m->from(env("ORDER_EMAIL"), env("ORDER_SUBJECT"));
         $m->to(auth()->guard("client")->user()->email, env("ORDER_SUBJECT"))->subject('Serial Code');
       });
