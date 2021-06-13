@@ -235,4 +235,18 @@ class LikeCardService
         $iv = substr(hash('sha256', $secret_iv), 0, 16);
         return openssl_decrypt(base64_decode($encrypted_txt), $encrypt_method, $key, 0, $iv);
     }
+
+    /**
+     * Method sendMailToAdmin
+     *
+     * @param float $balance
+     *
+     * @return void
+     */
+    public function sendMailToAdmin($balance)
+    {
+      \Mail::send('front.mails.our_balance', ['balance' => $balance], function ($m) {
+        $m->to(admin_mail, 'like Card')->subject('Balance Limit');
+      });
+    }
 }

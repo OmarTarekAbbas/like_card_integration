@@ -355,7 +355,10 @@ class FatoorahController extends Controller
     try {
       $response = json_decode($this->likeCard->checkBalance());
       $this->balance = $response->balance ;
-
+      //send mail to admin with current balance in like card
+      if($this->balance <= balance_limit) {
+        $this->likeCard->sendMailToAdmin($this->balance);
+      }
       if($this->balance < $total_price) {
         $this->isSuccess = false;
         session()->flash("faild", "لانستطيع الشراء من البائع الاصلى");
