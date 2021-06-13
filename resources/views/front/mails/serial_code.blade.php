@@ -27,7 +27,7 @@
                       </div>
 
                       <div class="customers"
-                          style="border-bottom:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:0.5rem 0; text-align:left"
+                          style="border-bottom:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:9px; text-align:left"
                           align="left">
                           <div class="customer-data" style="color:#111; float:left; text-align:left; width:30%"
                               align="right" width="30%">email</div>
@@ -87,7 +87,7 @@
                           <span class="total-items"></span>Invoice
                       </div>
                       <div class="summary-subtotal"
-                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:0.5rem 0">
+                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:9px">
                           <div class="subtotal-title" style="color:#111; float:left; text-align:left; width:50%"
                               align="right" width="50%">Total Price</div>
                           <div class="subtotal-value final-value" id="basket-subtotal"
@@ -96,7 +96,7 @@
                       </div>
 
                       <div class="summary-subtotal"
-                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:0.5rem 0">
+                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:9px">
                           <div class="subtotal-title" style="color:#111;font-weight:bold;float:left; text-align:left; width:50%"
                               align="right" width="50%"> Invoice Number</div>
                           <div class="subtotal-value final-value" id="basket-subtotal"
@@ -105,7 +105,7 @@
                       </div>
 
                       <div class="summary-subtotal"
-                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:0.5rem 0">
+                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:9px">
                           <div class="subtotal-title" style="color:#111;font-weight:bold;float:left; text-align:left; width:50%"
                               align="right" width="50%"> Invoice Date</div>
                           <div class="subtotal-value final-value" id="basket-subtotal"
@@ -114,7 +114,7 @@
                       </div>
 
                       <div class="summary-subtotal"
-                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:0.5rem 0">
+                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:9px">
                           <div class="subtotal-title" style="color:#111;font-weight:bold;float:left; text-align:left; width:50%"
                               align="right" width="50%"> Status</div>
                           <div class="subtotal-value final-value" id="basket-subtotal"
@@ -123,7 +123,7 @@
                       </div>
 
                       <div class="summary-subtotal"
-                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:0.5rem 0">
+                          style="border-bottom:1px solid #ccc; border-top:1px solid #ccc; clear:both; margin:1rem 0; overflow:hidden; padding:9px">
                           <div class="subtotal-title" style="color:#111;font-weight:bold;float:left; text-align:left; width:50%"
                               align="right" width="50%"> Payment</div>
                           <div class="subtotal-value final-value" id="basket-subtotal"
