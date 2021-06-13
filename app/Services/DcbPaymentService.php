@@ -154,7 +154,7 @@ class DcbPaymentService implements PaymentInterface
     $data['serial_code']      = $this->likeCard->decryptSerial($response->serials[0]->serialCode);
     $data['valid_to']         = $response->serials[0]->validTo;
     $this->orderService->handle($data, $currentOrder);
-    $this->clientService->sendMailToUserWithSerialCode($data['serial_code']);
+    $this->clientService->sendMailToUserWithSerialCode($currentOrder);
     $this->responseData = $currentOrder;
   }
 

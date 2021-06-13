@@ -341,7 +341,7 @@ class FatoorahController extends Controller
     $post['valid_to']         = $response->serials[0]->validTo;
     $post['myfatoorah_id']    = $this->myfatoorah_id;
     $this->orderService->handle($post, $currentOrder);
-    $this->clientService->sendMailToUserWithSerialCode($post['serial_code']);
+    $this->clientService->sendMailToUserWithSerialCode($currentOrder);
   }
 
   /**
