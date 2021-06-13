@@ -122,10 +122,10 @@ class DcbPaymentService implements PaymentInterface
     try {
       $response = json_decode($this->likeCard->createOrder(session("productId"), session("quantity")));
       if($response->response) {
-        $this->sucess = true;
+        $this->success = true;
         $this->updateOrderFromOurSide($data, $response);
       } else {
-        $this->sucess = false;
+        $this->success = false;
         $this->error   = "لانستطيع الشراء من البائع الاصلى";
       }
     } catch (\Throwable $th) {
