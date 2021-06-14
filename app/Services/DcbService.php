@@ -296,7 +296,7 @@ class DcbService
       $data['status'] = true;
       //send mail to admin with current balance in like card
       if($balance <= balance_limit) {
-        $this->likeCard->sendMailToAdmin($this->balance);
+        $this->likeCard->sendMailToAdmin($balance);
       }
       if($balance < $total_price) {
         $data['message'] = "لايمكن شراء المنتج الان";
