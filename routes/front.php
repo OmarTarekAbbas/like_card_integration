@@ -12,7 +12,7 @@ define("ShortCode", "50230");
 
 define('enable_dcb', false);
 define('enable_delete', false);
-define('balance_limit', 80);
+define('balance_limit', 100);
 define('admin_mail', "emad@ivas.com.eg");
 
 Route::get("/home","HomeController@index")->name("front.home");
