@@ -46,7 +46,7 @@ final class PaymentType
 
   public static function getLabel($key)
   {
-      return self::getList()[$key];
+      return array_key_exists($key, self::getList()) ? self::getList()[$key] : false;
   }
 
   public static function getKey($label)

@@ -245,8 +245,10 @@ class LikeCardService
      */
     public function sendMailToAdmin($balance)
     {
-      \Mail::send('front.mails.our_balance', ['balance' => $balance], function ($m) {
-        $m->to(admin_mail, 'like Card')->subject('Balance Limit');
+      $admin_mail = setting('admin_mail')??admin_mail;
+      \Mail::send('front.mails.our_balance', ['balance' => $balance], function ($m) use($admin_mail){
+        $m->from('super admin', env('ORDER_SUBJECT'));
+        $m->to($admin_mail, 'like Card')->subject('Balance Limit');
       });
     }
 }
