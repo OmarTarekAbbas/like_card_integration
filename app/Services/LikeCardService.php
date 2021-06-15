@@ -245,7 +245,7 @@ class LikeCardService
      */
     public function sendMailToAdmin($balance)
     {
-      $admin_mail = get_setting('admin_mail') != ''? admin_mail : get_setting('admin_mail');
+      $admin_mail = get_setting('admin_mail') == ''? admin_mail : get_setting('admin_mail');
       \Mail::send('front.mails.our_balance', ['balance' => $balance], function ($m) use($admin_mail){
         $m->from('digicards@digizone.com.kw', env('ORDER_SUBJECT'));
         $m->to($admin_mail, 'like Card')->subject('Balance Limit');
