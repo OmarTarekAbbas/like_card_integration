@@ -94,7 +94,7 @@
       <div class="show_details d-none">
         <div class="row m-1 myfatoorah-payment d-none">
           @for($i=2;$i<count($paymentType::getList());$i++)
-            <div class="payment-method col-6 text-center">
+            <div class="payment-method{{ $paymentType::getLabel($i+1) ? ' col-6 ' : ' col-12 ' }}text-center">
               <a href="#0" class="btn payment-method-btn" data-method="{{ $i }}">{{ $paymentType::getLabel($i) }}</a>
             </div>
           @endfor

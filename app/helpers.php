@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Services\LikeCardService;
+use App\Setting;
 
 function delete_multiselect(Request $request) // select many contract from index table and delete them
 {
@@ -291,3 +292,13 @@ function dynamic_routes($route_model,$found_roles)
      return $balance;
    }
  }
+
+ function get_setting($key)
+{
+    $value = '';
+    $setting = Setting::where('key', $key)->first();
+    if ($setting)
+        $value = $setting->value;
+
+    return $value;
+}
