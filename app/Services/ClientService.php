@@ -89,7 +89,7 @@ class ClientService
     public function sendMailToUserWithSerialCode($order)
     {
       $client = Client::find($order->client_id);
-      $order_mail = setting('ordr_mail')??env("ORDER_EMAIL");
+      $order_mail = get_setting('ordr_mail')??env("ORDER_EMAIL");
       \Mail::send('front.mails.serial_code',
       ['order' => $order,
       'client' => $client,
