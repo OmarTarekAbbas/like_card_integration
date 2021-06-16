@@ -112,7 +112,7 @@ class FatoorahController extends Controller
         'CustomerReference'  => $this->order_id,
 		        //Fill optional data
 		        //'CustomerName'       => 'fname lname',
-		        //'DisplayCurrencyIso' => 'KWD',
+		        'DisplayCurrencyIso' => session()->get('productCurrency'),
 		        //'MobileCountryCode'  => '+965',
 		        //'CustomerMobile'     => '1234567890',
 		        //'CustomerEmail'      => 'email@example.com',
