@@ -20,7 +20,7 @@ final class PaymentType
   const Apple_Pay          = 11;
   const STC_Pay            = 12;
   const Oman_Net           = 13;
-  const Mobile_Wallet_Egypt= 14;
+  // const Mobile_Wallet_Egypt= 14;
 
 
   public static function getList()
@@ -40,7 +40,7 @@ final class PaymentType
           self::Apple_Pay          => trans('Apple Pay'),
           self::STC_Pay            => trans('STC Pay'),
           self::Oman_Net           => trans('Oman Net'),
-          self::Mobile_Wallet_Egypt=> trans('Mobile Wallet (Egypt)'),
+          // self::Mobile_Wallet_Egypt=> trans('Mobile Wallet (Egypt)'),
       ];
   }
 

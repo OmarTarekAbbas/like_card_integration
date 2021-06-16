@@ -50,7 +50,7 @@ class BalanceMailCommand extends Command
     {
       $response = json_decode($this->likeCard->checkBalance());
       $this->balance = $response->balance??0 ;
-      if($this->balance <= balance_limit) {
+      if($this->balance <= get_setting('balance_limit')) {
         $this->sendMailToAdmin($this->balance);
       }
     }

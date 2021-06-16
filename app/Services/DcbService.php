@@ -123,7 +123,7 @@ class DcbService
 
     $out['dcb_status'] = isset($arr['Success-Code']) ? $arr['Success-Code'] : $arr['Error-Code'];
 
-    if(!enable_dcb) {
+    if(!get_setting('enable_dcb')) {
       $out['status']  = true;
       $out['message'] = "successfully picode request";
       $out['dcb_status'] = 10500;
@@ -228,7 +228,7 @@ class DcbService
 
     $out['dcb_status'] = isset($arr['Success-Code']) ? $arr['Success-Code'] : $arr['Error-Code'];
 
-    if(!enable_dcb) {
+    if(!get_setting('enable_dcb')) {
       $out['status']  = true;
       $out['message'] = "Your payment is success";
       $out['dcb_status'] = 10500;
@@ -295,7 +295,7 @@ class DcbService
       $balance = $response->balance ;
       $data['status'] = true;
       //send mail to admin with current balance in like card
-      if($balance <= balance_limit) {
+      if($balance <= get_setting('balance_limit')) {
         $this->likeCard->sendMailToAdmin($balance);
       }
       if($balance < $total_price) {
