@@ -291,7 +291,7 @@ class FatoorahController extends Controller
   {
     $order = Order::find($order_id);
     $order->payment = PaymentType::getKey($response->InvoiceTransactions[0]->PaymentGateway);
-    $order->status  = OrderStatus::getKey($response->InvoiceStatus);
+    $order->status  = OrderStatus::getKey($response->InvoiceTransactions[0]->TransactionStatus);
     $order->myfatoorah_id  = $this->myfatoorah_id;
     $order->save();
   }

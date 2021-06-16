@@ -18,11 +18,6 @@ class Order extends Model
     return DcbStatus::getLabel($value);
   }
 
-  public function products()
-  {
-    return $this->hasMany('App\OrderItem');
-  }
-
   public function client()
   {
     return $this->belongsTo('App\Client');

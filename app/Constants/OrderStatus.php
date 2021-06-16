@@ -13,9 +13,9 @@ final class OrderStatus
     public static function getList()
     {
         return [
-            self::PENDING        => trans('Pending'),
-            self::FINISHED       => trans('Paid'),
-            self::CANCEL         => trans('Canceled'),
+            self::PENDING        => trans('InProgress'),
+            self::FINISHED       => trans('Succss'),
+            self::CANCEL         => trans('Failed'),
         ];
     }
 

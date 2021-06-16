@@ -74,10 +74,10 @@ class OrderController extends Controller
     return view('order.show', compact('order'));
   }
 
-  public function delete($id)
+  public function destroy($id)
   {
     $order = Order::find($id);
-    $order->products()->delete();
+    $order->replaies()->delete();
     $order->delete();
     \Session::flash('success', 'Delete Order successful');
     return back();
