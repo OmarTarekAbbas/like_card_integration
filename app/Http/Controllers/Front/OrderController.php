@@ -84,6 +84,10 @@ class OrderController extends Controller
     {
       //login with user
       if(!auth()->guard('client')->check()){
+        if(!$request->filled("email")) {
+          session()->flash("faild", 'email is required');
+          return back();
+        }
         $this->clientService->registerAndLogin($request->email);
       }
       $response = $this->dcbService->pinCodeDCBRequest($request);

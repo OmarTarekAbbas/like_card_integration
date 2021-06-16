@@ -49,6 +49,10 @@ class FatoorahController extends Controller
     ini_set( 'serialize_precision', -1 ); // keep float number in normal 12.36513213213212 to be12.36
     //login with user
     if(!auth()->guard('client')->check()){
+      if(!$request->filled("email")) {
+        session()->flash("faild", 'email is required');
+        return back();
+      }
       $this->clientService->registerAndLogin($request->email);
     }
     //init order with pending status
@@ -262,7 +266,7 @@ class FatoorahController extends Controller
       return redirect('payment');
     }
 
-    if($json->Data->InvoiceStatus != OrderStatus::getLabel(OrderStatus::FINISHED))
+    if($json->Data->InvoiceTransactions[0]->TransactionStatus != OrderStatus::getLabel(OrderStatus::FINISHED))
     {
       $this->updateOrder($json->Data, $json->Data->CustomerReference);
       session()->flash("faild", "Transaction status is ".$json->Data->InvoiceTransactions[0]->TransactionStatus);
@@ -356,7 +360,7 @@ class FatoorahController extends Controller
       $response = json_decode($this->likeCard->checkBalance());
       $this->balance = $response->balance ;
       //send mail to admin with current balance in like card
-      if($this->balance <= balance_limit) {
+      if($this->balance <= get_setting('balance_limit')) {
         $this->likeCard->sendMailToAdmin($this->balance);
       }
       if($this->balance < $total_price) {
