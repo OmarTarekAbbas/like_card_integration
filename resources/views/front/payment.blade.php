@@ -108,7 +108,7 @@
           <div class="col-12 p-0">
             <div class="select_input">
               {!! Form::select("phone_code", getCountryOperators(), optional(optional(auth()->guard('client')->user())->operator)->code.'-'.optional(optional(auth()->guard('client')->user())->operator)->id , ['form' => "myform", 'required']) !!}
-              <input type="tel" class="form-control" value="{{ optional(auth()->guard('client')->user())->phone }}" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1">
+              <input type="tel" class="form-control input-phone" value="{{ optional(auth()->guard('client')->user())->phone }}" form="myform" name="phone" placeholder="رقم الهاتف" aria-label="Mobile_No" aria-describedby="basic-addon1" required>
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@
 
           <div class="col-12 p-0">
             <div class="select_input" style="grid-template-columns: 100%;">
-              {!! Form::email("email", optional(auth()->guard('client')->user())->email ,['class'=>'form__input form-control', 'form' => 'myform',  'placeholder'=>'Email' ]) !!}
+              {!! Form::email("email", optional(auth()->guard('client')->user())->email ,['class'=>'form__input form-control input-email', 'form' => 'myform',  'placeholder'=>'Email' , 'required']) !!}
             </div>
           </div>
         </div>
@@ -185,6 +185,7 @@
     $('.show_details').removeClass('d-none')
     $('.show_details .myfatoorah-payment').removeClass('d-none')
     $('.show_details .payment-phone').removeClass('d-none')
+    $('.show_details .payment-phone .input-phone').prop('required', true)
     $('.payment-method-value').removeAttr('disabled')
     $('.btn_checkout').removeAttr('disabled')
     $('.payment_methods .payment').css('color', "#368ca7")
@@ -195,13 +196,14 @@
 
     if($(this).hasClass('dcb')) {
       readyForm('{{ route("front.pincode.request") }}')
-      $('.show_details .myfatoorah-payment').addClass('d-none')
+      $('.show_details .myfatoorah-payment').addClass('d-none').prop('required', false);
       $('.payment-method-value').attr('disabled', true)
       $('.myfatoorah ').css('color', '#093543')
       $('.payment-method').children(".payment-method-btn").css("background-color", '#093543')
     } else {
       readyForm('{{ route("front.myfatoorah.redirect.payment") }}')
       $('.show_details .payment-phone').addClass('d-none')
+      $('.show_details .payment-phone .input-phone').prop('required', false)
       $('.dcb').css('color', '#093543')
     }
   })
