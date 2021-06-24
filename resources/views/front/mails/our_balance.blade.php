@@ -9,7 +9,7 @@
 <body>
   <center>
     <h3>Our Balance</h3>
-    <p>Our Balance Now In Like Card Reach To Limit Balance and Balance Now Is <strong>{{ $balance }}</strong></p>
+    <p>Our Balance Now In Digicards Reach To Limit Balance and Balance Now Is <strong>{{ $balance }}</strong></p>
   </center>
 </body>
 </html>

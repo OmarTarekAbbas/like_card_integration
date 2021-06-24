@@ -9,7 +9,7 @@
   <div class="main-content">
     <div class="login_form text-center">
       <div class="company_info">
-        <img src="{{ asset('front/images/logo1.png') }}" alt="Digi Card">
+        <img src="{{ asset('front/images/logo1.png') }}" alt="Digicards">
       </div>
 
       <div class="login_form_grid">

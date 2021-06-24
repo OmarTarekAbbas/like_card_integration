@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Like Card</title>
+    <title>Digicards</title>
     <link rel="shortcut icon" href="{{ asset('front/images/logo1.png') }}">
     <link rel="stylesheet" href="{{ asset('front/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
@@ -56,7 +56,7 @@
                  <li>
                       <a href="{{ route('client.login') }}" class="link text-capitalize link_href">Login</a>
                   </li>
-                  
+
                   <li>
                       <a href="{{ route('client.register') }}" class="link text-capitalize link_href">Register</a>
                   </li>

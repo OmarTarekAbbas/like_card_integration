@@ -201,7 +201,7 @@ orders
                         <div class="col-xs-6">
                             <ul type="none">
                                 <li class="left">Order number:</li>
-                                <li class="left">Like Card Price:</li>
+                                <li class="left">Digicards Price:</li>
                                 <li class="left">Date:</li>
                                 <li class="left">Sell Price:</li>
                                 <li class="left">quantity:</li>

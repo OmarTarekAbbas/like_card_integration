@@ -19,7 +19,7 @@
 
         <div class="col-6 text-center my-auto pl-0 pt-sm-4">
           <img class="img-fluid my-auto align-items-center mb-0 pt-3 w-50" src="https://i.imgur.com/7q7gIzR.png">
-          <p class="mb-4 pt-0 Glasses">Like Card</p>
+          <p class="mb-4 pt-0 Glasses">Digicards</p>
         </div> -->
       </div>
     </div>
